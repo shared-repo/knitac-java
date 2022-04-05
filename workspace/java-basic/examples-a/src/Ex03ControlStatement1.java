@@ -41,10 +41,10 @@ public class Ex03ControlStatement1 {
 		}
 		
 		//3-4. 위의 난수를 사용해서 다음과 같이 출력하세요.
-		//     0 ~ 20 : A, 
-		//     20 ~ 40 : B, 
-		//     40 ~ 60 : C, 
-		//     60 ~ 80 : D, 
+		//      0 ~  20 : A, 
+		//     20 ~  40 : B, 
+		//     40 ~  60 : C, 
+		//     60 ~  80 : D, 
 		//     80 ~ 100 : E
 		System.out.println("Random Number : " + number);
 		if (number < 20) {
@@ -59,7 +59,7 @@ public class Ex03ControlStatement1 {
 			System.out.println("E");
 		}
 		
-
+		
 	}
 
 }
