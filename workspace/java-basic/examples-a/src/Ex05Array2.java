@@ -25,18 +25,38 @@ public class Ex05Array2 {
 			System.out.print("작업을 선택하세요 : ");
 			String selection = scanner.nextLine();
 			
+			System.out.println();
+			
 			if (selection.equals("1")) {
 				int[] numbers = new int[6];
-				// 기본 번호 뽑기
-				for (int i = 0; i < numbers.length; i++) {
-					numbers[i] = (int)(Math.random() * 45) + 1;
-				}
 				
+				// 기본 번호 뽑기
+				int mean = 0;
+				do {
+					for (int i = 0; i < numbers.length; i++) {				
+						numbers[i] = (int)(Math.random() * 45) + 1;
+						// 중복검사를 위한 반복 ( 0부터 현재 뽑힌 위치 i까지 비교 )
+						for (int j = 0; j < i; j++) {
+							if (numbers[i] == numbers[j]) { // 중복 발생한 경우
+								// i--; // 현재 위치의 번호 다시 뽑기
+								i = -1; // 처음부터 다시 뽑기
+								break;
+							}
+						}
+					}					
+					// 평균 계산
+					int sum = 0;
+					for (int number : numbers) {
+						sum += number; // sum = sum + number; 
+					}
+					mean = sum / numbers.length;
+				} while (mean < 20 || mean > 26);
 				// 뽑힌 번호 출력
 				System.out.print("SELECTED NUMBERS : ");
-				for (int number : numbers) {
+				for (int number : numbers) { 
 					System.out.printf("[%d]", number);
 				}
+				System.out.printf("[MEAN : %d]", mean); // 평균 출력
 				System.out.println();
 						
 			} else if (selection.equals("2")) {
@@ -45,6 +65,8 @@ public class Ex05Array2 {
 			} else {
 				System.out.println("지원하지 않는 기능입니다.");
 			}
+			
+			System.out.println();
 			
 		}
 
