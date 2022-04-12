@@ -13,6 +13,7 @@ class Person5 {
 	// 2. instance가 만들어질때 (new 할때 ) 자동 호출
 	// 3. overloading 가능 : 전달인자를 다르게 해서 여러 개의 생성자 메서드 정의할 수 있습니다.
 	public Person5(String name, String phone, String email) {
+		this(); // 같은 클래스에 있는 다른 생성자 메서드 호출
 		System.out.println("전달인자 있는 생성자 메서드");
 		this.name = name;	// 전달인자로 인스턴스 멤버의 값 초기화
 		this.phone = phone;

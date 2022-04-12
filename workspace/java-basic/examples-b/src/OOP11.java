@@ -36,6 +36,17 @@ public class OOP11 {
 		TheDerived2 d1_1 = (TheDerived2)b1;
 		
 		///////////////////////
+		TheBase2 bb1 = new TheBase2();		// 부모 -> 부모 (O)
+		TheBase2 bb2 = new TheDerived2();	// 부모 -> 자식 (O)
+		
+		if (bb1 instanceof TheDerived2) { // bb1을 TheDerived2로 형변환 할 수 있는지 확인 (안전한 형변환)
+			TheDerived2 dd1 = (TheDerived2)bb1; // 형태가 "자식 -> 부모"이기 때문에 명시적 형변환 필요
+		}
+		if (bb2 instanceof TheDerived2) { // bb2를 TheDerived2로 형변환 할 수 있는지 확인
+			TheDerived2 dd2 = (TheDerived2)bb2; // 형태가 "자식 -> 부모"이기 때문에 명시적 형변환 필요
+		}
+		
+		///////////////////////
 		
 		// 2. 참조 타입과 인스턴스 타입이 다를 때 재정의된 메서드의 호출 기준은 언제나 인스턴스 타입 기준
 		TheBase2 b2 = new TheDerived2();

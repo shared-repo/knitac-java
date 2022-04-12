@@ -10,6 +10,15 @@ class MyClass {
 		// data2 = 10; // static 메서드 안에서 인스턴스형 멤버 사용할 수 없습니다.
 		data3 = 100;
 	}
+
+	////////////////////////////////////
+	
+	{
+		System.out.println("초기화 블럭");
+	}
+	static { // static 초기화 : static은 생성자를 통해 초기화하지 않습니다. 
+		System.out.println("static 초기화 블럭");
+	}
 }
 
 public class OOP07 {
