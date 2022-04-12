@@ -56,8 +56,7 @@ class BizContact extends Contact {
 	private String company;
 	private String title;
 	
-	public BizContact() {}
-	
+	public BizContact() {}	
 	public BizContact(int no, String name, String phone, String email, 
 					  String company, String title) {
 		super(no, name, phone, email); // 부모 클래스의 생성자 호출
@@ -88,8 +87,7 @@ class PersonalContact extends Contact {
 	private String relation;
 	private String birth;
 	
-	public PersonalContact() {}
-	
+	public PersonalContact() {}	
 	public PersonalContact(int no, String name, String phone, String email, 
 						   String relation, String birth) {
 		super(no, name, phone, email); // 부모 클래스의 생성자 메서드 호출
@@ -116,11 +114,19 @@ class PersonalContact extends Contact {
 	}
 }
 
-public class OOP13 {
+class ContactManager {
 
-	static java.util.Scanner scanner = new java.util.Scanner(System.in);
+	java.util.Scanner scanner = new java.util.Scanner(System.in);
 	
-	public static void main(String[] args) {
+	//등록된 연락처 정보를 저장할 배열 만들기
+	//배열은 같은 자료형만 저장할 수 있는데 PersonalContact와 BizContact를 모두 저장하려면 ?
+	//-> 부모 클래스인 Contact 타입으로 배열을 만들면 가능
+	Contact[] contacts = new Contact[1000];
+	
+	// 마지막 등록된 연락처의 위치 또는 다음에 등록할 연락처의 위치를 저장할 변수
+	int nextIdx = 0;
+	
+	public void doManage() {
 		
 		// testMethod1();
 		
@@ -130,44 +136,66 @@ public class OOP13 {
 			
 			System.out.println(); // 앞쪽 여백
 			if (selection.equals("6")) {
-				System.out.println("프로그램이 종료됩니다.");
+				System.out.println(">>> 프로그램이 종료됩니다");
 				break;
-			} else if (selection.equals("1")) {
-				// 입력 
-				System.out.println("[ 등록할 연락처 정보 ]");
-				System.out.print("종류 (1-개인연락처, 2-업무연락처) : ");
-				String type = scanner.nextLine();
-				System.out.print("이름 : ");
-				String name = scanner.nextLine();
-				System.out.print("전화번호 : ");
-				String phone = scanner.nextLine();
-				System.out.print("이메일 : ");
-				String email = scanner.nextLine();
-				if (type.equals("1")) { // 개인연락처인 경우
-					System.out.print("관계 : ");
-					String relation = scanner.nextLine();
-					System.out.print("생일 : ");
-					String birth = scanner.nextLine();
-					PersonalContact contact = new PersonalContact(0, name, phone, email, relation, birth);
-					System.out.println(contact.info());
-				} else { // 업무연락처인 경우
-					System.out.print("회사 : ");
-					String company = scanner.nextLine();
-					System.out.print("직함 : ");
-					String title = scanner.nextLine();
-					BizContact contact = new BizContact(0, name, phone, email, company, title);
-					System.out.println(contact.info());
+			} else if (selection.equals("1")) { 				// 등록
+				Contact contact = inputContact();				
+				contacts[nextIdx] = contact;
+				nextIdx++; // 다음에 등록할 연락처 위치 수정
+				System.out.println(">>> 새 연락처를 등록했습니다");
+			} else if (selection.equals("4")) { 				// 목록보기
+				if (nextIdx == 0) { // 등록된 연락처가 없다면
+					System.out.println("등록된 연락처가 없습니다.");
+				} else {
+					showAllContacts();
 				}
-				
 			} else {
-				System.out.println("지원하지 않는 기능입니다.");
+				System.out.println(">>> 지원하지 않는 기능입니다");
 			}
 			System.out.println(); // 뒤쪽 여백
 		}
 
 	}
 
-	private static String selectMenu() {
+	private void showAllContacts() {
+		System.out.println("[ 연락처 목록 ]");
+		for (int i = 0; i < nextIdx; i++) {
+			Contact contact = contacts[i];
+			System.out.println(contact.info());
+		}
+	}
+
+	private Contact inputContact() {
+		Contact contact = null; // 새로 등록할 연락처에 대한 참조 변수 ( 부모타입으로 선언 )
+		// 입력 
+		System.out.println("[ 등록할 연락처 정보 ]");
+		System.out.print("종류 (1-개인연락처, 2-업무연락처) : ");
+		String type = scanner.nextLine();
+		System.out.print("이름 : ");
+		String name = scanner.nextLine();
+		System.out.print("전화번호 : ");
+		String phone = scanner.nextLine();
+		System.out.print("이메일 : ");
+		String email = scanner.nextLine();
+		if (type.equals("1")) { // 개인연락처인 경우
+			System.out.print("관계 : ");
+			String relation = scanner.nextLine();
+			System.out.print("생일 : ");
+			String birth = scanner.nextLine();
+			contact = new PersonalContact(0, name, phone, email, relation, birth);
+		} else { // 업무연락처인 경우
+			System.out.print("회사 : ");
+			String company = scanner.nextLine();
+			System.out.print("직함 : ");
+			String title = scanner.nextLine();
+			contact = new BizContact(0, name, phone, email, company, title);
+		}
+		return contact;
+	}
+
+	
+
+	private String selectMenu() {
 		System.out.println("******************************");
 		System.out.println("* 1. 연락처 등록                *");
 		System.out.println("* 2. 연락처 수정                *");
@@ -181,7 +209,7 @@ public class OOP13 {
 		return selection;
 	}
 
-	private static void testMethod1() {
+	private void testMethod1() {
 		int a;
 		a = 10;
 		PersonalContact personalContact = new PersonalContact();
@@ -209,6 +237,18 @@ public class OOP13 {
 		System.out.println( bizContact.info() );
 	}
 
+}
+
+
+public class OOP13 {
+
+	public static void main(String[] args) {
+		
+		ContactManager manager = new ContactManager();
+		manager.doManage();
+
+	}
+ 
 }
 
 
