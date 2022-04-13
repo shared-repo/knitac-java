@@ -3,6 +3,8 @@ public class OOP01 {
 
 	public static void main(String[] args) {
 		
+		int x = 10 / 0;
+		
 		// int a
 		Person person = null;	// Person 타입의 참조 변수
 		person = new Person();	// Person 타입의 인스턴스 만들기 + 참조 변수에 주소(참조) 저장
