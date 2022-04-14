@@ -8,6 +8,15 @@ class TheGeneric<E> { // 아직 확정되지 않은 E자료형을 사용하는 �
 	E o;
 }
 
+class TheGeneric2<E, O> {
+	E a1;
+	O a2;
+	
+	void m(E e, O o) {}
+	E m2() { return null; }
+	O m3() { return null; }
+}
+
 public class Ex04Generic {
 
 	public static void main(String[] args) {
