@@ -125,8 +125,8 @@ class ContactManager {
 	//Contact[] contacts = new Contact[1000];
 	ArrayList<Contact> contacts = new ArrayList<>();
 	
-	// 마지막 등록된 연락처의 위치 또는 다음에 등록할 연락처의 위치를 저장할 변수
-	//int nextIdx = 0;
+	// 다음에 등록할 연락처의 생성 순서 번호 저장할 변수
+	int nextIdx = 1;
 	
 	public void doManage() {
 				
@@ -138,10 +138,11 @@ class ContactManager {
 				System.out.println(">>> 프로그램이 종료됩니다");
 				break;
 			} else if (selection.equals("1")) { 				// 등록
-				Contact contact = inputContact();				
+				Contact contact = inputContact();
+				contact.setNo(nextIdx); // 자동 증가 번호로 연락처 번호 설정
 				//contacts[nextIdx] = contact;
 				contacts.add(contact);
-				//nextIdx++; // 다음에 등록할 연락처 위치 수정
+				nextIdx++; // 다음에 등록할 연락처의 생성 순서 번호 수정 ( 자동 증가 번호 증가 )
 				System.out.println(">>> 새 연락처를 등록했습니다");
 			} else if (selection.equals("4")) { 				// 목록보기
 				//if (nextIdx == 0) { // 등록된 연락처가 없다면

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 // 연락처 관리 --> 연락처 클래스 : 업무연락처클래스, 개인연락처클래스
 // 업무연락처 : 연락처번호(정수), 이름(문자열), 전화번호(문자열), 이메일(문자열), 회사(문자열), 직함(문자열)
@@ -118,33 +119,34 @@ class ContactManager {
 
 	java.util.Scanner scanner = new java.util.Scanner(System.in);
 	
-	//등록된 연락처 정보를 저장할 배열 만들기
-	//배열은 같은 자료형만 저장할 수 있는데 PersonalContact와 BizContact를 모두 저장하려면 ?
-	//-> 부모 클래스인 Contact 타입으로 배열을 만들면 가능
-	Contact[] contacts = new Contact[1000];
+	// 등록된 연락처 정보를 저장할 ArrayList 만들기
+	// 배열은 같은 자료형만 저장할 수 있는데 PersonalContact와 BizContact를 모두 저장하려면 ?
+	// -> 부모 클래스인 Contact 타입으로 ArrayList을 만들면 가능
+	//Contact[] contacts = new Contact[1000];
+	ArrayList<Contact> contacts = new ArrayList<>();
 	
-	// 마지막 등록된 연락처의 위치 또는 다음에 등록할 연락처의 위치를 저장할 변수
-	int nextIdx = 0;
+	// 다음에 등록할 연락처의 생성 순서 번호 저장할 변수
+	int nextIdx = 1;
 	
 	public void doManage() {
-		
-		// testMethod1();
-		
+				
 		while (true) { // 메뉴표시 - 선택에 따라 실행 반복
-			String selection = selectMenu();			
-			// System.out.println(selection);
+			String selection = selectMenu();
 			
 			System.out.println(); // 앞쪽 여백
 			if (selection.equals("6")) {
 				System.out.println(">>> 프로그램이 종료됩니다");
 				break;
 			} else if (selection.equals("1")) { 				// 등록
-				Contact contact = inputContact();				
-				contacts[nextIdx] = contact;
-				nextIdx++; // 다음에 등록할 연락처 위치 수정
+				Contact contact = inputContact();
+				contact.setNo(nextIdx); // 자동 증가 번호로 연락처 번호 설정
+				//contacts[nextIdx] = contact;
+				contacts.add(contact);
+				nextIdx++; // 다음에 등록할 연락처의 생성 순서 번호 수정 ( 자동 증가 번호 증가 )
 				System.out.println(">>> 새 연락처를 등록했습니다");
 			} else if (selection.equals("4")) { 				// 목록보기
-				if (nextIdx == 0) { // 등록된 연락처가 없다면
+				//if (nextIdx == 0) { // 등록된 연락처가 없다면
+				if (contacts.size() == 0) {
 					System.out.println("등록된 연락처가 없습니다.");
 				} else {
 					showAllContacts();
@@ -159,10 +161,13 @@ class ContactManager {
 
 	private void showAllContacts() {
 		System.out.println("[ 연락처 목록 ]");
-		for (int i = 0; i < nextIdx; i++) {
-			Contact contact = contacts[i];
+		for (int i = 0; i < contacts.size(); i++) {
+			Contact contact = contacts.get(i);
 			System.out.println(contact.info());
 		}
+//		for (Contact contact : contacts) {
+//			System.out.println(contact.info());
+//		}
 	}
 
 	private Contact inputContact() {
@@ -208,39 +213,10 @@ class ContactManager {
 		String selection = scanner.nextLine();
 		return selection;
 	}
-
-	private void testMethod1() {
-		int a;
-		a = 10;
-		PersonalContact personalContact = new PersonalContact();
-		personalContact.setNo(1);
-		personalContact.setName("장동건");
-		personalContact.setPhone("010-9098-3345");
-		personalContact.setEmail("jdk@example.com");
-		personalContact.setRelation("Friend");
-		personalContact.setBirth("04-11");		
-		System.out.println( personalContact.info() );
-		
-		int a2 = 20; // 초기화
-		PersonalContact personalContact2 = 
-				new PersonalContact(1, "장동건2", "010-9098-3345", "jdk2@example.com", "Friend", "04-11");
-		System.out.println( personalContact2.info() );
-		
-		BizContact bizContact = new BizContact();
-		bizContact.setNo(2);
-		bizContact.setName("송강호");
-		bizContact.setPhone("010-5214-5698");
-		bizContact.setEmail("skh@example.com");
-		bizContact.setCompany("써브라임");
-		bizContact.setTitle("배우");
-		
-		System.out.println( bizContact.info() );
-	}
-
 }
 
 
-public class OOP13 {
+public class Ex07ContactManager {
 
 	public static void main(String[] args) {
 		
