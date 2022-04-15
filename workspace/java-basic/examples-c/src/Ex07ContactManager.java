@@ -13,7 +13,8 @@ import java.util.ArrayList;
 //    연락처클래스(Contact), 업무연락처클래스(BizContact), 개인연락처클래스(PersonalContact)
 //    업무연락처클래스와 개인연락처클래스는 연락처클래스 상속
 
-class Contact {
+//파일에 저장 또는 파일로부터 읽는 클래스는 Serialzable 인터페이스를 구현해야 합니다.
+class Contact implements Serializable {
 	private int no;
 	private String name;
 	private String phone;
@@ -90,7 +91,8 @@ class BizContact extends Contact implements Serializable {
 	}
 }
 
-class PersonalContact extends Contact {
+//파일에 저장 또는 파일로부터 읽는 클래스는 Serialzable 인터페이스를 구현해야 합니다.
+class PersonalContact extends Contact implements Serializable {
 	private String relation;
 	private String birth;
 	
