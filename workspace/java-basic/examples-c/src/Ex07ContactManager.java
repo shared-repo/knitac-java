@@ -1,3 +1,8 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 // 연락처 관리 --> 연락처 클래스 : 업무연락처클래스, 개인연락처클래스
@@ -53,7 +58,8 @@ class Contact {
 	}
 }
 
-class BizContact extends Contact {
+// 파일에 저장 또는 파일로부터 읽는 클래스는 Serialzable 인터페이스를 구현해야 합니다.
+class BizContact extends Contact implements Serializable {
 	private String company;
 	private String title;
 	
@@ -134,7 +140,7 @@ class ContactManager {
 			String selection = selectMenu();
 			
 			System.out.println(); // 앞쪽 여백
-			if (selection.equals("6")) {
+			if (selection.equals("7")) {
 				System.out.println(">>> 프로그램이 종료됩니다");
 				break;
 			} else if (selection.equals("1")) { 				// 등록
@@ -150,6 +156,19 @@ class ContactManager {
 					System.out.println("등록된 연락처가 없습니다.");
 				} else {
 					showAllContacts();
+				}
+			} else if (selection.equals("6")) { // 저장
+				FileOutputStream fos = null;
+				ObjectOutputStream oos = null;
+				try {
+					fos = new FileOutputStream("contacts.dat");
+					oos = new ObjectOutputStream(fos);
+					oos.writeObject(contacts);					
+				} catch (IOException e) {
+					e.printStackTrace(); // 오류 메시지를 출력 ( 테스트에만 적용해야 합니다. )
+				} finally {
+					try { oos.close(); } catch(Exception ex) {}
+					try { fos.close(); } catch(Exception ex) {}
 				}
 			} else {
 				System.out.println(">>> 지원하지 않는 기능입니다");
@@ -207,7 +226,8 @@ class ContactManager {
 		System.out.println("* 3. 연락처 삭제                *");
 		System.out.println("* 4. 연락처 목록                *");
 		System.out.println("* 5. 연락처 검색                *");
-		System.out.println("* 6. 종료                      *");
+		System.out.println("* 6. 연락처 저장                *");
+		System.out.println("* 7. 종료                      *");
 		System.out.println("******************************");
 		System.out.print("작업을 선택하세요 : ");
 		String selection = scanner.nextLine();
