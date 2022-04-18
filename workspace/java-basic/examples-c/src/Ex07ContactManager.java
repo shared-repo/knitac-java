@@ -1,6 +1,8 @@
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -130,11 +132,28 @@ class ContactManager {
 	// 등록된 연락처 정보를 저장할 ArrayList 만들기
 	// 배열은 같은 자료형만 저장할 수 있는데 PersonalContact와 BizContact를 모두 저장하려면 ?
 	// -> 부모 클래스인 Contact 타입으로 ArrayList을 만들면 가능
-	//Contact[] contacts = new Contact[1000];
-	ArrayList<Contact> contacts = new ArrayList<>();
+	// Contact[] contacts = new Contact[1000];
+	// ArrayList<Contact> contacts = new ArrayList<>();
+	ArrayList<Contact> contacts = null; // 생성자 메서드에서 초기화하도록 변경
 	
 	// 다음에 등록할 연락처의 생성 순서 번호 저장할 변수
 	int nextIdx = 1;
+	
+	public ContactManager() { // 생성자 메서드 : 초기화, 인스턴스가 만들어질때 자동 호출
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		try {
+			fis = new FileInputStream("contacts.dat");
+			ois = new ObjectInputStream(fis);
+			contacts = (ArrayList<Contact>)ois.readObject();
+		} catch (Exception ex) {
+			contacts = new ArrayList<>(); // 문제가 발생하면 빈 ArrayList 사용
+			ex.printStackTrace(); // 오류 메시지 표시
+		} finally {
+			try { ois.close(); } catch (Exception ex) {}
+			try { fis.close(); } catch (Exception ex) {}
+		}
+	}
 	
 	public void doManage() {
 				
