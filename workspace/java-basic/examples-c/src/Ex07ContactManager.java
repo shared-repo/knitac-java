@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -140,12 +141,25 @@ class ContactManager {
 	int nextIdx = 1;
 	
 	public ContactManager() { // 생성자 메서드 : 초기화, 인스턴스가 만들어질때 자동 호출
+		
+		File file = new File("contacts.dat"); // File : 파일 또는 폴더 정보를 관리하는 클래스
+		if (!file.exists()) { // exists() : 파일이 있는지 확인하는 메서드
+			contacts = new ArrayList<>();
+			return;	// return : 메서드 종료 명령
+		}
+		
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
 			fis = new FileInputStream("contacts.dat");
 			ois = new ObjectInputStream(fis);
 			contacts = (ArrayList<Contact>)ois.readObject();
+			if (contacts.size() == 0) {
+				nextIdx = 1;
+			} else {
+				Contact lastContact = contacts.get(contacts.size() - 1); //목록의 마지막 연락처
+				nextIdx = lastContact.getNo() + 1;					
+			}
 		} catch (Exception ex) {
 			contacts = new ArrayList<>(); // 문제가 발생하면 빈 ArrayList 사용
 			ex.printStackTrace(); // 오류 메시지 표시
