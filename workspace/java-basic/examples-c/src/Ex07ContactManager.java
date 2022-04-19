@@ -148,8 +148,8 @@ class ContactManager {
 			return;	// return : 메서드 종료 명령
 		}
 		
-		FileInputStream fis = null;
-		ObjectInputStream ois = null;
+		FileInputStream fis = null;		// 데이터를 읽을 장소에 따라 결정 : 여기서는 파일 
+		ObjectInputStream ois = null;	// 읽을 데이터의 종류에 따라 결정 : 여기서는 ArrayList
 		try {
 			fis = new FileInputStream("contacts.dat");
 			ois = new ObjectInputStream(fis);
@@ -193,20 +193,21 @@ class ContactManager {
 					showAllContacts();
 				}
 			} else if (selection.equals("6")) { // 저장
-				FileOutputStream fos = null;
-				ObjectOutputStream oos = null;
+				FileOutputStream fos = null;	// 저장 장소에 따라 결정 : 디스크에 파일형태로 저장 
+				ObjectOutputStream oos = null;	// 저장할 데이터에 따라 결정 : ArrayList				
 				try {
 					fos = new FileOutputStream("contacts.dat");
 					oos = new ObjectOutputStream(fos);
-					oos.writeObject(contacts);					
-				} catch (IOException e) {
-					e.printStackTrace(); // 오류 메시지를 출력 ( 테스트에만 적용해야 합니다. )
+					oos.writeObject(contacts);	
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				} finally {
-					try { oos.close(); } catch(Exception ex) {}
-					try { fos.close(); } catch(Exception ex) {}
+					try { oos.close(); } catch (Exception ex) {}
+					try { fos.close(); } catch (Exception ex) {}
 				}
+				System.out.println(">>> 연락처를 파일에 저장했습니다.");				
 			} else {
-				System.out.println(">>> 지원하지 않는 기능입니다");
+				System.out.println(">>> 지원하지 않는 기능입니다.");
 			}
 			System.out.println(); // 뒤쪽 여백
 		}

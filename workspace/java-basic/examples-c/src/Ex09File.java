@@ -6,9 +6,12 @@ public class Ex09File {
 
 	public static void main(String[] args) {
 		
+		// File : 파일 또는 디렉터리 정보를 관리하는 클래스
+		
 		//C:\Windows 디렉터리를 관리하는 객체 만들기
 		File winDir = new File("C:\\Windows") ;
 		
+		// isDirectory() : 디렉터리 여부 확인, isFile() : 파일 여부 확인
 		//if (winDir.isDirectory() == false) { //isDirectory() : 디렉터리라면 true 반환
 		if ( !winDir.isDirectory() ) { //! : 논리부정연산자 -> !true == false / !false == true
 			System.out.println("정상적인 디렉터리(폴더)가 아닙니다.");

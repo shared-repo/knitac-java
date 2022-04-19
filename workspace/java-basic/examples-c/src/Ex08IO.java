@@ -160,6 +160,7 @@ public class Ex08IO {
 		
 		//6 - 1.
 //		InputStream is = System.in;
+//		// System.out.println(is.getClass());
 //		InputStreamReader isr6 = new InputStreamReader(is); //System.in : 표준 입력 스트림 (키보드)
 //		BufferedReader br6 = new BufferedReader(isr6);//enter 단위로 읽기 가능
 //		
