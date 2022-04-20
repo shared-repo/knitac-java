@@ -103,6 +103,78 @@ from emp e1
 left outer join emp e2
 on e1.mgr = e2.empno;
 
+-- ///////////////////////////////////////////////////////////
+
+-- Customer, Orders, Book 테이블을 사용해서 구문을 작성하세요
+
+-- 1. 고객과 고객의 주문에 관한 데이터를 고객번호 순으로 정렬하여 보이시오.
+select *
+from customer c, orders o
+where c.custid = o.custid
+order by c.custid;
+
+select *
+from customer c
+inner join orders o
+on c.custid = o.custid
+order by c.custid;
+
+-- 2. 고객의 이름과 고객이 주문한 도서의 판매가격을 검색하시오.
+select c.name, o.bookid, o.saleprice
+from customer c, orders o
+where c.custid = o.custid;
+
+select c.name, o.bookid, o.saleprice
+from customer c
+inner join orders o
+on c.custid = o.custid;
+
+-- 3. 고객별로 주문한 모든 도서의 총 판매액을 구하고, 고객별로 정렬하시오.
+-- 6. 도서를 구매하지 않은 고객을 포함하여 고객의 이름과 고객이 주문한 도서의
+--    판매가격을 구하시오.
+select c.custid, c.name, sum(o.saleprice) 총구매액
+from customer c, orders o
+where c.custid = o.custid
+group by c.custid, c.name
+order by c.custid;
+
+select c.custid, c.name, nvl(sum(o.saleprice), 0) 총구매액
+from customer c, orders o
+where c.custid = o.custid(+)
+group by c.custid, c.name
+order by c.custid;
+
+select c.custid, c.name, nvl(sum(o.saleprice), 0) 총구매액
+from customer c
+left outer join orders o
+on c.custid = o.custid
+group by c.custid, c.name
+order by c.custid;
+
+-- 4. 고객의 이름과 고객이 주문한 도서의 이름을 구하시오.
+select c.name, b.bookname, o.saleprice 판매가격, b.price 도서가격
+from customer c, orders o, book b
+where c.custid = o.custid and o.bookid = b.bookid;
+
+select c.name, b.bookname, o.saleprice 판매가격, b.price 도서가격
+from customer c
+inner join orders o
+on c.custid = o.custid 
+inner join book b
+on o.bookid = b.bookid;
+
+-- 5. 가격이 20,000원인 도서를 주문한 고객의 이름과 도서의 이름을 구하시오
+select c.name, b.bookname, o.saleprice 판매가격, b.price 도서가격
+from customer c
+inner join orders o
+on c.custid = o.custid 
+inner join book b
+on o.bookid = b.bookid
+where b.price = 20000;
+
+-- /////////////////////////////////////////////////////
+
+
 
 
 
