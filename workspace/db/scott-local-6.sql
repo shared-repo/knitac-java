@@ -69,6 +69,19 @@ select * from dept_temp;
 
 commit; -- 작업 확정
 
+-- 데이터 삭제
+delete from emp;
+select * from emp;
+rollback;
+
+-- 데이터 삭제
+delete from emp
+where empno > 9000;
+
+select * from emp;
+
+commit;
+
 
 
 
