@@ -2,10 +2,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
-public class Ex01 {
-
-	public static void main(String[] args) {
+// 데이터베이스 연동 기능을 수행하는 클래스 ( JDBC 코드 사용 )
+public class HRDao {
+	
+	// key를 사용해서 데이터 조회 + 조회 결과를 EmployeeDto에 담아서 반환
+	public List<EmployeeDto> selectEmployeesByNameKey(String key) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -21,20 +24,25 @@ public class Ex01 {
 					"jdbc:oracle:thin:@localhost:1521:xe", // db server url
 					"hr", "hr"); // 계정 정보
 			
-			// 3. SQL 작성 + 명령 객체 만들기
-			String sql = "select employee_id, first_name, last_name, email from employees";
+			// 3-2. SQL 작성 + 명령 객체 만들기 2 ( SQL과 데이터를 분리 )
+			String sql = "select employee_id, first_name, last_name, email " +
+						 "from employees " +
+						 "where    lower(first_name) like ? " + // ? : 데이터가 들어올 자리
+						 "      or lower(last_name)  like ? ";			
 			pstmt = conn.prepareStatement(sql); // 명령객체 만들기
+			pstmt.setString(1, "%" + key + "%"); // SQL의 1번째 ?에 사용될 데이터
+			pstmt.setString(2, "%" + key + "%"); // SQL의 2번째 ?에 사용될 데이터			
 			
 			// 4. 명령 실행 ( select인 경우 ResultSet 형식의 결과 반환 )
 			rs = pstmt.executeQuery(); // executeQuery : select, exeucteUpdate : select 이외의 sql
 			
 			// 5. 결과가 있으면 (select 명령인 경우) 결과 처리
 			while (rs.next()) { // 결과 집합의 다음 행으로 이동 (더이상 행이 없으면 false 반환)
-				System.out.printf("[%d][%15s][%15s][%s]\n", 
-								  rs.getInt(1),					// get자료형(순서번호) 
-								  rs.getString("first_name"), 	// get자료형(컬럼이름)
-								  rs.getString(3), 
-								  rs.getString(4));
+				EmployeeDto employee = new EmployeeDto(); 	// 한 행마다 Dto 객체 만들어서
+				employee.setEmployeeId(rs.getInt(1));		// 행의 데이터를 Dto 객체에 저장
+				employee.setFirstName(rs.getString("first_name"));
+				employee.setLastName(rs.getString(3));
+				employee.setEmail(rs.getString(4));
 			}
 			
 		} catch (Exception ex) {
@@ -45,7 +53,8 @@ public class Ex01 {
 			try { pstmt.close(); } catch (Exception ex) {}
 			try { conn.close(); } catch (Exception ex) {}
 		}
-
+		
+		return null;
 	}
 
 }

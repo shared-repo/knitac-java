@@ -3,13 +3,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class Ex01 {
+public class Ex02 {
 
 	public static void main(String[] args) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String key = "z";
 		
 		try {
 			// 1. JDBC 드라이버 준비
@@ -21,9 +22,21 @@ public class Ex01 {
 					"jdbc:oracle:thin:@localhost:1521:xe", // db server url
 					"hr", "hr"); // 계정 정보
 			
-			// 3. SQL 작성 + 명령 객체 만들기
-			String sql = "select employee_id, first_name, last_name, email from employees";
+//			// 3-1. SQL 작성 + 명령 객체 만들기 1 ( SQL과 데이터를 문자열로 결합 )
+//			String sql = "select employee_id, first_name, last_name, email " +
+//						 "from employees " +
+//						 "where    lower(first_name) like '%" + key + "%' " + 
+//						 "      or lower(last_name)  like '%" + key + "%' ";
+//			pstmt = conn.prepareStatement(sql); // 명령객체 만들기
+			
+			// 3-1. SQL 작성 + 명령 객체 만들기 2 ( SQL과 데이터를 분리 )
+			String sql = "select employee_id, first_name, last_name, email " +
+						 "from employees " +
+						 "where    lower(first_name) like ? " + // ? : 데이터가 들어올 자리
+						 "      or lower(last_name)  like ? ";			
 			pstmt = conn.prepareStatement(sql); // 명령객체 만들기
+			pstmt.setString(1, "%" + key + "%"); // SQL의 1번째 ?에 사용될 데이터
+			pstmt.setString(2, "%" + key + "%"); // SQL의 2번째 ?에 사용될 데이터			
 			
 			// 4. 명령 실행 ( select인 경우 ResultSet 형식의 결과 반환 )
 			rs = pstmt.executeQuery(); // executeQuery : select, exeucteUpdate : select 이외의 sql
