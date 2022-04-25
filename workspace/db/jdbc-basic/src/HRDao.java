@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 // 데이터베이스 연동 기능을 수행하는 클래스 ( JDBC 코드 사용 )
@@ -13,6 +14,9 @@ public class HRDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		// 조회 결과를 저장할 컬렉션 객체 ( 조회 결과가 여러 개일 수 있기 때문에 )
+		ArrayList<EmployeeDto> employees = new ArrayList<>();
 		
 		try {
 			// 1. JDBC 드라이버 준비
@@ -43,6 +47,8 @@ public class HRDao {
 				employee.setFirstName(rs.getString("first_name"));
 				employee.setLastName(rs.getString(3));
 				employee.setEmail(rs.getString(4));
+				
+				employees.add(employee); // 한 행의 데이터를 저장한 Dto객체를 목록에 추가
 			}
 			
 		} catch (Exception ex) {
@@ -54,7 +60,7 @@ public class HRDao {
 			try { conn.close(); } catch (Exception ex) {}
 		}
 		
-		return null;
+		return employees; // 조회 결과를 저장한 컬렉션 객체를 호출한 곳으로 반환
 	}
 
 }
