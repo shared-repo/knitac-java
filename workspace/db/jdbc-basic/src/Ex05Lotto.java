@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ex05Lotto {
 	
@@ -20,41 +22,13 @@ public class Ex05Lotto {
 				int mean = mean(numbers);				
 				showNumbers(numbers, mean);						
 			} else if (selection.equals("2")) {
-				// 파일에서 과거 당첨 번호 데이터 읽기
-				FileInputStream fis = null;
-				InputStreamReader isr = null;
-				BufferedReader br = null;
-				try {
-					fis = new FileInputStream("lotto-winning-numbers.txt");
-					isr = new InputStreamReader(fis); // byte[] -> char[]
-					br = new BufferedReader(isr); // 한 줄씩 데이터 읽기
-					while (true) {
-						String line = br.readLine();
-						if (line == null) { // EOF(End Of File)
-							break;
-						}
-						
-						String[] row = line.split(","); // "1,2,3" -> ["1","2","3"]
-						WinningNumbersDto dto = new WinningNumbersDto();
-						dto.setRound(Integer.parseInt(row[0]));
-						dto.setNo1(Integer.parseInt(row[1]));
-						dto.setNo2(Integer.parseInt(row[2]));
-						dto.setNo3(Integer.parseInt(row[3]));
-						dto.setNo4(Integer.parseInt(row[4]));
-						dto.setNo5(Integer.parseInt(row[5]));
-						dto.setNo6(Integer.parseInt(row[6]));
-						dto.setBonusNo(Integer.parseInt(row[7]));
-						
-						System.out.println(dto);
-					}
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				} finally {
-					try { br.close(); } catch (Exception ex) {}
-					try { isr.close(); } catch (Exception ex) {}
-					try { fis.close(); } catch (Exception ex) {}
-				}
+				// 파일에서 과거 당첨 번호 데이터 읽기				
+				List<WinningNumbersDto> winningNumbersList = readWinningNumbersFromFile();
+				
 				// 읽은 데이터를 데이터베이스에 저장
+				for (WinningNumbersDto t : winningNumbersList) {
+					System.out.println(t);
+				}
 			} else if (selection.equals("9")) {
 				System.out.println("행운을 빕니다. 부자 되세요.");
 				break;
@@ -64,6 +38,45 @@ public class Ex05Lotto {
 			System.out.println();			
 		}
 
+	}
+
+	///////////////////////////////////////////////////////
+	
+	private List<WinningNumbersDto> readWinningNumbersFromFile() {
+		ArrayList<WinningNumbersDto> winningNumbersList = new ArrayList<>();				
+		FileInputStream fis = null;
+		InputStreamReader isr = null;
+		BufferedReader br = null;
+		try {
+			fis = new FileInputStream("lotto-winning-numbers.txt");
+			isr = new InputStreamReader(fis); // byte[] -> char[]
+			br = new BufferedReader(isr); // 한 줄씩 데이터 읽기
+			while (true) {
+				String line = br.readLine();
+				if (line == null) { // EOF(End Of File)
+					break;
+				}						
+				String[] row = line.split(","); // "1,2,3" -> ["1","2","3"]
+				WinningNumbersDto dto = new WinningNumbersDto();
+				dto.setRound(Integer.parseInt(row[0]));
+				dto.setNo1(Integer.parseInt(row[1]));
+				dto.setNo2(Integer.parseInt(row[2]));
+				dto.setNo3(Integer.parseInt(row[3]));
+				dto.setNo4(Integer.parseInt(row[4]));
+				dto.setNo5(Integer.parseInt(row[5]));
+				dto.setNo6(Integer.parseInt(row[6]));
+				dto.setBonusNo(Integer.parseInt(row[7]));
+				
+				winningNumbersList.add(dto); // 읽은 데이터를 목록에 저장
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try { br.close(); } catch (Exception ex) {}
+			try { isr.close(); } catch (Exception ex) {}
+			try { fis.close(); } catch (Exception ex) {}
+		}
+		return winningNumbersList;
 	}
 	
 	///////////////////
