@@ -26,8 +26,10 @@ public class Ex05Lotto {
 				List<WinningNumbersDto> winningNumbersList = readWinningNumbersFromFile();
 				
 				// 읽은 데이터를 데이터베이스에 저장
+				LottoDao dao = new LottoDao();
 				for (WinningNumbersDto t : winningNumbersList) {
-					System.out.println(t);
+					// System.out.println(t);
+					dao.insertWinningNumbers(t);
 				}
 			} else if (selection.equals("9")) {
 				System.out.println("행운을 빕니다. 부자 되세요.");
