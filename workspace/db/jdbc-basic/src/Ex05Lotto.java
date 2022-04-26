@@ -27,10 +27,11 @@ public class Ex05Lotto {
 				
 				// 읽은 데이터를 데이터베이스에 저장
 				LottoDao dao = new LottoDao();
-				for (WinningNumbersDto t : winningNumbersList) {
-					// System.out.println(t);
-					dao.insertWinningNumbers(t);
-				}
+				dao.insertWinningNumbers(winningNumbersList);
+				
+			} else if (selection.equals("3")) {
+				LottoDao dao = new LottoDao();
+				dao.deleteAllWinningNumbers();
 			} else if (selection.equals("9")) {
 				System.out.println("행운을 빕니다. 부자 되세요.");
 				break;
@@ -54,7 +55,7 @@ public class Ex05Lotto {
 			isr = new InputStreamReader(fis); // byte[] -> char[]
 			br = new BufferedReader(isr); // 한 줄씩 데이터 읽기
 			while (true) {
-				String line = br.readLine();
+				String line = br.readLine(); // 한 줄의 문자열 데이터 읽기
 				if (line == null) { // EOF(End Of File)
 					break;
 				}						
@@ -96,6 +97,7 @@ public class Ex05Lotto {
 		System.out.println("******************************");
 		System.out.println("* 1. 당첨 예상 번호 뽑기.");
 		System.out.println("* 2. 과거 당첨 번호 저장.");
+		System.out.println("* 3. 과거 당첨 번호 초기화.");
 		System.out.println("* 9. 종료.");
 		System.out.println("******************************");
 		System.out.print("작업을 선택하세요 : ");
