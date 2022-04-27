@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 public class LottoDao {
@@ -80,7 +81,58 @@ public class LottoDao {
 		}
 		
 	}
-	
+
+	// round 번호를 받아서 해당 round의 당첨 번호를 조회하고 WinningNumbersDto 객체로 반환
+	public WinningNumbersDto selectWinningNumbersByRound(int round) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		WinningNumbersDto winningNumbers = null;
+
+		try {
+			// 1. JDBC 드라이버 준비
+			Class.forName("oracle.jdbc.OracleDriver");
+			// 2. 데이터베이스에 연결 ( 연결 객체 준비 )
+			conn = DriverManager.getConnection(
+					"jdbc:oracle:thin:@localhost:1521:xe", // db server url
+					"scott", "TIGER"); // 계정 정보
+			// 3-2. SQL 작성 + 명령 객체 만들기 2 ( SQL과 데이터를 분리 )
+			String sql = "select \"round\", no1, no2, no3, no4, no5, no6, bonus_no " +
+						 "from winning_numbers " +
+						 "where \"round\" = ? ";
+			pstmt = conn.prepareStatement(sql); // 명령객체 만들기
+			pstmt.setInt(1, round);
+			
+			// 4. 명령 실행 ( DML인 경우 영향 받은 행의 갯수 반환 )
+			rs = pstmt.executeQuery(); // executeQuery : select, exeucteUpdate : select 이외의 sql
+				
+			// 5. 결과가 있으면 (select 명령인 경우) 결과 처리
+			// while (rs.next()) {
+			if (rs.next()) { // primary key로 조회한 경우에는 if 사용 가능
+				winningNumbers = new WinningNumbersDto();
+				winningNumbers.setRound(rs.getInt(1));
+				winningNumbers.setNo1(rs.getInt(2));
+				winningNumbers.setNo2(rs.getInt(3));
+				winningNumbers.setNo3(rs.getInt(4));
+				winningNumbers.setNo4(rs.getInt(5));
+				winningNumbers.setNo5(rs.getInt(6));
+				winningNumbers.setNo6(rs.getInt(7));
+				winningNumbers.setBonusNo(rs.getInt(8));
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace(); // 오류 메시지를 화면에 출력
+		} finally {
+			// 6. 연결 종료
+			try { rs.close(); } catch (Exception ex) {}
+			try { pstmt.close(); } catch (Exception ex) {}
+			try { conn.close(); } catch (Exception ex) {}
+		}
+		
+		return winningNumbers;
+		
+	}
 	
 
 }
