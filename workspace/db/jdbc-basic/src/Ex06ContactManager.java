@@ -8,6 +8,20 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
+// 연락처 테이블 생성 SQL
+/*
+create table contact
+(
+    no number(6) primary key,   -- 자동 증가 처리
+    name varchar2(100) not null,
+    phone varchar2(20) not null,
+    email varchar2(50) null
+);
+
+create sequence contact_sequence nocache;
+*/
+
 //파일에 저장 또는 파일로부터 읽는 클래스는 Serialzable 인터페이스를 구현해야 합니다.
 class Contact implements Serializable {
 	private int no;
@@ -54,47 +68,16 @@ class Contact implements Serializable {
 	}
 }
 
-class ContactManager {
+class Ex06ContactManager {
 
 	java.util.Scanner scanner = new java.util.Scanner(System.in);
 	
-	// 등록된 연락처 정보를 저장할 ArrayList 만들기
-	// 배열은 같은 자료형만 저장할 수 있는데 PersonalContact와 BizContact를 모두 저장하려면 ?
-	// -> 부모 클래스인 Contact 타입으로 ArrayList을 만들면 가능
-	// Contact[] contacts = new Contact[1000];
-	// ArrayList<Contact> contacts = new ArrayList<>();
 	ArrayList<Contact> contacts = null; // 생성자 메서드에서 초기화하도록 변경
 	
 	// 다음에 등록할 연락처의 생성 순서 번호 저장할 변수
 	int nextIdx = 1;
 	
-	public ContactManager() { // 생성자 메서드 : 초기화, 인스턴스가 만들어질때 자동 호출
-		
-		File file = new File("contacts.dat"); // File : 파일 또는 폴더 정보를 관리하는 클래스
-		if (!file.exists()) { // exists() : 파일이 있는지 확인하는 메서드
-			contacts = new ArrayList<>();
-			return;	// return : 메서드 종료 명령
-		}
-		
-		FileInputStream fis = null;		// 데이터를 읽을 장소에 따라 결정 : 여기서는 파일 
-		ObjectInputStream ois = null;	// 읽을 데이터의 종류에 따라 결정 : 여기서는 ArrayList
-		try {
-			fis = new FileInputStream("contacts.dat");
-			ois = new ObjectInputStream(fis);
-			contacts = (ArrayList<Contact>)ois.readObject();
-			if (contacts.size() == 0) {
-				nextIdx = 1;
-			} else {
-				Contact lastContact = contacts.get(contacts.size() - 1); //목록의 마지막 연락처
-				nextIdx = lastContact.getNo() + 1;					
-			}
-		} catch (Exception ex) {
-			contacts = new ArrayList<>(); // 문제가 발생하면 빈 ArrayList 사용
-			ex.printStackTrace(); // 오류 메시지 표시
-		} finally {
-			try { ois.close(); } catch (Exception ex) {}
-			try { fis.close(); } catch (Exception ex) {}
-		}
+	public Ex06ContactManager() { // 생성자 메서드 : 초기화, 인스턴스가 만들어질때 자동 호출
 	}
 	
 	public void doManage() {
@@ -121,19 +104,7 @@ class ContactManager {
 					showAllContacts();
 				}
 			} else if (selection.equals("6")) { // 저장
-				FileOutputStream fos = null;	// 저장 장소에 따라 결정 : 디스크에 파일형태로 저장 
-				ObjectOutputStream oos = null;	// 저장할 데이터에 따라 결정 : ArrayList				
-				try {
-					fos = new FileOutputStream("contacts.dat");
-					oos = new ObjectOutputStream(fos);
-					oos.writeObject(contacts);	
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				} finally {
-					try { oos.close(); } catch (Exception ex) {}
-					try { fos.close(); } catch (Exception ex) {}
-				}
-				System.out.println(">>> 연락처를 파일에 저장했습니다.");				
+								
 			} else {
 				System.out.println(">>> 지원하지 않는 기능입니다.");
 			}
@@ -184,14 +155,10 @@ class ContactManager {
 		String selection = scanner.nextLine();
 		return selection;
 	}
-}
-
-
-public class Ex06ContactManager {
 
 	public static void main(String[] args) {
 		
-		ContactManager manager = new ContactManager();
+		Ex06ContactManager manager = new Ex06ContactManager();
 		manager.doManage();
 
 	}
