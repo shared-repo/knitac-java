@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 // 연락처 테이블 생성 SQL
@@ -96,14 +97,19 @@ class Ex06ContactManager {
 				dao.insertContact(contact);
 				System.out.println(">>> 새 연락처를 등록했습니다");
 			} else if (selection.equals("4")) { 		// 목록보기
-				//if (nextIdx == 0) { // 등록된 연락처가 없다면
-				if (contacts.size() == 0) {
-					System.out.println("등록된 연락처가 없습니다.");
-				} else {
-					showAllContacts();
-				}
-			} else if (selection.equals("6")) { // 저장
-								
+				List<ContactDto> contacts = dao.selectAllContacts();
+				System.out.println("[ 연락처 목록 ]");
+				for (ContactDto contact : contacts) {
+					System.out.println(contact.info());
+				}				
+			} else if (selection.equals("5")) { // 저장
+				System.out.print("검색할 이름 : ");
+				String nameKey = scanner.nextLine();
+				List<ContactDto> contacts = dao.selectContactsByName(nameKey);
+				System.out.println("[ 연락처 목록 ]");
+				for (ContactDto contact : contacts) {
+					System.out.println(contact.info());
+				}			
 			} else {
 				System.out.println(">>> 지원하지 않는 기능입니다.");
 			}
