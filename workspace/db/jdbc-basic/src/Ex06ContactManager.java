@@ -69,6 +69,8 @@ class Contact implements Serializable {
 }
 
 class Ex06ContactManager {
+	
+	ContactDao dao = new ContactDao();
 
 	java.util.Scanner scanner = new java.util.Scanner(System.in);
 	
@@ -90,11 +92,9 @@ class Ex06ContactManager {
 				System.out.println(">>> 프로그램이 종료됩니다");
 				break;
 			} else if (selection.equals("1")) { 				// 등록
-				Contact contact = inputContact();
-				contact.setNo(nextIdx); // 자동 증가 번호로 연락처 번호 설정
-				//contacts[nextIdx] = contact;
-				contacts.add(contact);
-				nextIdx++; // 다음에 등록할 연락처의 생성 순서 번호 수정 ( 자동 증가 번호 증가 )
+				ContactDto contact = inputContact();	// 입력
+				
+				dao.insertContact(contact);
 				System.out.println(">>> 새 연락처를 등록했습니다");
 			} else if (selection.equals("4")) { 				// 목록보기
 				//if (nextIdx == 0) { // 등록된 연락처가 없다면
@@ -124,8 +124,8 @@ class Ex06ContactManager {
 //		}
 	}
 
-	private Contact inputContact() {
-		Contact contact = null; // 새로 등록할 연락처에 대한 참조 변수 ( 부모타입으로 선언 )
+	private ContactDto inputContact() {
+		ContactDto contact = null; // 새로 등록할 연락처에 대한 참조 변수 ( 부모타입으로 선언 )
 		// 입력 
 		System.out.println("[ 등록할 연락처 정보 ]");
 		System.out.print("이름 : ");
@@ -135,7 +135,7 @@ class Ex06ContactManager {
 		System.out.print("이메일 : ");
 		String email = scanner.nextLine();
 		
-		contact = new Contact(0, name, phone, email);
+		contact = new ContactDto(0, name, phone, email);
 		return contact;
 	}
 
