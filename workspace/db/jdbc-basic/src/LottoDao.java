@@ -152,9 +152,11 @@ public class LottoDao {
 			// 3-2. SQL 작성 + 명령 객체 만들기 2 ( SQL과 데이터를 분리 )
 			String sql = "select count(*) " +
 						 "from winning_numbers " +
+						 // "where " + number + " in (no1, no2, no3, no4, no5, no6, bonus_no) ";
 						 "where ? in (no1, no2, no3, no4, no5, no6, bonus_no) ";
+						 
 			pstmt = conn.prepareStatement(sql); // 명령객체 만들기
-			pstmt.setInt(1, number);
+			pstmt.setInt(1, number); // sql문의 1번째 ?에 적용할 값 지정
 			
 			// 4. 명령 실행 ( DML인 경우 영향 받은 행의 갯수 반환 )
 			rs = pstmt.executeQuery(); // executeQuery : select, exeucteUpdate : select 이외의 sql
