@@ -91,12 +91,11 @@ class Ex06ContactManager {
 			if (selection.equals("7")) {
 				System.out.println(">>> 프로그램이 종료됩니다");
 				break;
-			} else if (selection.equals("1")) { 				// 등록
-				ContactDto contact = inputContact();	// 입력
-				
+			} else if (selection.equals("1")) { 		// 등록
+				ContactDto contact = inputContact();	// 입력				
 				dao.insertContact(contact);
 				System.out.println(">>> 새 연락처를 등록했습니다");
-			} else if (selection.equals("4")) { 				// 목록보기
+			} else if (selection.equals("4")) { 		// 목록보기
 				//if (nextIdx == 0) { // 등록된 연락처가 없다면
 				if (contacts.size() == 0) {
 					System.out.println("등록된 연락처가 없습니다.");
