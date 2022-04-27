@@ -30,12 +30,18 @@ public class Ex05Lotto {
 				dao.insertWinningNumbers(winningNumbersList);				
 			} else if (selection.equals("3")) {
 				dao.deleteAllWinningNumbers();
-			} else if (selection.equals("4")) { // 회차별 당첨 번호 검색
+			} else if (selection.equals("4")) { // 회차별 당첨 번호 조회
 				System.out.print("회차 번호 : ");
 				int round = scanner.nextInt();
 				scanner.nextLine(); // buffer에 남아있는 enter 제거
 				WinningNumbersDto winningNumbers = dao.selectWinningNumbersByRound(round);
 				System.out.println(winningNumbers);
+			} else if (selection.equals("5")) { // 번호별 출현 회수 조회
+				System.out.print("번호 : ");
+				int number = scanner.nextInt();
+				scanner.nextLine(); // buffer에 남아있는 enter 제거
+				int count = dao.selectCountByNumber(number);
+				System.out.printf("번호 [%2d]의 출현 회수 : [%3d]\n", number, count);
 			} else if (selection.equals("9")) {
 				System.out.println("행운을 빕니다. 부자 되세요.");
 				break;
