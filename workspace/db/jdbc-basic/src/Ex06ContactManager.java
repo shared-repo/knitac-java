@@ -97,7 +97,22 @@ class Ex06ContactManager {
 				dao.insertContact(contact);
 				System.out.println(">>> 새 연락처를 등록했습니다");
 			} else if (selection.equals("2")) { 		// 수정
-
+				// 1. 입력, 2. 검색, 3. 검색 결과 표시
+				System.out.print("수정할 연락처 이름 : ");
+				String nameKey = scanner.nextLine();
+				List<ContactDto> contacts = dao.selectContactsByName(nameKey);
+				if (contacts.size() == 0) { // 검색 결과가 없는 경우
+					System.out.println("[ 검색된 연락처가 없습니다 ]");
+				} else {
+					System.out.println("[ 연락처 목록 ]");
+					for (ContactDto contact : contacts) {
+						System.out.println(contact.info());
+					}
+				}
+				// 4. 수정 대상 선택 ( 번호 입력 )
+				// 5. 수정 내용 입력 ( 이름, 전화번호, 이메일 )
+				// 6. 수정 실행
+				
 			} else if (selection.equals("3")) { 		// 삭제
 				// 1. 입력, 2. 검색, 3. 검색 결과 표시
 				System.out.print("삭제할 연락처 이름 : ");
