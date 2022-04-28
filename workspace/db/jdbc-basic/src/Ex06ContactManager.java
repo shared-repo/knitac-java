@@ -110,8 +110,14 @@ class Ex06ContactManager {
 					}
 				}
 				// 4. 수정 대상 선택 ( 번호 입력 )
+				System.out.print("수정할 연락처 번호 : ");
+				int no = scanner.nextInt(); // 입력 buffer에 enter가 남아 있어서
+				scanner.nextLine(); // buffer에 남아있는 enter 제거 
 				// 5. 수정 내용 입력 ( 이름, 전화번호, 이메일 )
+				ContactDto contact = inputContact();
+				contact.setNo(no);
 				// 6. 수정 실행
+				dao.updateContact(contact);
 				
 			} else if (selection.equals("3")) { 		// 삭제
 				// 1. 입력, 2. 검색, 3. 검색 결과 표시
