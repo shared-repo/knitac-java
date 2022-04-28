@@ -110,8 +110,13 @@ class Ex06ContactManager {
 					for (ContactDto contact : contacts) {
 						System.out.println(contact.info());
 					}
-					// 4. 삭제 대상 선택
+					// 4. 삭제 대상 선택 ( 번호 입력 )
+					System.out.print("삭제할 연락처 번호 : ");
+					int no = scanner.nextInt(); // 입력 buffer에 enter가 남아 있어서
+					scanner.nextLine(); // buffer에 남아있는 enter 제거 
 					// 5. 선택된 대상 삭제
+					dao.deleteContact(no);
+					System.out.println(">>> 선택된 연락처를 삭제했습니다.");
 				}
 			} else if (selection.equals("4")) { 		// 목록보기
 				List<ContactDto> contacts = dao.selectAllContacts();
