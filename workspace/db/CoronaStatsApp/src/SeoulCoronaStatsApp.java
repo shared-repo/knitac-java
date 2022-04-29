@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class SeoulCoronaStatsApp {
 	
 	private Scanner scanner = new Scanner(System.in);
+	private SeoulCoronaStatsDao dao = new SeoulCoronaStatsDao();
 	
 	public void doStart() {
 		
@@ -21,10 +22,8 @@ public class SeoulCoronaStatsApp {
 			} else if (selection.equals("1")) {
 				// 1. 파일에서 데이터 읽기 ( 현재 클래스에 메서드 생성 )
 				List<SeoulCoronaStatsDto> stats = readFromFile();
-				for (SeoulCoronaStatsDto dto : stats) {
-					System.out.println(dto);
-				}
 				// 2. 데이터베이스에 데이터 저장 ( Dao 클래스에 메서드 생성 )
+				dao.insertSeoulCoronaStats(stats);
 			} else if (selection.equals("2")) {
 			
 			} else if (selection.equals("3")) {
@@ -56,6 +55,9 @@ public class SeoulCoronaStatsApp {
 			br = new BufferedReader(isr);
 			while (true) {
 				String line = br.readLine(); 	// "a,b,c,d"
+				if (line == null) {
+					break;
+				}
 				String[] row = line.split(","); // "a,b,c,d" -> ["a", "b", "c", "d"]
 				
 				SeoulCoronaStatsDto dto = 
