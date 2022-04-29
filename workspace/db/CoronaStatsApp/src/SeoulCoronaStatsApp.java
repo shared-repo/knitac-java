@@ -21,13 +21,23 @@ public class SeoulCoronaStatsApp {
 				break;
 			} else if (selection.equals("1")) {
 				// 1. 파일에서 데이터 읽기 ( 현재 클래스에 메서드 생성 )
-				List<SeoulCoronaStatsDto> stats = readFromFile();
+				List<SeoulCoronaStatsDto> stats = readFromFile();				
 				// 2. 데이터베이스에 데이터 저장 ( Dao 클래스에 메서드 생성 )
+				dao.deleteAll();
 				dao.insertSeoulCoronaStats(stats);
-			} else if (selection.equals("2")) {
-			
+				System.out.println(">>>>> 데이터를 데이터베이스에 저장했습니다. <<<<<");
+			} else if (selection.equals("2")) {				
+				dao.deleteAll();
+				System.out.println(">>>>> 데이터베이스를 초기화 했습니다. <<<<<");
 			} else if (selection.equals("3")) {
+				System.out.print("조회 날짜 (yyyy.mm.dd) : ");
+				String regDate = scanner.nextLine();
+				List<SeoulCoronaStatsDto> stats = dao.selectSeoulCoronaStatsByRegDate(regDate);
 				
+				System.out.printf("[ %s 기준 확진자 현황 ]\n", regDate);
+				for (SeoulCoronaStatsDto dto : stats) {
+					System.out.println(dto);
+				}
 			} else if (selection.equals("4")) {
 				
 			} else if (selection.equals("5")) {
