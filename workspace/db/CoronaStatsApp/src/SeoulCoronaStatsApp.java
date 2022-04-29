@@ -42,11 +42,29 @@ public class SeoulCoronaStatsApp {
 					}
 				}
 			} else if (selection.equals("4")) {
-				
+				System.out.print("자치구 : ");
+				String guName = scanner.nextLine();
+				List<SeoulCoronaStatsDto> stats = dao.selectSeoulCoronaStatsByGuName(guName);
+				if (stats.size() == 0) {
+					System.out.println("해당 자치구의 데이터가 없습니다.");
+				} else {
+					System.out.printf("[ %s 확진자 현황 ]\n", guName);
+					for (SeoulCoronaStatsDto dto : stats) {
+						System.out.println(dto);
+					}
+				}
 			} else if (selection.equals("5")) {
 				
 			} else if (selection.equals("6")) {
-				
+				List<SeoulCoronaStatsDto> stats = dao.selectMaxSeoulCoronaStats();
+				if (stats.size() == 0) {
+					System.out.println("데이터가 없습니다.");
+				} else {
+					System.out.println("[ 최다 확진자 발생 일자 및 자치구 ]");
+					for (SeoulCoronaStatsDto dto : stats) {
+						System.out.println(dto);
+					}
+				}
 			}  else {
 				System.out.println(">>>>> 지원하지 않는 작업입니다. <<<<<");
 			}
