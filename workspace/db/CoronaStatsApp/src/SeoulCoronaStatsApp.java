@@ -33,10 +33,13 @@ public class SeoulCoronaStatsApp {
 				System.out.print("조회 날짜 (yyyy.mm.dd) : ");
 				String regDate = scanner.nextLine();
 				List<SeoulCoronaStatsDto> stats = dao.selectSeoulCoronaStatsByRegDate(regDate);
-				
-				System.out.printf("[ %s 기준 확진자 현황 ]\n", regDate);
-				for (SeoulCoronaStatsDto dto : stats) {
-					System.out.println(dto);
+				if (stats.size() == 0) {
+					System.out.println("해당 날짜의 데이터가 없습니다.");
+				} else {
+					System.out.printf("[ %s 기준 확진자 현황 ]\n", regDate);
+					for (SeoulCoronaStatsDto dto : stats) {
+						System.out.println(dto);
+					}
 				}
 			} else if (selection.equals("4")) {
 				
@@ -70,15 +73,16 @@ public class SeoulCoronaStatsApp {
 				}
 				String[] row = line.split(","); // "a,b,c,d" -> ["a", "b", "c", "d"]
 				
-				SeoulCoronaStatsDto dto = 
-						new SeoulCoronaStatsDto(0, row[0], row[1], 
-												Integer.parseInt(row[2]),
-												Integer.parseInt(row[3]));
-//				SeoulCoronaStatsDto dto = new SeoulCoronaStatsDto();
-//				dto.setRegDate(row[0]);
-//				dto.setGuName(row[1]);
-//				dto.setTotal(Integer.parseInt(row[2]));
-//				dto.setToday(Integer.parseInt(row[3]));
+//				SeoulCoronaStatsDto dto = 
+//						new SeoulCoronaStatsDto(0, row[0], row[1], 
+//												Integer.parseInt(row[2]),
+//												Integer.parseInt(row[3]));
+				SeoulCoronaStatsDto dto = new SeoulCoronaStatsDto();
+				dto.setRegDate(row[0]);
+				dto.setGuName(row[1]);
+				dto.setTotal(Integer.parseInt(row[2]));
+				dto.setToday(Integer.parseInt(row[3]));
+				
 				stats.add(dto);
 			}
 		} catch (Exception ex) {
