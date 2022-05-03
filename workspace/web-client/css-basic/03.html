@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Selector Example 01</title>
+
+    <style type="text/css">
+        /* 모든 p 요소 선택 */
+        p {
+            font-size: 20pt;
+            font-weight: bold;
+        }
+
+        /* id='a' 인 요소 하위에 있는 모든 p 요소를 선택 */
+        #a p {
+            color: darkmagenta;
+        }
+
+        /* id='a' 인 요소 1단계 하위에 있는 모든 p 요소를 선택 */
+        #a > p {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="a">
+        <div>
+            <p>스타일이 적용된 내용 1</p>
+        </div>
+        <p>스타일이 적용된 내용 2</p>
+    </div>
+    <p>스타일이 적용된 내용 3</p>
+
+   
+</body>
+</html>
