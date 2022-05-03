@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Selector Example 01</title>
+
+    <style type="text/css">
+        /*  css 주석 */
+        /* 전체선택자 (*) : 문서 내의 모든 요소 선택 */
+        * {
+           color: purple; 
+        }
+
+        /* 태그이름선택자 : 지정된 이름의 요소(태그) 선택 */ 
+        h1 {
+            text-align: center;
+            color: hotpink;
+        }
+        /* id 선택자 : id="고유한이름" 속성의 값으로 요소(태그) 선택 */
+        #b {
+            text-decoration: underline;
+            text-align: right;
+        }
+        /* class 선택자 : class="이름" 속성의 값으로 요소(태그) 선택 */
+        .bg {
+            background-color: chocolate;
+        }
+        .bg.z {
+            font-size: 40pt;
+        }
+
+        /* 다중 선택자 : 여러 개의 선택자를 ,로 연결해서 해당하는 모든 요소(태그) 선택 */
+        h3, #b, .z {
+            color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <p>스타일이 적용된 내용 0</p>
+    <h1 id="a">스타일이 적용된 내용 1</h1>
+    <h2 id="b">스타일이 적용된 내용 2</h2>
+    <h3 id="c" class="bg">스타일이 적용된 내용 3</h3>
+    <p id="d" class="bg z">스타일이 적용된 내용 4</p>
+    <p>스타일이 적용된 내용 5</p>
+
+</body>
+</html>
