@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Selector Example 01</title>
+
+    <style type="text/css">
+        p { font-size: 20pt; }
+
+        /* data-attr 속성이 있는 p 요소 */
+        p[data-attr] {
+            color: red;
+        }
+
+        /*  data-attr속성의 값이 abc인 p 요소 */
+        p[data-attr=abc] {
+            font-weight: bold;
+        }
+        /*  data-attr속성의 값이 abc로 시작하는 p 요소 */
+        p[data-attr^=abc] {
+            font-style: italic;
+        }
+        /*  data-attr속성의 값이 def로 끝나는 p 요소 */
+        p[data-attr$=def] {
+            background-color: aquamarine;
+        }
+        /*  data-attr속성의 값에 de가 포함된 p 요소 */
+        p[data-attr*=de] {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 속성 이름이 data-로 시작하는 것은 사용자 정의 속성 -->
+    <p data-attr>스타일이 적용된 단락 1</p>
+    <p data-attr="abc">스타일이 적용된 단락 2</p>
+    <p data-attr="abcdef">스타일이 적용된 단락 3</p>
+    <p data-attr="xyzdef">스타일이 적용된 단락 4</p>
+    <p>스타일이 적용된 단락 5</p>
+    <p>스타일이 적용된 단락 6</p>
+    <p>스타일이 적용된 단락 7</p>
+   
+</body>
+</html>
