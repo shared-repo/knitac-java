@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Form and Input</title>
+</head>
+<body>
+
+    <form method="get">
+    <!-- hidden : 존재하지만 화면에 보이지 않는 요소 ( 개발자가 데이터를 임시 저장하는 도구 )-->
+    <input type="hidden" name="hiddendata" value="100">
+    <table border="1" width="600" align="center">
+        <caption><h3>게시판 글쓰기</h3></caption>
+        
+        <tr>
+            <td style="width:150px">제목</td>
+            <td>
+                <input type="text" name="title">
+            </td>
+        </tr>
+        <tr>
+            <td>작성자</td>
+            <td>
+                <input type="text" name="writer">
+            </td>
+        </tr>
+        <tr>
+            <td>첨부파일</td>
+            <td>
+                <input type="file" name="attachment">
+            </td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td>
+                <textarea name="content" rows="10" cols="60"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>작성일자</td>
+            <td>
+                <input type="date" name="writedate">
+            </td>
+        </tr>
+        <tr>
+            <td>수정일자</td>
+            <td>
+                <input type="date" name="modifydate">
+            </td>
+        </tr>
+        <tr>
+            <td>조회수</td>
+            <td>
+                <input type="text" name="readcount">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" value="글쓰기">
+                <input type="reset" value="다시쓰기">
+            </td>
+            
+        </tr>
+    </table>
+    </form>
+</body>
+</html>
