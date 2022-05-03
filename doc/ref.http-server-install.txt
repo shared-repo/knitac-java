@@ -1,0 +1,13 @@
+1. node.js 설치
+
+2. (  node.js 환경변수 확인 )
+
+   PATH 환경변수에 C:\Program Files\nodejs\ 경로가 등록되어 있어야 합니다.
+
+3. http-server 설치
+
+   터미널에서 npm install -g http-server
+
+4. http-server 실행
+
+   터미널에서 http-server 폴더이름 -p 8081
