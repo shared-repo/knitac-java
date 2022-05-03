@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Form and Input</title>
+</head>
+<body>
+
+    <table border="1" width="600" align="center">
+        <caption><h3>회원가입</h3></caption>
+        <tr>
+            <td style="width:150px">아이디</td>
+            <td>
+                <!-- name : 서버로 전송할 때 데이터에 붙이는 이름, 중복 허용 O -->
+                <!-- id : 브라우저에서 주로 자바스크립트가 사용하는 식별값, 중복 허용 X -->
+                <input type="text" name="id" id="id">
+            </td>
+        </tr>
+        <tr>
+            <td>패스워드</td>
+            <td>
+                <input type="password" name="passwd">
+            </td>
+        </tr>
+        <tr>
+            <td>이메일</td>
+            <td>
+                <input type="text" name="emailid">
+                @
+                <select name="emaildomain">
+                    <option value="naver.com">naver.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="daum.com">daum.net</option>
+                    <option value="zum.com">zum.com</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>생년월일</td>
+            <td>
+                <input type="date" name="birthdate">
+                <input type="radio" name="datetype" value="solar" checked>양력
+                <input type="radio" name="datetype" value="lunar">음력
+            </td>
+        </tr>
+        <tr>
+            <td>성별</td>
+            <td>
+                <!-- radio : name이 같은 요소끼리 단일 선택 -->
+                <input type="radio" name="gender" value="female">여성
+                <input type="radio" name="gender" value="male">남성
+            </td>
+        </tr>
+        <tr>
+            <td>관심분야</td>
+            <td>
+                <!-- checkbox : name이 같은 요소끼리 다중 선택 -->                
+                <input type="checkbox" name="interests" value="music">음악
+                <input type="checkbox" name="interests" value="shopping">쇼핑
+                <input type="checkbox" name="interests" value="game">게임
+                <input type="checkbox" name="interests" value="movie">영화
+                <input type="checkbox" name="interests" value="book">책
+            </td>
+        </tr>
+
+
+    </table>
+
+
+</body>
+</html>
