@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello, CSS</title>
+
+    <!-- 외부 파일에서 스타일 가져오기 -->
+    <link rel="stylesheet" href="01.my-style.css">
+    
+    <!-- 페이지 전체를 대상으로 일괄 적용 -->
+    <style type="text/css">
+        div {
+            font-size: 25pt;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. 태그에 직접 적용 : 선택자 없습니다. -->
+    <div style="color:red; background-color: aqua;">스타일이 적용된 제목 1</div>
+    <div>스타일이 적용된 제목 2</div>
+    <p>스타일이 적용된 제목 3</p>
+</body>
+</html>
