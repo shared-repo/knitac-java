@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Selector Example 01</title>
+
+    <style type="text/css">
+       a {
+           font-size: 15pt;
+           font-weight: bold;
+           text-decoration: none;
+       }
+       a:visited {
+           color: hotpink;
+       }
+       a:active {
+           color: chartreuse;
+       }
+       input {
+           width: 300px;
+       }
+       input:focus {
+           border: solid 3px red;
+       }
+       table {
+           width: 600px;
+           margin: 0 auto; /* 가운데 정렬 */
+       }
+       tr {
+           height: 30px;
+       }
+       tr:nth-child(2n+1) {
+           background-color: aquamarine;
+       }
+    </style>
+</head>
+<body>
+
+   <a href="https://ko.wikipedia.org/">위키피디아</a>
+   <br>
+   <a href="https://www.naver.com">네이버</a>
+   <br>
+   <a href="https://www.youtube.com">유튜브</a>
+   <hr>
+   <input type="text">
+   <hr>
+   <table border="1">
+       <tr><td></td></tr>
+       <tr><td></td></tr>
+       <tr><td></td></tr>
+       <tr><td></td></tr>
+       <tr><td></td></tr>
+       <tr><td></td></tr>
+       <tr><td></td></tr>
+   </table>
+   
+</body>
+</html>
