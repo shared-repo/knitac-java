@@ -14,6 +14,7 @@ public class EchoClient {
 		Scanner scanner = new Scanner(System.in);
 		
 		try {
+			
 			while (true) {			
 				
 				System.out.print("서버로 전송할 메시지 (종료는 enter): ");
@@ -25,7 +26,7 @@ public class EchoClient {
 				
 				// 1. 소켓 만들기 (통신 도구)
 				// 2. 연결
-				Socket socket = new Socket("127.0.0.1", 8500);
+				Socket socket = new Socket("192.168.150.6", 8500);
 				
 				OutputStream os = socket.getOutputStream();
 				PrintStream ps = new PrintStream(os); // 한 줄 쓰기 기능이 있는 객체
@@ -37,7 +38,7 @@ public class EchoClient {
 				InputStream is = socket.getInputStream();
 				InputStreamReader isr = new InputStreamReader(is);
 				BufferedReader br = new BufferedReader(isr);
-				
+
 				// 3-2. 네트워크에서 데이터 읽기
 				String message = br.readLine();
 				System.out.println(message);
