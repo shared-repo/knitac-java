@@ -1,5 +1,7 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class LottoNumberScraper {
 
@@ -12,6 +14,16 @@ public class LottoNumberScraper {
 			
 			// System.out.println(doc.body().text());
 			System.out.println(doc.title());
+			
+			Elements elements = doc.select("#article > div:nth-child(2) > " +
+										   "div > div.win_result > div > " +
+										   "div.num.win > p > span");
+			
+			System.out.print("[WINNING NUMBERS] : ");
+			for (Element element : elements) {
+				System.out.printf("[%2s]", element.text());
+			}
+			System.out.println();
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
