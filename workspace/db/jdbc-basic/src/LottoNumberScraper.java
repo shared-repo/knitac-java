@@ -9,8 +9,12 @@ public class LottoNumberScraper {
 		
 		try {
 			// 지정된 주소로 요청을 보내고 응답 수신 ( 응답은 html )
+//			Document doc = Jsoup.connect("https://dhlottery.co.kr/gameResult.do?method=byWin")
+//					   			.get(); // get 방식 요청
 			Document doc = Jsoup.connect("https://dhlottery.co.kr/gameResult.do?method=byWin")
-					   			.get();
+								.data("drwNo", "1004")
+								.data("drwNoList", "1004")
+								.post(); // post 방식 요청
 			
 			// System.out.println(doc.body().text());
 			System.out.println(doc.title());
