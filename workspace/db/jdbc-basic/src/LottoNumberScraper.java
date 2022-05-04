@@ -15,9 +15,10 @@ public class LottoNumberScraper {
 			// System.out.println(doc.body().text());
 			System.out.println(doc.title());
 			
-			Elements elements = doc.select("#article > div:nth-child(2) > " +
-										   "div > div.win_result > div > " +
-										   "div.num.win > p > span");
+//			Elements elements = doc.select("#article > div:nth-child(2) > " +
+//										   "div > div.win_result > div > " +
+//										   "div.num.win > p > span");
+			Elements elements = doc.select(".ball_645");
 			
 			System.out.print("[WINNING NUMBERS] : ");
 			for (Element element : elements) {
