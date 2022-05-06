@@ -6,13 +6,19 @@
     <style type="text/css">
         tr { height: 30px; }
         td { width: 100px; text-align: center; }
-        tr:nth-child(2n+1) { background-color: lightblue; }
+        tr:nth-child(2n) { background-color: lightblue; }
+        tr:first-child { background-color: orange; }
     </style>
 </head>
 <body>    
     <script type="text/javascript">
         //구구단 출력
         document.write("<table border='1' align='center'>");
+        document.write("<tr>");
+        for (var i = 1; i < 10; i++) {
+            document.write("<th>" + i + "단</th>");
+        }
+        document.write("</tr>");
         for (var y = 1; y < 10; y++) {
             document.write("<tr>");
             for (var x = 1; x < 10; x++) {
