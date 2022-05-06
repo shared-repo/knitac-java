@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>제어문</title>    
+</head>
+<body>
+    
+    <script type="text/javascript">
+        //1. 난수 발생 코드
+        var rn = Math.random(); // 0 ~ 1사이의 값 반환
+        rn = (rn * 900) + 100;
+        rn = Math.floor(rn); // 소수점 이하 데이터 버림
+        document.write("<h3>" + "난수 : " + rn + "</h3>");
+        //2. 배열 만들기
+        var ar = new Array(6); // 6개의 요소를 포함하는 배열 만들기
+        for (var i = 0; i < ar.length; i++) {
+            ar[i] = (i+1) * 10;
+        }
+        for (var i = 0; i < ar.length; i++) {
+            document.write("<h3>" + ar[i] + "</h3>");
+        }
+    </script>
+    <script type="text/javascript">
+        // examples-b 프로젝트 Lotto 클래스의 selectBasicNumbers를 참고해서
+        // 동일한 기능의 코드를 작성하세요
+        // 단, 출력은 document.write로 수행하세요        
+
+    </script>
+</body>
+</html>
