@@ -25,7 +25,26 @@
         // examples-b 프로젝트 Lotto 클래스의 selectBasicNumbers를 참고해서
         // 동일한 기능의 코드를 작성하세요
         // 단, 출력은 document.write로 수행하세요        
+        //int[] numbers = new int[6];
+        var numbers = new Array(6);
+		for (var i = 0; i < numbers.length; i++) {				
+			numbers[i] = Math.floor((Math.random() * 45)) + 1;
 
+			for (var j = 0; j < i; j++) {
+				if (numbers[i] === numbers[j]) {
+					i = -1; // 처음부터 다시 뽑기
+					break;
+				}
+			}
+		}
+        document.write("<table border='1' align='center'>");
+        document.write("<caption><h2>당첨 예상 번호</h2></caption>");
+        document.write("<tr style='height:50px'>");
+        for (var i = 0; i < numbers.length; i++) {
+            document.write("<th style='width:50px'>" + numbers[i] + "</th>");
+        }
+        document.write("</tr>");
+        document.write("</table>");
     </script>
 </body>
 </html>
