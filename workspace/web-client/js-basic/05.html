@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>제어문</title>    
+    <style type="text/css">
+        tr { height: 30px; }
+        td { width: 100px; text-align: center; }
+        tr:nth-child(2n+1) { background-color: lightblue; }
+    </style>
+</head>
+<body>    
+    <script type="text/javascript">
+        //구구단 출력
+        document.write("<table border='1' align='center'>");
+        for (var y = 1; y < 10; y++) {
+            document.write("<tr>");
+            for (var x = 1; x < 10; x++) {
+                document.write("<td>");
+                document.write(x + " * " + y);
+                document.write(" = ");
+                document.write(x * y);
+                document.write("</td>");
+            }
+            document.write("</tr>");
+
+        }
+        document.write("</table>");
+        
+    </script>
+</body>
+</html>
