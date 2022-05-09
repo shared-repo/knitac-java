@@ -13,20 +13,40 @@
     <table border="1" align="center">
         <tr>
             <td colspan="6">
-                <button>당첨 예상 번호 뽑기</button>
+                <button id="select_btn">당첨 예상 번호 뽑기</button>
             </td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td id="no1"></td>
+            <td id="no2"></td>
+            <td id="no3"></td>
+            <td id="no4"></td>
+            <td id="no5"></td>
+            <td id="no6"></td>
         </tr>
     </table>
     <script type="text/javascript">
-
+        // 1. 이벤트 처리 함수 만들기
+        function selectNumbers() {
+            var numbers = new Array(6);
+            for (var i = 0; i < numbers.length; i++) {				
+                numbers[i] = Math.floor((Math.random() * 45)) + 1;
+                for (var j = 0; j < i; j++) {
+                    if (numbers[i] === numbers[j]) {
+                        i = -1; // 처음부터 다시 뽑기
+                        break;
+                    }
+                }
+            }
+            for (var i = 0; i < numbers.length; i++) {
+                var td = document.querySelector('#no' + (i+1));
+                td.innerHTML = numbers[i];
+            }
+        }
+        // 2. 객체 찾기
+        var selectBtn = document.querySelector("#select_btn");
+        // 3. 객체에 함수 등록 ( 이벤트 변수에 함수 저장 )
+        selectBtn.addEventListener('click', selectNumbers);
     </script>
 </body>
 </html>
