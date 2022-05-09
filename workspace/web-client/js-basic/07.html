@@ -8,6 +8,7 @@
     </style>
 </head>
 <body>
+    <input type="button" value="눌러주세요 0" onclick="alert('0번 버튼 클릭')">
     <input id="button1" type="button" value="눌러주세요 1">
     <button id="button2">눌러주세요 2</button>
     <hr>
@@ -15,7 +16,9 @@
     <script type="text/javascript">
         //1-1. 이벤트 처리 함수 만들기
         function clickHandler1() {
-            alert('1번 버튼이 클릭되었습니다.');
+            // alert('1번 버튼이 클릭되었습니다.');
+            var message = document.querySelector("#message");
+            message.innerHTML = "<h3>1번 버튼이 클릭되었습니다.</h3>"; 
         }        
         //1-2. 객체 찾기        
         var button1 = document.querySelector("#button1"); // querySelector : css 선택자로 객체 찾는 함수
