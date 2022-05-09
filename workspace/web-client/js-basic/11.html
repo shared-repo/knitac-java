@@ -15,8 +15,27 @@
     USD : <input type="text" id="usd">
     
     <script type="text/javascript">
+        //1-1. 함수 만들기 ()
+        //1-2. 객체 찾기
+        var won2usd = document.querySelector('#won-to-usd');        
+        //1-3. 객체의 이벤트 처리기로 함수 등록
+        won2usd.addEventListener('click', function() {
+            var won = document.querySelector('#won');
+            var usd = document.querySelector('#usd');
+            wonValue = parseInt(won.value);
+            usd.value = wonValue / 1275.50;
+        });
         
-        
+        //2-1.
+        //2-2.
+        var usd2won = document.querySelector('#usd-to-won');
+        //2-3.
+        usd2won.addEventListener('click', function() {
+            var won = document.querySelector('#won');
+            var usd = document.querySelector('#usd');
+            usdValue = parseInt(usd.value);
+            won.value = usdValue * 1275.50;
+        });
         // 환율 : 1275.50
         // 값을 변경할 때 innerHTML 대신 value 사용
     </script>
