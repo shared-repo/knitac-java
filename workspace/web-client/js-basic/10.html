@@ -26,11 +26,18 @@
         </tr>
     </table>
     <script type="text/javascript">
+        function selectRandomNumber(min, max) {
+            var range = max - min + 1;
+            var number = Math.floor(Math.random() * range) + min;
+
+            return number; // 함수 종료 + number를 호출한 곳으로 반환
+        }
         // 1. 이벤트 처리 함수 만들기
         function selectNumbers() {
             var numbers = new Array(6);
             for (var i = 0; i < numbers.length; i++) {				
-                numbers[i] = Math.floor((Math.random() * 45)) + 1;
+                // numbers[i] = Math.floor((Math.random() * 45)) + 1;
+                numbers[i] = selectRandomNumber(1, 46);
                 for (var j = 0; j < i; j++) {
                     if (numbers[i] === numbers[j]) {
                         i = -1; // 처음부터 다시 뽑기
