@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>함수</title>    
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>    
+    <script type="text/javascript">
+        
+        // 함수 정의, 선언
+        function f(n) {
+            console.log(n + " 함수 f가 호출되었습니다."); // 브라우저의 개발자 도구 console에 출력
+        }
+        // 함수 호출
+        f(10);
+
+        var v = f; // 함수를 변수에 저장 (이 때부터 변수는 함수처럼 동작)
+        v(20);
+
+        // 익명함수를 만들어서 변수에 저장
+        // function f2(n) {
+        var f2 = function(n) {
+            console.log(n + " 익명 함수가 호출되었습니다.");
+        }
+        f2(300);
+
+    </script>
+</body>
+</html>
