@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>함수</title>    
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+    <input id="button1" type="button" value="눌러주세요 1">
+    <button>눌러주세요 2</button>
+    <hr>
+    <div></div>
+
+
+    <script type="text/javascript">
+        //1. 이벤트 처리 함수 만들기
+        function clickHandler1() {
+            alert('1번 버튼이 클릭되었습니다.');
+        }
+        
+        //2. 객체 찾기        
+        var button1 = document.querySelector("#button1"); // querySelector : css 선택자로 객체 찾는 함수
+        
+        //3. 함수를 객체에 등록
+        button1.addEventListener('click', clickHandler1); // click event 처리기를 저장하는 변수에 함수 저장
+    </script>
+</body>
+</html>
