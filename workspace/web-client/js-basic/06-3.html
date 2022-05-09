@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>함수</title>    
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>    
+    <script type="text/javascript">
+        
+        function selectRandomNumber(min, max) {
+            var range = max - min + 1;
+            var number = Math.floor(Math.random() * range) + min;
+
+            return number; // 함수 종료 + number를 호출한 곳으로 반환
+        }
+
+        var number = selectRandomNumber(30, 150);
+        document.write("<h1>" + number + "</h1>");
+    </script>
+</body>
+</html>
