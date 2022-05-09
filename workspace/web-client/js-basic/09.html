@@ -17,6 +17,7 @@
         function showTime() {
             var message = document.querySelector("#message");
             message.innerHTML = new Date(); // Date : 날짜 객체
+            timer = window.setTimeout(showTime, 1000);
         }
         var timer = null; // 타이머 객체를 저장하는 변수
 
@@ -25,7 +26,9 @@
         var btn1 = document.querySelector('#btn1');
         //1-3. 이벤트 처리 함수 등록하기
         btn1.addEventListener('click', function() {
-            timer = window.setTimeout(showTime, 1000); // 1초 후에 showTime 호출 예약
+            if (timer == null) {
+                timer = window.setTimeout(showTime, 1000); // 1초 후에 showTime 1회 호출 예약 
+            }
         });
 
         //2-1. 이벤트 처리 함수 만들기 (생략)
@@ -33,12 +36,10 @@
         var btn2 = document.querySelector('#btn2');
         //2-3. 이벤트 처리 함수 등록하기
         btn2.addEventListener('click', function() {
-            var oc = window.confirm('메시지를 표시하고 사용자의 확인 또는 거절 의사를 수신하는 팝업창');
-            if (oc) {
-                window.alert('ok 선택');
-            } else {
-                window.alert('cancel 선택');
-            }
+            if (timer != null) {
+                window.clearTimeout(timer); // 지정된 타이머의 예약 작업을 취소
+                timer = null;
+            }            
         });
 
     </script>
