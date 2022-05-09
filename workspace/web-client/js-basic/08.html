@@ -35,6 +35,20 @@
             }
         });
 
+        //3-1. 이벤트 처리 함수 만들기 (생략)
+        //3-2. 객체 찾기
+        var btn3 = document.querySelector('#btn3');
+        //3-3. 이벤트 처리 함수 등록하기
+        btn3.addEventListener('click', function() {
+            var input = window.prompt('메시지를 표시하고 사용자의 입력을 수신하는 팝업창');
+            if (input) {
+                window.alert(input);
+            } else {
+                window.alert('입력을 취소했습니다.');
+            }
+            
+        });
+
 
     </script>
 </body>
