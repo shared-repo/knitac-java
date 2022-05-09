@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>함수</title>    
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>    
+    <script type="text/javascript">
+        
+        // 함수 선언 (정의) - 함수 만들기
+        function drawBox() {
+            // 30 x 10 박스 그리기
+            document.write("<table align='center'>");
+            for (var y = 0; y < 10; y++) { // 세로 방향 반복 (행 반복 - tr)
+                document.write("<tr>");
+                for (var x = 0; x < 30; x++) { // 가로 방향 반복 (열 반복 - td)
+                    document.write("<td>");
+                    if (x == 0 || x == 30 - 1 || y == 0 || y == 10 - 1) {
+                        document.write("*");
+                    } else {
+                        document.write("&nbsp;");
+                    }
+                    document.write("</td>");
+                }
+                document.write("</tr>");
+            }
+            document.write("</table>");
+        }
+
+        drawBox(); // 함수 호출 - 함수의 코드를 실행
+        drawBox();
+
+    </script>
+</body>
+</html>

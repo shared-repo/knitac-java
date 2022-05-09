@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>함수</title>    
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>    
+    <script type="text/javascript">
+        
+        // 함수 선언 (정의) - 함수 만들기
+        function drawBox(w, h) {
+            // 30 x 10 박스 그리기
+            document.write("<table align='center'>");
+            for (var y = 0; y < h; y++) { // 세로 방향 반복 (행 반복 - tr)
+                document.write("<tr>");
+                for (var x = 0; x < w; x++) { // 가로 방향 반복 (열 반복 - td)
+                    document.write("<td>");
+                    if (x == 0 || x == w - 1 || y == 0 || y == h - 1) {
+                        document.write("*");
+                    } else {
+                        document.write("&nbsp;");
+                    }
+                    document.write("</td>");
+                }
+                document.write("</tr>");
+            }
+            document.write("</table>");
+        }
+        var width = window.prompt("박스의 너비", "30"); // 사용자에게 값을 입력받는 팝업창 표시
+        var height = window.prompt("박스의 높이", "10"); // 사용자에게 값을 입력받는 팝업창 표시
+        width = window.parseInt(width); // 문자열 -> 정수
+        height = window.parseInt(height);
+        drawBox(width, height); // 함수 호출 - 함수의 코드를 실행
+
+    </script>
+</body>
+</html>
