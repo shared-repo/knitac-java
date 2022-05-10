@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">    
+    <title>Document Object</title>
+    <style type="text/css">
+        #canvas { width: 100%; height: 500px; border: solid 1px black; }
+    </style>
+</head>
+<body>
+    <button id="change-color-btn">색상을 변경해 주세요</button>
+    <hr>
+    <div id="canvas" style="font-weight: bold; font-size: 20pt;"></div>
+    <script type="text/javascript">
+
+        var n = 123;
+        alert(n.toString(16));
+
+        //button을 클릭하면 div의 색상을 random하게 변경
+        var btn = document.querySelector("#change-color-btn");
+        // btn.addEventListener('click', function() {
+        //     var canvas = document.querySelector("#canvas"); // 객체 찾기
+        //     var r = Math.floor(Math.random() * 256); // 0 ~ 256 (256은 포함하지 않음)
+        //     var g = Math.floor(Math.random() * 256);
+        //     var b = Math.floor(Math.random() * 256);
+        //     // canvas.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+        //     canvas.style.backgroundColor = `rgb(${r}, ${g}, ${b})`; // 문자열과 변수 결합
+        // });
+        btn.addEventListener('click', function() {
+            var canvas = document.querySelector("#canvas"); // 객체 찾기
+            var color = Math.floor(Math.random() * 0xFFFFFF);
+            color = color.toString(16);
+            canvas.style.backgroundColor = '#' + color;
+        });
+        
+        /////////////////////////////////////////////////////////////
+        // var canvas = document.querySelector("#canvas"); // 객체 찾기
+
+        // test 1. 객체의 속성 값 읽기
+        // alert(canvas.id);    // <tag id='value' 의 id속성에 접근 ( 항상 가능한 것은 아님 )
+        // alert(canvas.getAttribute("id")); // <tag id='value' 의 id속성에 접근 ( 항상 가능 )
+        
+        // test 2. 객체의 style 속성 값 사용
+        // alert( canvas.style.fontSize );
+        
+        // test 3. 색상 표현 방법
+        // canvas.style.backgroundColor = 'blue';      // 색상 이름으로 색상 지정
+        // canvas.style.backgroundColor = '#ff0000';   // 16진수 색상 값 지정 : #rrggbb
+        // canvas.style.backgroundColor = 'rgb(0, 255, 0)'; // 10진수 색상 값 지정
+        // canvas.style.backgroundColor = 'rgb(255, 255, 255)'; // 10진수 색상 값 지정
+    </script>
+</body>
+</html>
