@@ -35,10 +35,18 @@
         // // ... 같은 내용 반복 ( 좋지 않음 )
 
         // 1-2. td에 순서대로 red, orange, yellow, green, blue, purple, navy 색상으로 배경색 지정
+        // var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'navy'];
+        // for (var i = 0; i < 7; i++) {
+        //     var td = document.querySelector("td:nth-child(" + (i+1) + ")");
+        //     td.style.backgroundColor = colors[i];
+        // }
+
+        // 1-3. td에 순서대로 red, orange, yellow, green, blue, purple, navy 색상으로 배경색 지정
         var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'navy'];
-        for (var i = 0; i < 7; i++) {
-            var td = document.querySelector("td:nth-child(" + (i+1) + ")");
-            td.style.backgroundColor = colors[i];
+        // document.querySelector("td"); // 모든 td 중에서 첫 번째 td만 찾기
+        var tds = document.querySelectorAll("td"); // 모든 td를 찾기 ( 배열로 반환 )
+        for (var i = 0; i < tds.length; i++) {            
+            tds[i].style.backgroundColor = colors[i];
         }
 
     </script>
