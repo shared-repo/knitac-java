@@ -30,6 +30,16 @@
         ];
 
         // button을 클릭하면 messageList에서 Random하게 한 개를 뽑고 div에 표시
+        // 1. 이벤트 처리기 함수 만들기 (선택적)
+        // 2. 버튼 객체 찾기
+        var btn = document.querySelector('#show-message-btn');
+
+        // 3. 객체의 click 이벤트 처리기로 함수 등록
+        btn.addEventListener('click', function() {
+            var idx = Math.floor(Math.random() * 12); // 0 ~ 12 (12는 포함하지 않음)
+            var div = document.querySelector("#message");
+            div.innerHTML = "<h2>" + messageList[idx] + "<h2>"
+        });
 
     </script>
 
