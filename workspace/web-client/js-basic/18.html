@@ -4,19 +4,30 @@
     <meta charset="UTF-8">    
     <title>Document Object</title>
     <style type="text/css">
-        
+        a { text-decoration: none; }
     </style>
 </head>
 <body>
     
-    [<a href="javascript:">네이버 개발자 사이트</a>]
+    [<a id="naver-dev-link" href="javascript:">네이버 개발자 사이트</a>]
     &nbsp;
-    [<a href="javascript:">구글 개발자 사이트</a>]
+    [<a id="google-dev-link" href="javascript:">구글 개발자 사이트</a>]
     &nbsp;
-    [<a href="javascript:">애플 개발자 사이트</a>]
+    [<a id="apple-dev-link" href="javascript:">애플 개발자 사이트</a>]
 
     <script type="text/javascript">
-        
+        var naverLink = document.querySelector('#naver-dev-link');
+        naverLink.addEventListener('click', function(event) {
+            location.href = 'http://developers.naver.com'; // 주소입력요소에 지정된 주소를 입력
+        });
+        var googleLink = document.querySelector('#google-dev-link');
+        googleLink.addEventListener('click', function(event) {
+            location.href = 'http://developers.google.com'; // 주소입력요소에 지정된 주소를 입력
+        });
+        var appleLink = document.querySelector('#apple-dev-link');
+        appleLink.addEventListener('click', function(event) {
+            location.href = 'http://developer.apple.com'; // 주소입력요소에 지정된 주소를 입력
+        });
     </script>
 </body>
 </html>
