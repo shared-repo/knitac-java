@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">    
+    <title>Document Object</title>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+    
+    <button id="prev-btn">이전페이지</button>
+    <button id="next-btn">다음페이지</button>
+    <hr>
+    이전/다음 : <input id="direction" type="text"><button id="go-btn">지정된 이전/다음으로 이동</button>
+
+    <script type="text/javascript">
+        
+        var prevBtn = document.querySelector('#prev-btn');
+        prevBtn.addEventListener('click', function(event) {
+            history.back(); // 방문 페이지 목록에서 이전 페이지로 이동
+        });
+
+        var nextBtn = document.querySelector('#next-btn');
+        nextBtn.addEventListener('click', function(event) {
+            history.forward(); // 방문 페이지 목록에서 다음 페이지로 이동
+        });
+
+        var goBtn = document.querySelector('#go-btn');
+        goBtn.addEventListener('click', function(event) {
+            var direction = document.querySelector('#direction');
+            delta = window.parseInt(direction.value); // 문자열 -> 숫자
+            history.go(delta); // 지정된 방향(+, -)으로 지정된 양만큼(1, 3, ...) 이동
+        });
+
+    </script>
+</body>
+</html>
