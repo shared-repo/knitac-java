@@ -16,18 +16,31 @@
     [<a id="apple-dev-link" href="javascript:">애플 개발자 사이트</a>]
 
     <script type="text/javascript">
-        var naverLink = document.querySelector('#naver-dev-link');
-        naverLink.addEventListener('click', function(event) {
-            location.href = 'http://developers.naver.com'; // 주소입력요소에 지정된 주소를 입력
-        });
-        var googleLink = document.querySelector('#google-dev-link');
-        googleLink.addEventListener('click', function(event) {
-            location.href = 'http://developers.google.com'; // 주소입력요소에 지정된 주소를 입력
-        });
-        var appleLink = document.querySelector('#apple-dev-link');
-        appleLink.addEventListener('click', function(event) {
-            location.href = 'http://developer.apple.com'; // 주소입력요소에 지정된 주소를 입력
-        });
+        //1.
+        // var naverLink = document.querySelector('#naver-dev-link');
+        // naverLink.addEventListener('click', function(event) {
+        //     location.href = 'http://developers.naver.com'; // 주소입력요소에 지정된 주소를 입력
+        // });
+        // var googleLink = document.querySelector('#google-dev-link');
+        // googleLink.addEventListener('click', function(event) {
+        //     location.href = 'http://developers.google.com';
+        // });
+        // var appleLink = document.querySelector('#apple-dev-link');
+        // appleLink.addEventListener('click', function(event) {
+        //     location.href = 'http://developer.apple.com'; 
+        // });
+
+        //2.
+        var links = document.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function(event) {
+                switch (event.target.id) { // 현재 이벤트가 발생한 객체의 id
+                    case "naver-dev-link": location.href='http://developers.naver.com'; break;
+                    case "google-dev-link": location.href='http://developers.google.com'; break;
+                    case "apple-dev-link": location.href='http://developer.apple.com'; break;
+                }
+            });
+        }
     </script>
 </body>
 </html>
