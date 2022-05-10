@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">    
+    <title>Document Object</title>
+    <style type="text/css">
+        table { width: 700px; height: 95px; margin: 0 auto; }
+        #canvas { width: 700px; height: 500px; border: solid 1px black; margin: 0 auto; }
+        td { border: solid 1px black; }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>1&nbsp;</td>
+            <td>2&nbsp;</td>
+            <td>3&nbsp;</td>
+            <td>4&nbsp;</td>
+            <td>5&nbsp;</td>
+            <td>6&nbsp;</td>
+            <td>7&nbsp;</td>
+        </tr>
+    </table>
+    <hr>
+    <div id="canvas"></div>
+    <script type="text/javascript">
+        // 1-1. td에 순서대로 red, orange, yellow, green, blue, purple, navy 색상으로 배경색 지정
+        // // [ test-code ]
+        // // var td = document.querySelector("td:nth-child(4)");
+        // // alert(td.innerHTML);
+        // var td = document.querySelector("td:nth-child(1)");
+        // td.style.backgroundColor = 'red';
+        // var td = document.querySelector("td:nth-child(2)");
+        // td.style.backgroundColor = 'orange';
+        // // ... 같은 내용 반복 ( 좋지 않음 )
+
+        // 1-2. td에 순서대로 red, orange, yellow, green, blue, purple, navy 색상으로 배경색 지정
+        var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'navy'];
+        for (var i = 0; i < 7; i++) {
+            var td = document.querySelector("td:nth-child(" + (i+1) + ")");
+            td.style.backgroundColor = colors[i];
+        }
+
+    </script>
+</body>
+</html>
