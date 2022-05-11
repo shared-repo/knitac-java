@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <form method="post">
+    <form id="register-form" method="post">
     <table border="1" width="600" align="center">
         <caption><h3>회원가입</h3></caption>
         <tr>
@@ -32,7 +32,7 @@
                 <select id="domain-selector">
                     <option value="naver.com">naver.com</option>
                     <option value="gmail.com">gmail.com</option>
-                    <option value="daum.com">daum.net</option>
+                    <option value="daum.net">daum.net</option>
                     <option value="zum.com">zum.com</option>
                     <option value="">직접입력</option>
                 </select>
@@ -97,6 +97,15 @@
             //     emailDomain.readOnly = true;
             // }
             emailDomain.readOnly = !(emailDomain.value === "");
+        });
+        
+        /////////////////////////////////////////////////////
+
+        var registerForm = document.querySelector('#register-form');
+        registerForm.addEventListener("submit", function(event) {
+            alert('form submit control test');
+
+            event.preventDefault(); // 이벤트가 발생한 객체의 원래 동작을 차단
         });
     </script>
 </body>
