@@ -74,8 +74,7 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;">
-                <input type="submit" value="가입"> <!-- form을 서버로 전송하는 버튼 -->
-                <input type="button" value="아무동작도 하지 않습니다.">
+                <input id="register-button" type="button" value="가입">
                 <input type="reset" value="초기화면으로...">
             </td>
         </tr>
@@ -101,11 +100,9 @@
         
         /////////////////////////////////////////////////////
 
-        // form의 submit 이벤트를 사용해서 유효성검사 + 전송제어
-        // ( submit 버튼이 클릭되었을 때 )
-
         var registerForm = document.querySelector('#register-form');
-        registerForm.addEventListener("submit", function(event) {
+        var registerBtn = document.querySelector("#register-button");
+        registerBtn.addEventListener("click", function(event) {
             
             // 유효성 검사
             var valid = true;
@@ -119,7 +116,9 @@
             // 검사 결과에 따라 전송 제어
             if (!valid) {
                 alert(message);
-                event.preventDefault(); // 이벤트가 발생한 객체의 원래 동작을 차단
+            } else {
+                registerForm.method = "get";
+                registerForm.submit(); // 지정된 Form을 강제 submit
             }
         });
     </script>
