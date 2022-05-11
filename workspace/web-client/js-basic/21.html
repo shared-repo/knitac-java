@@ -67,6 +67,7 @@
 
         // 5. 다음 버튼을 클릭하면 (currentIdx 1 증가) + (currentIdx를 기준으로 이미지 교체)
         nextBtn.addEventListener('click', function(event) {
+            // if (timer != null) return; // 자동 변경 실행 중일 때 버튼 작동 중지
             currentIdx++; // currentIdx = currentIdx + 1;
             if (currentIdx >= images.length) {
                 currentIdx = 0;
@@ -76,6 +77,7 @@
 
         // 6. 이전 버튼을 클릭하면 (currentIdx 1 감소) + (currentIdx를 기준으로 이미지 교체)
         prevBtn.addEventListener('click', function(event) {
+            // if (timer != null) return;
             currentIdx--; // currentIdx = currentIdx - 1;
             if (currentIdx < 0) {
                 currentIdx = images.length - 1;
