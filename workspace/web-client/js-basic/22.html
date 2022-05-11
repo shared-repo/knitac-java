@@ -84,11 +84,19 @@
 
     <script type="text/javascript">
         //1. domain 선택기로 선택하면 내용을 <input type="text" 에 복사
+        var emailDomain = document.querySelector("#emaildomain");
+        emailDomain.readOnly = true; // 읽기 전용 (입력 X)
+
         var domainSelector = document.querySelector("#domain-selector");
         domainSelector.addEventListener("change", function(event) {
-            // alert(domainSelector.value);
-            var emailDomain = document.querySelector("#emaildomain");
+            // alert(domainSelector.value);            
             emailDomain.value = domainSelector.value;
+            // if (emailDomain.value === "") {
+            //     emailDomain.readOnly = false;
+            // } else {
+            //     emailDomain.readOnly = true;
+            // }
+            emailDomain.readOnly = !(emailDomain.value === "");
         });
     </script>
 </body>
