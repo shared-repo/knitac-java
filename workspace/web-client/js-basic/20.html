@@ -68,17 +68,23 @@
         nextBtn.addEventListener('click', function(event) {
             if (currentIdx < images.length - 1) {
                 currentIdx++; // currentIdx = currentIdx + 1;
-                currentImg.src = "image/" + images[currentIdx];
-            }            
+                changeImage();
+            }
         });
 
         // 6. 이전 버튼을 클릭하면 (currentIdx 1 감소) + (currentIdx를 기준으로 이미지 교체)
         prevBtn.addEventListener('click', function(event) {
             if (currentIdx > 0) {
                 currentIdx--; // currentIdx = currentIdx - 1;
-                currentImg.src = "image/" + images[currentIdx];
+                changeImage();
             }            
         });
+
+        function changeImage() {
+            prevImg.src = "image/" + images[currentIdx - 1];
+            currentImg.src = "image/" + images[currentIdx];
+            nextImg.src = "image/" + images[currentIdx + 1];
+        }
     </script>
 </body>
 </html>
