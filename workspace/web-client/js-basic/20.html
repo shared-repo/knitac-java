@@ -11,7 +11,9 @@
     
     <table style="margin: 0 auto">
         <tr>
-            <td> &lt; </td>
+            <td>
+                <img id="prev-button" src="">
+            </td>
             <td>
                 <img id="prev-image" src="">
             </td>
@@ -21,7 +23,9 @@
             <td>
                 <img id="next-image" src="">
             </td>
-            <td> &gt; </td>
+            <td>
+                <img id="next-button" src="">
+            </td>
         </tr>
     </table>   
    
@@ -39,6 +43,16 @@
         prevImg.src = 'image/1.jpg';
         currentImg.src = 'image/2.jpg';
         nextImg.src = 'image/3.jpg';
+
+        // 2. next, prev 버튼 이미지 표시
+        var prevBtn = document.querySelector("#prev-button");
+        var nextBtn = document.querySelector('#next-button');
+        prevBtn.src = 'image/prev.png';
+        nextBtn.src = 'image/next.png';
+        prevBtn.style.width = prevBtn.style.height = '50px';
+        nextBtn.style.width = nextBtn.style.height = '50px';
+
+        // 3. 
 
     </script>
 </body>
