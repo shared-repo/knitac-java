@@ -103,9 +103,21 @@
 
         var registerForm = document.querySelector('#register-form');
         registerForm.addEventListener("submit", function(event) {
-            alert('form submit control test');
+            
+            // 유효성 검사
+            var valid = true;
+            var message = "";
+            var id = document.querySelector("#id");
+            if (id.value === "") {
+                valid = false;
+                message = "아이디는 필수 입력항목입니다.";
+            }
 
-            event.preventDefault(); // 이벤트가 발생한 객체의 원래 동작을 차단
+            // 검사 결과에 따라 전송 제어
+            if (!valid) {
+                alert(message);
+                event.preventDefault(); // 이벤트가 발생한 객체의 원래 동작을 차단
+            }
         });
     </script>
 </body>
