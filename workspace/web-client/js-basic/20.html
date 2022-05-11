@@ -9,17 +9,37 @@
 </head>
 <body>
     
-    <table border="1" style="width: 80%;margin: 0 auto">
+    <table style="margin: 0 auto">
         <tr>
-            <td style="width:10%"> &lt; </td>
-            <td style="height:500px"> 이미지 </td>
-            <td style="width:10%"> &gt; </td>
+            <td> &lt; </td>
+            <td>
+                <img id="prev-image" src="">
+            </td>
+            <td>
+                <img id="current-image" src="">
+            </td>
+            <td>
+                <img id="next-image" src="">
+            </td>
+            <td> &gt; </td>
         </tr>
-    </table>
-    
+    </table>   
    
     <script type="text/javascript">
-       
+        //1. img 태그 3곳에 1.jpg, 2.jpg, 3.jpg를 표시
+        var prevImg = document.querySelector('#prev-image');
+        prevImg.style.width = prevImg.style.height = "200px";
+        var currentImg = document.querySelector('#current-image');
+        currentImg.style.width = currentImg.style.height = "300px";
+        var nextImg = document.querySelector('#next-image');
+        nextImg.style.width = nextImg.style.height = "200px";
+
+        prevImg.style.border = nextImg.style.border = currentImg.style.border = "solid 2px black";
+
+        prevImg.src = 'image/1.jpg';
+        currentImg.src = 'image/2.jpg';
+        nextImg.src = 'image/3.jpg';
+
     </script>
 </body>
 </html>
