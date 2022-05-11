@@ -30,6 +30,11 @@
                 <img id="next-button" src="">
             </td>
         </tr>
+        <tr>
+            <td colspan="5" style="text-align: center">
+                <button id="auto-change-button">자동변환</button>
+            </td>
+        </tr>
     </table>   
    
     <script type="text/javascript">
@@ -93,6 +98,28 @@
                 nextImg.src = "image/" + images[currentIdx + 1];
             }
         }
+
+        /////////////////////////////
+        var timer = null;
+        function doChange() {
+            currentIdx++;
+            if (currentIdx >= images.length - 1) {
+                currentIdx = 0
+            }
+            changeImage();
+            timer = window.setTimeout(doChange, 3000); // 3초 후에 doChange 호출 예약
+        }
+        var autoChangeBtn = document.querySelector("#auto-change-button");
+        autoChangeBtn.addEventListener("click", function(event) {
+            if (timer == null) { // 시작
+                doChange();
+                autoChangeBtn.innerHTML = "자동변경중지";
+            } else { // 중지
+                window.clearTimeout(timer);
+                timer = null;
+                autoChangeBtn.innerHTML = "자동변경시작";
+            }
+        });
     </script>
 </body>
 </html>
