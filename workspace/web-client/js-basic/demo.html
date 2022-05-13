@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <button id="select">뽑기</button>
+    <hr>
+    <div id="result"></div>
+    <script type="text/javascript">
+
+        function selectTeam() {
+            var numbers = new Array(4);
+            for (var i = 0; i < numbers.length; i++) {				
+                numbers[i] = Math.floor((Math.random() * 4)) + 1;                
+                for (var j = 0; j < i; j++) {
+                    if (numbers[i] === numbers[j]) {
+                        i = -1; // 처음부터 다시 뽑기
+                        break;
+                    }
+                }
+            }
+
+            var result = document.querySelector("#result");
+            result.innerHTML = "";
+            for (var i = 0; i < numbers.length; i++) {
+                result.innerHTML += `<h2>${numbers[i]}</h2>`;   
+            }
+
+        }
+
+        var select = document.querySelector("#select");
+        select.addEventListener('click', function(event) {
+
+            window.setTimeout(selectTeam, 10000);
+
+        });
+
+    </script>
+    
+</body>
+</html>
