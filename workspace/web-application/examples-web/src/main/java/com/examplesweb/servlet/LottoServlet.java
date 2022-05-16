@@ -30,8 +30,11 @@ public class LottoServlet extends HttpServlet {
 			}
 		}
 		
+		resp.setContentType("text/plain;charset=utf-8"); // 한글 지원 적용
+		
 		PrintWriter out = resp.getWriter();
-		out.write("[SELECTED NUMBERS] : ");
+		// out.write("[SELECTED NUMBERS] : ");
+		out.write("[선택된 번호] : ");
 		for (int i = 0; i < numbers.length; i++) {
 			// out.write(numbers[i] + "");
 			out.write(String.format("[%2d]", numbers[i]));
