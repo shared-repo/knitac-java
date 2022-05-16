@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = { "/lotto.abc" })
 public class LottoServlet extends HttpServlet {
 
+	// doGet : method="get"인 요청일 때 호출되는 메서드
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
