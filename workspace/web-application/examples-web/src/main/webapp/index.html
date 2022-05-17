@@ -10,8 +10,27 @@
 	<h3><a href="hello.action">서블릿 처리 요청 1</a></h3>
 	<h3><a href="hello2.action">서블릿 처리 요청 2</a></h3>
 	<h3><a href="hello3.action">서블릿 처리 요청 3</a></h3>
-	
+	<hr>
 	<h3><a href="lotto.abc">로또 번호 뽑기</a></h3>
+	<hr>
+	<h3>요청 데이터 전송 및 처리 테스트</h3>
+	<h4>1. GET 방식 데이터 전송</h4>
+	<form action="request-process.action" method="get">
+		Name : <input type="text" name="name"><br>
+		Email : <input type="text" name="email"><br>
+		<input type="submit" value="전송">
+	</form>
+	<h4>2. POST 방식 데이터 전송</h4>
+	<form action="request-process.action" method="post">
+		Name : <input type="text" name="name"><br>
+		Email : <input type="text" name="email"><br>
+		<input type="submit" value="전송">
+	</form>
 	
 </body>
 </html>
+
+
+
+
+
