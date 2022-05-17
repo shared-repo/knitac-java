@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = { "request-process.action" })
+@WebServlet(urlPatterns = { "/request-process.action" })
 public class RequestProcessServlet extends HttpServlet {
 	
 	@Override
@@ -22,6 +22,7 @@ public class RequestProcessServlet extends HttpServlet {
 		System.out.printf("[%s][%s]\n", name, email); // 서버의 콘솔에 출력
 		
 		//2. 응답 컨텐츠 생산 + 응답
+		resp.setContentType("text/plain;charset=utf-8"); // 응답 컨텐츠의 종류와 encoding 설정
 		PrintWriter out = resp.getWriter();
 		out.printf("[%s][%s]", name, email);
 		
