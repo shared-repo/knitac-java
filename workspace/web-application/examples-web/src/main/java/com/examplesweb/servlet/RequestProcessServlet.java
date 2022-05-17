@@ -30,7 +30,17 @@ public class RequestProcessServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+		//1. 요청 데이터 읽기 + 사용
+		req.setCharacterEncoding("utf-8"); // post 요청 데이터 읽기 encoding 설정
+		String name = req.getParameter("name"); // <input ... name="name"인 요청 데이터 읽기
+		String email = req.getParameter("email");// <input ... name="email"인 요청 데이터 읽기
+		
+		System.out.printf("[%s][%s]\n", name, email); // 서버의 콘솔에 출력
+		
+		//2. 응답 컨텐츠 생산 + 응답
+		resp.setContentType("text/plain;charset=utf-8"); // 응답 컨텐츠의 종류와 encoding 설정
+		PrintWriter out = resp.getWriter();
+		out.printf("[%s][%s]", name, email);
 	}
 
 }
