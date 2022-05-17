@@ -36,9 +36,9 @@ public class LottoServlet2 extends HttpServlet {
 		out.write("</head>");
 		out.write("<body>");
 		out.write("<table width='600' border='1' align='center'>");
-		out.write("<caption style='font-size:25pt;text-align:center'>당첨 예상 번호</caption>");
+		out.write("<caption style='font-size:20pt;text-align:center'>당첨 예상 번호</caption>");
 		for (int[] numbers : numbersList) {
-			out.write("<tr>");
+			out.write("<tr style='height:50px'>");
 			for (int i = 0; i < numbers.length; i++) {
 				out.write("<th>");
 				out.write(numbers[i] + "");
