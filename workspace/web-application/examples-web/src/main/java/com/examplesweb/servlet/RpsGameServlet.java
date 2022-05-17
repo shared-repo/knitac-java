@@ -40,9 +40,11 @@ public class RpsGameServlet extends HttpServlet {
 		resp.setContentType("text/html;charset=utf-8");
 		PrintWriter out = resp.getWriter();
 		
-		out.write("당신의 선택은 : " + kUser + " 입니다.");
+		out.write("당신의 선택은 : <img src='images/" + iUser + ".png' style='width:100px'>");
 		out.write("<br>");
-		out.write("결과는 " + result);
+		out.write("컴퓨터의 선택은 : <img src='images/" + com + ".png' style='width:100px'>");
+		out.write("<br><br>");
+		out.write("<h3>결과는 " + result + "</h3>");
 		
 	}
 	

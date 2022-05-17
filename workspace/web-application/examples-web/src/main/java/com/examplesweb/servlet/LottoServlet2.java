@@ -48,7 +48,7 @@ public class LottoServlet2 extends HttpServlet {
 		}
 		out.write("</table>");
 		out.write("</body>");
-		out.write("</html>");		
+		out.write("</html>");
 		
 	}
 
