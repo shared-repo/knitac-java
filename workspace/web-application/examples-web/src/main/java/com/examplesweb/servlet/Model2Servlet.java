@@ -22,7 +22,7 @@ public class Model2Servlet extends HttpServlet {
 		// 3. JSP에서 사용할 수 있도록 데이터 전달 ( request 객체에 데이터 저장 )
 		req.setAttribute("now", new Date());
 		
-		// 4. 응답컨텐츠 생산 -> JSP에게 요청 ( JSP로 forward )
+		// 4. 응답컨텐츠 생산 -> JSP에게 요청 ( JSP로 forward 이동 )
 		RequestDispatcher dispatcher = req.getRequestDispatcher("03.model2.jsp");
 		dispatcher.forward(req, resp);
 		
