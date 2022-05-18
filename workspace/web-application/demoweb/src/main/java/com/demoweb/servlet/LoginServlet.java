@@ -20,6 +20,17 @@ public class LoginServlet extends HttpServlet {
 		dispatcher.forward(req, resp);
 		
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		// 1. 요청 데이터 읽기
+		String memberId = req.getParameter("memberId");
+		String passwd = req.getParameter("passwd");
+		
+		System.out.printf("[%s][%s]\n", memberId, passwd);
+		
+	}
 
 }
 

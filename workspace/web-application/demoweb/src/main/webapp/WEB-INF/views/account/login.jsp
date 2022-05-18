@@ -39,7 +39,7 @@
 		    <div id="inputmain">
 		        <div class="inputsubtitle">로그인정보</div>
 		        
-		        <form action="" method="">
+		        <form action="/demoweb/account/login.action" method="post">
 		       
 		        <table>
 		            <tr>
