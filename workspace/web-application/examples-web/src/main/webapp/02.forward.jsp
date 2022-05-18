@@ -5,6 +5,7 @@
 <%
 
 pageContext.setAttribute("page-data", "This is Page Scope Data (from forward)");
+// request 객체에 데이터 저장
 request.setAttribute("req-data", "This is Request Scope Data (from forward)");
 
 //forward 방식으로 다른 처리기로 이동 : JSP에서 사용할 수 있는 구문	
