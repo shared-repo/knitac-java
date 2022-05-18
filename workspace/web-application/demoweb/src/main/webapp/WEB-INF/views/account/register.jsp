@@ -41,7 +41,7 @@
 		        <div class="inputsubtitle">회원기본정보</div>
 
 		        <form id="registerform" 
-		        	  action="" method="">
+		        	  action="/demoweb/account/register.action" method="post">
 		        <table>
 		            <tr>
 		                <th>아이디(ID)</th>
@@ -71,7 +71,7 @@
 		        </table>
 		        <div class="buttons">
 		        	<input id="register" type="submit" value="등록" style="height:25px" />
-		        	<input id="cancel" type="cancel" value="취소" style="height:25px"  />
+		        	<input id="cancel" type="button" value="취소" style="height:25px"  />
 
 		        </div>
 		        </form>
