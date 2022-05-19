@@ -1,3 +1,21 @@
+-- 1.  root 계정으로 접속해서 실행
+
+-- 데이터베이스 만들기
+create database demoweb;
+
+-- 계정 만들기
+create user knit@localhost identified by "mysql";
+create user knit@"%" identified by "mysql";
+
+-- 권한 부여하기
+grant all privileges on demoweb.* to knit@localhost;
+grant all privileges on demoweb.* to knit@"%";
+
+
+
+
+-- 2. demoweb 계정으로 접속해서 실행
+
 create table member
 (
 	memberid varchar(50) not null,
