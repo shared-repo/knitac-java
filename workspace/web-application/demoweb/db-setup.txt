@@ -1,0 +1,9 @@
+create table member
+(
+	memberid varchar(50) not null,
+    passwd varchar(100) not null,
+    email varchar(50) not null,
+    usertype varchar (20) default ('user'), -- 'user' or 'admin'
+    active boolean default (true),
+    regdate datetime default (now()) -- now == current_timestamp    
+);
