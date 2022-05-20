@@ -1,0 +1,136 @@
+-- 1. 
+create table departments2
+(
+    department_id number(4) primary key,
+    department_name varchar2(30 byte) not null,
+    manager_id number(6) null
+);
+
+-- 2. 
+create table employees2
+(
+    employee_id number(6) primary key,
+    first_name varchar2(20 byte),
+    last_name varchar2(25 byte),
+    email varchar2(25 byte) not null,
+    phone_number varchar2(20 byte),
+    hire_date date not null,
+    salary number(8,2),
+    commission_pct number(2,2),
+    manager_id number(6),
+    department_id number(4),
+    foreign key (department_id) references departments2(department_id)
+);
+
+-- 3.
+alter table departments2
+add foreign key (manager_id) references employees2(employee_id);
+
+-- 4.
+insert into departments2 (department_id, department_name) 
+values (60, 'IT');
+
+-- 5.
+insert into employees2 (employee_id, first_name, last_name, email, phone_number, hire_date, salary, department_id)
+values (107, 'Diana', 'Lorentz', 'DLORENTZ', '590.423.5567', '2017-02-07', 4200, 60);
+
+-- 6. 
+update departments2
+set manager_id = 107
+where department_id = 60;
+
+
+-- 7. 
+drop table employees2;
+drop table departments2;
+
+delete from employees2;
+delete from departments2;
+
+-- 8. 
+select *
+from employees e
+inner join
+departments d
+on e.department_id = d.department_id
+where d.department_name = 'IT';
+
+
+-- 9.
+select department_id, count(employee_id) 직원수
+from employees
+group by department_id
+order by 직원수;
+
+-- 10.
+select e.employee_id, e.first_name, e.last_name, d.department_name, l.city, l.state_province
+from employees e
+inner join departments d
+on e.department_id = d.department_id
+inner join locations l
+on d.location_id = l.location_id;
+
+
+-- 11. 
+select e1.employee_id, e1.first_name, e1.last_name, e2.first_name, e2.last_name
+from employees e1
+inner join employees e2
+on e1.manager_id = e2.employee_id;
+
+
+-- 12. 
+select *
+from employees
+where salary = (select max(salary)
+                from employees)
+      or
+      salary = (select min(salary)
+                from employees);
+                
+-- 13.
+select department_id, trunc(avg(salary), 2) 평균급여
+from employees
+group by department_id
+order by department_id;
+
+-- 14.
+select * 
+from employees
+where department_id = (
+                        select department_id
+                        from employees
+                        group by department_id
+                        having trunc(avg(salary), 0) = ( select max(평균급여) 최고평균급여
+                                                        from
+                                                        (
+                                                            select department_id, trunc(avg(salary), 0) 평균급여
+                                                            from employees
+                                                            group by department_id
+                                                        )
+                                                      )
+                       );
+
+select * 
+from employees
+where department_id = (
+                        select department_id
+                        from 
+                        (
+                            select department_id, trunc(avg(salary), 0) 평균급여
+                            from employees
+                            group by department_id
+                            order by 평균급여 desc
+                        )
+                        where rownum = 1
+                      );
+                       
+                       
+-- 15.
+select e1.*
+from employees e1
+where e1.salary > ( select avg(e2.salary)
+                    from employees e2
+                    where e2.department_id = e1.department_id
+                    group by e2.department_id
+                  );
+
