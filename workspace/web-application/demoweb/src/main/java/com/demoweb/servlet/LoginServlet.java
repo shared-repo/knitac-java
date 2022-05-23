@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.demoweb.dto.Member;
 import com.demoweb.service.AccountService;
@@ -37,18 +38,19 @@ public class LoginServlet extends HttpServlet {
 		member.setMemberId(memberId);
 		member.setPasswd(passwd);
 		
-		// 2. 요청 처리 (로그인 처리 - id와 passwd로 데이터베이스에서 데이터 조회 )
+		// 2. 요청 처리 (로그인 처리 - id와 passwd로 데이터베이스에서 데이터 조회 후 세션에 데이터 저장)
 		//    서비스 객체에게 데이터 요청
 		AccountService accountService = new AccountService();
 		Member member2 = accountService.findMemberByIdAndPasswd(member);
 		
-		resp.setContentType("text/plain;charset=utf-8");
-		PrintWriter out = resp.getWriter();
 		if (member2 != null) {
-			out.write("로그인 성공");
+			HttpSession session = req.getSession();	// request객체로부터 세션 가져오기
+			session.setAttribute("loginuser", member2); // 세션에 데이터 저장 (로그인 처리)			
 		} else {
-			out.write("로그인 실패");
+			// do something
 		}
+		
+		resp.sendRedirect("/demoweb/home.action");
 		
 	}
 

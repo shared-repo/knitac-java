@@ -15,23 +15,22 @@ if (cookies != null) {
 	for (int i = 0; i < cookies.length; i++) {
 		//이름이 cookiedata인 쿠키를 찾아서
 		if (cookies[i].getName().equals("cookiedata")) {
-			//쿠키의 값을 변수에 저장
-			String data = cookies[i].getValue();//쿠키는 항상 문자열
-			data = URLDecoder.decode(data, "utf-8");//비영문자 처리
-			cookieData = Integer.parseInt(data);//문자열 -> 숫자
+			String data = cookies[i].getValue();		//쿠키는 항상 문자열
+			data = URLDecoder.decode(data, "utf-8");	//비영문자 처리
+			cookieData = Integer.parseInt(data);		//문자열 -> 숫자
 		}
 	}
 }
 
-//이름이 cookiedata인 쿠키 객체 생성하고 값을 지정
+//이름이 cookiedata인 쿠키 객체 생성하고 값을 지정 ( 쿠기 값은 오직 문자열 )
 Cookie cookie = 
 	new Cookie("cookiedata", //쿠기의 이름
-		URLEncoder.encode(String.format("%d", cookieData + 1), "utf-8"));
+			   URLEncoder.encode(String.format("%d", cookieData + 1), "utf-8"));  // 쿠키의 값
 
-//만료시간을 지정하면 쿠키를 파일로 기록
-//-> 브라우저를 종료하고 다시 실행해도 쿠키 값을 읽을 수 있습니다.
-//cookie.setMaxAge(60 * 10);
-//cookie.setMaxAge(0); //--> 쿠키 제거
+// 만료시간을 지정하면 쿠키를 파일로 기록
+// -> 브라우저를 종료하고 다시 실행해도 쿠키 값을 읽을 수 있습니다.
+// cookie.setMaxAge(60 * 10);
+// cookie.setMaxAge(0); 			//--> 쿠키 제거
 
 response.addCookie(cookie);//응답 객체에 쿠키를 기록 --> 브라우저에 쿠기 저장
 
