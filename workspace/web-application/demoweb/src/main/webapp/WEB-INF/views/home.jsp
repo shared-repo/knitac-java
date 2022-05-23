@@ -14,26 +14,12 @@
 
 	<div id='pageContainer'>
 		
-		<div id="header">    	
-            <div class="title">
-                <a href="/demoweb/home.action">DEMO WEBSITE</a>
-            </div>
-            <div class="links">
-            	<a href="/demoweb/account/login.action">로그인</a>
-                <a href="/demoweb/account/register.action">회원가입</a>
-            </div>
-        </div>
-                
-        <div id="menu">
-            <div>
-                <ul>
-                    <li><a href="#">사용자관리</a></li>
-					<li><a href="#">메일보내기</a></li>
-					<li><a href="#">자료실</a></li>
-					<li><a href="#">게시판</a></li>
-                </ul>
-            </div>
-		</div>
+		<%-- <% pageContext.include("/WEB-INF/views/modules/header.jsp"); %> --%>
+		
+		<%-- jsp:include : 함수 호출, jsp:param : 전달인자 --%>
+		<jsp:include page="/WEB-INF/views/modules/header.jsp">
+			<jsp:param name="bg_color" value="purple" />
+		</jsp:include>
 		
 		<div id='content'>
 			<br /><br /><br />
