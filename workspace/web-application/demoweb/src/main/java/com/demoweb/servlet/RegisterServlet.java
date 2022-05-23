@@ -46,6 +46,9 @@ public class RegisterServlet extends HttpServlet {
 		AccountService accountService = new AccountService();
 		accountService.registerMember(member);
 		
+		// 3. 로그인 화면으로 이동 ( redirect )
+		resp.sendRedirect("/demoweb/account/login.action");
+		
 		
 		
 	}
