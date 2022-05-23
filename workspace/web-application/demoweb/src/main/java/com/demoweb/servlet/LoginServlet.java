@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if (member2 != null) {
 			HttpSession session = req.getSession();	// request객체로부터 세션 가져오기
-			session.setAttribute("loginuser", member2); // 세션에 데이터 저장 (로그인 처리)			
+			session.setAttribute("loginuser", member2); // 세션에 로그인관련 데이터 저장 (로그인 처리)			
 		} else {
 			// do something
 		}
