@@ -27,6 +27,7 @@ public class RegisterServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		// 1. 요청 데이터 읽기
 		req.setCharacterEncoding("utf-8");
 		String memberId = req.getParameter("memberId");

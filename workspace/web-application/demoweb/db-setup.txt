@@ -16,12 +16,57 @@ grant all privileges on demoweb.* to knit@"%";
 
 -- 2. demoweb 계정으로 접속해서 실행
 
+use demoweb; -- 사용할 데이터베이스 지정
+
+drop table member;
+
 create table member
 (
-	memberid varchar(50) not null,
+	memberid varchar(20) primary key,
     passwd varchar(100) not null,
     email varchar(50) not null,
     usertype varchar (20) default ('user'), -- 'user' or 'admin'
     active boolean default (true),
     regdate datetime default (now()) -- now == current_timestamp    
+);
+
+CREATE TABLE board
+(
+    boardno INT PRIMARY KEY AUTO_INCREMENT
+    , title VARCHAR(100) NOT NULL
+    , writer VARCHAR (20) NOT NULL
+    , content VARCHAR (4000) NOT NULL
+    , regdate DATE DEFAULT (NOW())
+    , readcount INT DEFAULT (0)
+    , deleted BOOLEAN DEFAULT (FALSE)
+
+    , CONSTRAINT fk_board_to_member FOREIGN KEY (writer) REFERENCES member (memberid)
+);
+
+CREATE TABLE boardattach
+(
+    attachno INT PRIMARY KEY AUTO_INCREMENT
+    , boardno INT NOT NULL
+    , userfilename VARCHAR (100) NOT NULL
+    , savedfilename VARCHAR (100) NOT NULL
+    , downloadcount INT DEFAULT (0)
+
+    , CONSTRAINT fk_boardattach_to_board FOREIGN KEY (boardno) REFERENCES board (boardno)
+);
+
+CREATE TABLE boardcomment
+(
+    commentno INT PRIMARY KEY AUTO_INCREMENT
+    , boardno INT NOT NULL
+    , writer VARCHAR (20) NOT NULL
+    , content VARCHAR (1000) NOT NULL
+    , regdate DATE DEFAULT (NOW())
+    , deleted BOOLEAN DEFAULT (FALSE)
+
+    , groupno INT NOT NULL
+    , step INT NOT NULL
+    , depth INT NOT NULL
+
+    , CONSTRAINT fk_boardcomment_to_board FOREIGN KEY (boardno) REFERENCES board (boardno)
+    , CONSTRAINT fk_boardcomment_to_member FOREIGN KEY (writer) REFERENCES member (memberid)
 );
