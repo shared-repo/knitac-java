@@ -32,7 +32,7 @@ create table member
 
 CREATE TABLE board
 (
-    boardno INT PRIMARY KEY AUTO_INCREMENT
+    boardno INT PRIMARY KEY AUTO_INCREMENT -- AUTO_INCREMENT : 자동 증가 컬럼 속성
     , title VARCHAR(100) NOT NULL
     , writer VARCHAR (20) NOT NULL
     , content VARCHAR (4000) NOT NULL
