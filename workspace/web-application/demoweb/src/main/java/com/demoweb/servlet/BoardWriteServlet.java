@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.demoweb.dto.Board;
+import com.demoweb.service.BoardService;
 
 @WebServlet(urlPatterns = { "/board/write.action" })
 public class BoardWriteServlet extends HttpServlet {
@@ -49,12 +50,16 @@ public class BoardWriteServlet extends HttpServlet {
 		String title = req.getParameter("title");
 		String writer = req.getParameter("writer");
 		String content = req.getParameter("content");
-		System.out.println(title + " / " + writer + " / " + content);
+		// System.out.println(title + " / " + writer + " / " + content);
+		
 		//2. 요청 처리
 		Board board = new Board();
 		board.setTitle(title);
 		board.setWriter(writer);
 		board.setContent(content);
+		
+		BoardService boardService = new BoardService();
+		boardService.writeBoard(board);
 		
 		//3. JSP에서 사용할 수 있도록 데이터 저장 ( forward 이동인 경우 )
 		//4. 이동 (forward or redirect)
