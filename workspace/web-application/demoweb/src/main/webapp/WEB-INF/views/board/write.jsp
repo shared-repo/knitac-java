@@ -1,3 +1,4 @@
+<%@page import="com.demoweb.dto.Member"%>
 <%@ page language="java" 
 		 contentType="text/html; charset=utf-8"
     	 pageEncoding="utf-8" %>
@@ -25,19 +26,25 @@
 		<div id="inputcontent">
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시글 쓰기</div>
-		        <form id="writeform" action="write.action" 
-		        	method="post" enctype="multipart/form-data">
+		        <form id="writeform" 
+		        	  action="write.action" 
+		        	  method="post">
 		        <table>
 		            <tr>
 		                <th>제목</th>
 		                <td>
-		                    <input type="text" name="title" style="width:280px" />
+		                    <input type="text" name="title" style="width:550px" />
 		                </td>
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
 		                <td>
-							<input type="text" name="writer" value="">
+		                	<% Member member = (Member)session.getAttribute("loginuser"); %>
+							<%-- <input type="text" name="writer" style="width:550px" 
+								   value="<%= member.getMemberId() %>" readonly> --%>
+							<%= member.getMemberId() %>
+							<input type="hidden" 
+								   name="writer" value="<%= member.getMemberId() %>">
 		                </td>
 		            </tr>
 		            <tr>
@@ -49,8 +56,8 @@
 		            <tr>
 		                <th>내용</th>
 		                <td>		                    
-		                    <textarea 
-		                    	name="content" cols="76" rows="15"></textarea>
+		                    <textarea style="resize: none"
+		                    		  name="content" cols="76" rows="15"></textarea>
 		                </td>
 		            </tr>
 		        </table>
@@ -65,6 +72,25 @@
 	
 	</div>
 	</div>
+	
+	<script type="text/javascript">
+	var writeLink = document.querySelector("#write");
+	writeLink.addEventListener("click", function(event) {
+		event.preventDefault();
+		var writeForm = document.querySelector("#writeform");
+		writeForm.submit(); // submit : form을 서버로 전송 (submit button click과 같은 효과)
+	});
+	</script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
