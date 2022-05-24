@@ -1,5 +1,7 @@
 package com.demoweb.service;
 
+import java.util.List;
+
 import com.demoweb.dao.BoardDao;
 import com.demoweb.dto.Board;
 
@@ -11,6 +13,12 @@ public class BoardService {
 		
 		boardDao.insertBoard(board);
 		
+	}
+
+	public List<Board> findAll() {
+
+		List<Board> boardList = boardDao.selectAll();
+		return boardList;
 	}
 
 }
