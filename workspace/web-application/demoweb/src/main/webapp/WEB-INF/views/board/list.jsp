@@ -1,4 +1,5 @@
-﻿<%@page import="java.util.List"%>
+﻿<%@page import="com.demoweb.dto.Board"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" 
 		 contentType="text/html; charset=utf-8"
     	 pageEncoding="utf-8"%>
@@ -34,14 +35,19 @@
 					<th style="width:150px">작성자</th>
 					<th style="width:120px">작성일</th>
 					<th style="width:80px">조회수</th>
-				</tr>				
-				<tr style="height:25px">
-					<td></td>
-					<td style='text-align:left;padding-left:5px'></td>
-					<td></td>
-					<td></td>
-					<td></td>
 				</tr>
+				<% List<Board> boardList = (List<Board>)request.getAttribute("boardList"); %>
+				<% for(Board board : boardList) { %>				
+				<tr style="height:25px">
+					<td><%= board.getBoardNo() %></td>
+					<td style='text-align:left;padding-left:5px'>
+					<%= board.getTitle() %>
+					</td>
+					<td><%= board.getWriter() %></td>
+					<td><%= board.getRegDate() %></td>
+					<td><%= board.getReadCount() %></td>
+				</tr>
+				<% } %>
 			</table>
 			
 			<br><br>

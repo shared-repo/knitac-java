@@ -66,16 +66,15 @@ public class BoardDao {
 					"knit", "mysql"); // 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 만들기
-			String sql = "select boardno, title, writer, readcount, regdate, delete " +
+			String sql = "select boardno, title, writer, readcount, regdate, deleted " +
 						 "from board " +
 						 "order by boardno desc"; // 최근에 작성된 글을 앞에 표시
 			pstmt = conn.prepareStatement(sql); // 명령객체 만들기
 			
 			// 4. 명령 실행 ( select인 경우 ResultSet 형식의 결과 반환 )
 			rs = pstmt.executeQuery(); // executeQuery : select, exeucteUpdate : select 이외의 sql
-			
 			// 5. 결과가 있으면 (select 명령인 경우) 결과 처리
-			if (rs.next()) { // pk 검색이므로 결과가 있다면 한 건 -> while 대신 if 사용 가능
+			while (rs.next()) { 
 				Board board = new Board();
 				board.setBoardNo(rs.getInt(1));
 				board.setTitle(rs.getString(2));
@@ -83,10 +82,8 @@ public class BoardDao {
 				board.setReadCount(rs.getInt(4));
 				board.setRegDate(rs.getDate(5));
 				board.setDeleted(rs.getBoolean(6));
-				
 				boardList.add(board);
 			}
-			
 		} catch (Exception ex) {
 			ex.printStackTrace(); // 오류 메시지를 화면에 출력
 		} finally {
@@ -95,8 +92,7 @@ public class BoardDao {
 			try { pstmt.close(); } catch (Exception ex) {}
 			try { conn.close(); } catch (Exception ex) {}
 		}
-		
-		return member2;
+		return boardList;
 	}
 
 }

@@ -25,15 +25,17 @@ public class BoardListServlet extends HttpServlet {
 		if (session.getAttribute("loginuser") == null) { // 로그인하지 않은 경우
 			resp.sendRedirect("/demoweb/account/login.action");
 			return;
-		}
-		
+		}		
 		
 		//1. 요청 데이터 읽기
 		//2. 요청 처리	
 		BoardService boardService = new BoardService();
 		List<Board> boardList = boardService.findAll();
+		// System.out.println("data count : " + boardList.size());
 		
-		//3. JSP에서 사용할 수 있도록 데이터 저장 ( forward 이동인 경우 )
+		//3. JSP에서 사용할 수 있도록 request 객체에 데이터 저장 ( forward 이동인 경우 )
+		req.setAttribute("boardList", boardList);
+		
 		//4. 이동 (forward or redirect)
 		RequestDispatcher dispatcher = 
 				req.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
