@@ -33,6 +33,12 @@ public class BoardService {
 		
 	}
 
+	public void update(Board board) {
+
+		boardDao.update(board);
+		
+	}
+
 }
 
 

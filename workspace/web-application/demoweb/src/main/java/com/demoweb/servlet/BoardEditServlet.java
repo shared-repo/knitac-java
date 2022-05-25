@@ -65,13 +65,24 @@ public class BoardEditServlet extends HttpServlet {
 		}		
 		
 		//1. 요청 데이터 읽기
+		req.setCharacterEncoding("utf-8");
 		String sBoardNo = req.getParameter("boardno");
 		int boardNo = Integer.parseInt(sBoardNo); // 문자열 -> 숫자
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		
 		//2. 요청 처리	
+		Board board = new Board();
+		board.setBoardNo(boardNo);
+		board.setTitle(title);
+		board.setContent(content);
+		
 		BoardService boardService = new BoardService();
+		boardService.update(board);
+		
+		//3. 
+		//4. 이동
+		resp.sendRedirect("detail.action?boardno=" + sBoardNo);
 	}
 }
 
