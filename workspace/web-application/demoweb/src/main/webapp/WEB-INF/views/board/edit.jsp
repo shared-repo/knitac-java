@@ -26,17 +26,21 @@
 		<div id="inputcontent">
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시판 글 수정</div>
-		        <form id="updateform" action="edit.action" method="post">
+		        <form id="editform" action="edit.action" method="post">
 		        <% Board board = (Board)request.getAttribute("board"); %>
 		        <table>
 		        	<tr>
 		                <th>글번호</th>
-		                <td><%= board.getBoardNo() %></td>
+		                <td>
+		                	<input type="hidden" 
+		                		   name="boardno" value="<%= board.getBoardNo() %>">
+		                	<%= board.getBoardNo() %>
+		                </td>
 		            </tr>
 		            <tr>
 		                <th>제목</th>
 		                <td>
-		                    <input type="text" name="title" style="width:280px"
+		                    <input type="text" name="title" style="width:560px"
 		                    	   value="<%= board.getTitle() %>">
 		                </td>
 		            </tr>
@@ -53,9 +57,10 @@
 		            </tr>
 		        </table>
 		        <div class="buttons">        	
-		        	<a id="update" href="javascript:">글수정</a>
+		        	[&nbsp;<a id="edit-btn" href="javascript:">글수정</a>&nbsp;]
 		        	&nbsp;&nbsp;
-		        	<a href='javascript:'>취소</a>
+		        	[&nbsp;<a href='detail.action?boardno=<%= board.getBoardNo() %>'>취소1</a>&nbsp;]
+		        	[&nbsp;<a href='javascript:history.back()'>취소2</a>&nbsp;]
 		        </div>
 		        </form>
 		    </div>
@@ -63,6 +68,23 @@
 	
 	</div>
 	</div>
+	
+	<script type="text/javascript">
+	var editBtn = document.querySelector("#edit-btn");
+	editBtn.addEventListener('click', function(event) {
+		event.preventDefault();
+		var editForm = document.querySelector("#editform");
+		editForm.submit(); // 전송 명령
+	});
+	</script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
