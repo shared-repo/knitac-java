@@ -57,22 +57,44 @@
 		        <div class="buttons">
 		        	
 		        	[&nbsp;<a id='update-btn' href='javascript:'>수정</a>&nbsp;]
-		        	[&nbsp;<a id='delete-btn' 
-		        			  href='delete.action?boardno=<%= board.getBoardNo() %>'>삭제</a>&nbsp;]
+		        	[&nbsp;<a href='delete.action?boardno=<%= board.getBoardNo() %>'>삭제</a>&nbsp;]
+		        	[&nbsp;<a id='delete-btn' href='javascript:'>확인삭제</a>&nbsp;]
 		        	[&nbsp;<a href='list.action'>목록보기</a>&nbsp;]
 		        </div>
 		    </div>
 		</div>
-
 		<!-- comment 쓰기 영역 -->		
-		<!-- / comment 쓰기 영역 -->
-		
+		<!-- / comment 쓰기 영역 -->		
         <!-- comment 표시 영역 -->        			
-		<!-- / comment 표시 영역 -->
-        
+		<!-- / comment 표시 영역 -->        
 	</div>
 	</div>
-	<br><br><br><br><br>
+	<br><br><br><br><br>	
+	<script type="text/javascript">
+	var deleteBtn = document.querySelector('#delete-btn');
+	deleteBtn.addEventListener('click', function(event) {
+		event.preventDefault();
+		var ok = confirm('삭제할까요?');
+		if (ok) {
+			location.href = 'delete.action?boardno=<%= board.getBoardNo() %>';
+		}
+	});
+	</script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
