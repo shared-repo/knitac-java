@@ -21,4 +21,22 @@ public class BoardService {
 		return boardList;
 	}
 
+	public Board findByBoardNo(int boardNo) {
+		
+		Board board = boardDao.selectByBoardNo(boardNo);
+		return board;
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

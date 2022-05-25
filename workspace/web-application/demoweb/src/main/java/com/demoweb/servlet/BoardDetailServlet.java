@@ -39,15 +39,19 @@ public class BoardDetailServlet extends HttpServlet {
 		//2. 요청 처리	
 		BoardService boardService = new BoardService();
 		Board board = boardService.findByBoardNo(boardNo);
-		// System.out.println("data count : " + boardList.size());
+		// System.out.println(board.getTitle() + "/" + board.getWriter());
+		if (board == null) { // 해당 번호의 게시글이 없는 경우
+			resp.sendRedirect("list.action");
+			return;
+		}
 		
-//		//3. JSP에서 사용할 수 있도록 request 객체에 데이터 저장 ( forward 이동인 경우 )
-//		req.setAttribute("boardList", boardList);
-//		
-//		//4. 이동 (forward or redirect)
-//		RequestDispatcher dispatcher = 
-//				req.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
-//		dispatcher.forward(req, resp);
+		//3. JSP에서 사용할 수 있도록 request 객체에 데이터 저장 ( forward 이동인 경우 )
+		req.setAttribute("board", board);
+		
+		//4. 이동 (forward or redirect)
+		RequestDispatcher dispatcher = 
+				req.getRequestDispatcher("/WEB-INF/views/board/detail.jsp");
+		dispatcher.forward(req, resp);
 		
 	}
 }
