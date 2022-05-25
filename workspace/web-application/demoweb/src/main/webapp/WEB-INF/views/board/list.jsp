@@ -41,7 +41,9 @@
 				<tr style="height:25px">
 					<td><%= board.getBoardNo() %></td>
 					<td style='text-align:left;padding-left:5px'>
+					<a href="detail.action?boardno=<%= board.getBoardNo() %>">
 					<%= board.getTitle() %>
+					</a>
 					</td>
 					<td><%= board.getWriter() %></td>
 					<td><%= board.getRegDate() %></td>

@@ -62,9 +62,10 @@
 		            </tr>
 		        </table>
 		        <div class="buttons">		        	
-		        	<a id="write" href="javascript:">글쓰기</a>
+		        	[<a id="write" href="javascript:">글쓰기</a>]
 		        	&nbsp;&nbsp;
-		        	<a href="javascript:">목록보기</a>
+		        	[<a href="list.action">목록보기(상대경로)</a>]
+		        	[<a href="/demoweb/board/list.action">목록보기(절대경로)</a>]
 		        </div>
 		        </form>
 		    </div>
