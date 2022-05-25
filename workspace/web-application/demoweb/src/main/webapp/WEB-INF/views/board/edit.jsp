@@ -51,7 +51,7 @@
 		            <tr>
 		                <th>내용</th>
 		                <td>		                    
-		                    <textarea name="content" cols="76" 
+		                    <textarea name="content" style="resize:none" cols="76" 
 		                    	rows="15"><%= board.getContent() %></textarea>
 		                </td>
 		            </tr>
