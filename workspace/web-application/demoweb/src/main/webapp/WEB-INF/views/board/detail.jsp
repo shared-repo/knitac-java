@@ -50,15 +50,16 @@
 		            <tr>
 		                <th>내용</th>
 		                <td style="height:200px;vertical-align:top">
-		                <%= board.getContent() %>
+		                <%= board.getContent().replace("\r\n", "<br>") %>
 		                </td>
 		            </tr>
 		        </table>
 		        <div class="buttons">
 		        	
 		        	[&nbsp;<a id='update-btn' href='javascript:'>수정</a>&nbsp;]
-		        	[&nbsp;<a id='delete-btn' href='javascript:'>삭제</a>&nbsp;]
-		        	[&nbsp;<a href='j'>목록보기</a>&nbsp;]
+		        	[&nbsp;<a id='delete-btn' 
+		        			  href='delete.action?boardno=<%= board.getBoardNo() %>'>삭제</a>&nbsp;]
+		        	[&nbsp;<a href='list.action'>목록보기</a>&nbsp;]
 		        </div>
 		    </div>
 		</div>

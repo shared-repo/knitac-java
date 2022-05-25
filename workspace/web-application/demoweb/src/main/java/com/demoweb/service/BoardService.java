@@ -27,6 +27,12 @@ public class BoardService {
 		return board;
 	}
 
+	public void delete(int boardNo) {
+		
+		boardDao.delete(boardNo);
+		
+	}
+
 }
 
 
