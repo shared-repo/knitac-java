@@ -58,7 +58,7 @@
 		        <div class="buttons">
 		        	<% Member member = (Member)session.getAttribute("loginuser"); %>
 		        	<% if (member.getMemberId().equals(board.getWriter())) { %>
-		        	[&nbsp;<a id='update-btn' href='javascript:'>수정</a>&nbsp;]
+		        	[&nbsp;<a href='edit.action?boardno=<%= board.getBoardNo() %>'>수정</a>&nbsp;]
 		        	[&nbsp;<a href='delete.action?boardno=<%= board.getBoardNo() %>'>삭제</a>&nbsp;]
 		        	[&nbsp;<a id='delete-btn' href='javascript:'>확인삭제</a>&nbsp;]
 		        	<% } %>
