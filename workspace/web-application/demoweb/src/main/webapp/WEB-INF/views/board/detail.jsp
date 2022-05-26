@@ -62,7 +62,7 @@
 		        	[&nbsp;<a href='delete.action?boardno=<%= board.getBoardNo() %>'>삭제</a>&nbsp;]
 		        	[&nbsp;<a id='delete-btn' href='javascript:'>확인삭제</a>&nbsp;]
 		        	<% } %>
-		        	[&nbsp;<a href='list.action'>목록보기</a>&nbsp;]
+		        	[&nbsp;<a href='list.action?pageNo=<%= request.getAttribute("pageNo") %>'>목록보기</a>&nbsp;]
 		        </div>
 		    </div>
 		</div>

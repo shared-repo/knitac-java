@@ -29,24 +29,24 @@ public class BoardListServlet extends HttpServlet {
 		if (sPageNo == null || sPageNo.length() == 0) {
 			sPageNo = "1";
 		}
-		int pageNo = Integer.parseInt(sPageNo);
+		int pageNo = Integer.parseInt(sPageNo);	
 		
 		//2. 요청 처리
 		int pageSize = 3; // 한 페이지에 표시할 데이터 개수
 		int pagerSize = 3; // 표시되는 페이지 번호 개수 ( 보이지 않은 페이지 번호는 다음, 이전 등으로 표시 )
-		int count = 0; // 전체 데이터 개수
+		int count = 0; // 전체 데이터 개수		
 		
 		BoardService boardService = new BoardService();
-		List<Board> boardList = boardService.findByPage(pageNo, pageSize);
-		
-		count = boardService.findBoardCount(); // 데이터베이스에 전체 개시물 개수 조회
+		List<Board> boardList = boardService.findByPage(pageNo, pageSize);		
+		count = boardService.findBoardCount(); // 데이터베이스에 전체 개시물 개수 조회		
 		
 		// 페이지 번호 표시기 클래스 객체 생성
-		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "list.action");
+		ThePager pager = new ThePager(count, pageNo, pageSize, pagerSize, "list.action");		
 		
 		//3. JSP에서 사용할 수 있도록 request 객체에 데이터 저장 ( forward 이동인 경우 )
 		req.setAttribute("boardList", boardList);
 		req.setAttribute("pager", pager);
+		req.setAttribute("pageNo", pageNo);
 		
 		//4. 이동 (forward or redirect)
 		RequestDispatcher dispatcher = 
