@@ -25,7 +25,7 @@ public class BoardDetailServlet extends HttpServlet {
 		if (session.getAttribute("loginuser") == null) { // 로그인하지 않은 경우
 			resp.sendRedirect("/demoweb/account/login.action");
 			return;
-		}		
+		}
 		
 		//1. 요청 데이터 읽기
 		String sBoardNo = req.getParameter("boardno");
