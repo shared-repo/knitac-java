@@ -20,6 +20,15 @@ public class BoardService {
 		List<Board> boardList = boardDao.selectAll();
 		return boardList;
 	}
+	
+	public List<Board> findByPage(int pageNo, int pageSize) {
+		
+		int from = (pageNo - 1) * pageSize;
+		int count = pageSize;
+		
+		List<Board> boardList = boardDao.selectByRange(from, count);
+		return boardList;
+	}
 
 	public Board findByBoardNo(int boardNo) {
 		
@@ -38,6 +47,8 @@ public class BoardService {
 		boardDao.update(board);
 		
 	}
+
+
 
 }
 

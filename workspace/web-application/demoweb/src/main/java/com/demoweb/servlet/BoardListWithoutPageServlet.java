@@ -14,28 +14,25 @@ import javax.servlet.http.HttpSession;
 import com.demoweb.dto.Board;
 import com.demoweb.service.BoardService;
 
-@WebServlet(urlPatterns = { "/board/list.action" })
-public class BoardListServlet extends HttpServlet {
+//@WebServlet(urlPatterns = { "/board/list.action" })
+public class BoardListWithoutPageServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		// 로그인 여부 확인 (로그인 안했으면 로그인 화면으로 이동)
-		// --> Filter에서 일괄처리하는 방식으로 변경		
+		// --> Filter에서 일괄처리하는 방식으로 변경
+//		HttpSession session = req.getSession();
+//		if (session.getAttribute("loginuser") == null) { // 로그인하지 않은 경우
+//			resp.sendRedirect("/demoweb/account/login.action");
+//			return;
+//		}		
 		
 		//1. 요청 데이터 읽기
-		String sPageNo = req.getParameter("pageno");	// 목록에서 현재 페이지 번호
-		if (sPageNo == null || sPageNo.length() == 0) {
-			sPageNo = "1";
-		}
-		int pageNo = Integer.parseInt(sPageNo);
-		
-		//2. 요청 처리
-		int pageSize = 3; // 한 페이지에 표시할 데이터 개수
-		int pagerSize = 3; // 표시되는 페이지 번호 개수 ( 보이지 않은 페이지 번호는 다음, 이전 등으로 표시 )
-		
+		//2. 요청 처리	
 		BoardService boardService = new BoardService();
-		List<Board> boardList = boardService.findByPage(pageNo, pageSize);
+		List<Board> boardList = boardService.findAll();
+		// System.out.println("data count : " + boardList.size());
 		
 		//3. JSP에서 사용할 수 있도록 request 객체에 데이터 저장 ( forward 이동인 경우 )
 		req.setAttribute("boardList", boardList);
