@@ -59,6 +59,8 @@
 			
 			<br><br>
 			
+			<%= request.getAttribute("pager") %>
+			
 		</div>
 	</div>
 

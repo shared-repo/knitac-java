@@ -48,6 +48,11 @@ public class BoardService {
 		
 	}
 
+	public int findBoardCount() {
+		int count = boardDao.selectBoardCount();
+		return count;
+	}
+
 
 
 }
