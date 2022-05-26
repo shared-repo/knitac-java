@@ -20,11 +20,8 @@ public class BoardWriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		// 로그인 여부 확인 (로그인 안했으면 로그인 화면으로 이동)
-		HttpSession session = req.getSession();
-		if (session.getAttribute("loginuser") == null) { // 로그인하지 않은 경우
-			resp.sendRedirect("/demoweb/account/login.action");
-			return;
-		}		
+		// --> Filter에서 일괄처리하는 방식으로 변경
+			
 		//1. 요청 데이터 읽기
 		//2. 요청 처리		
 		//3. JSP에서 사용할 수 있도록 데이터 저장 ( forward 이동인 경우 )
@@ -39,11 +36,7 @@ public class BoardWriteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		// 로그인 여부 확인 (로그인 안했으면 로그인 화면으로 이동)
-		HttpSession session = req.getSession();
-		if (session.getAttribute("loginuser") == null) { // 로그인하지 않은 경우
-			resp.sendRedirect("/demoweb/account/login.action");
-			return;
-		}
+		// --> Filter에서 일괄처리하는 방식으로 변경
 		
 		//1. 요청 데이터 읽기
 		req.setCharacterEncoding("utf-8");
