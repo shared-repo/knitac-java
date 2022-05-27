@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.demoweb.dto.Board;
+import com.demoweb.dto.BoardAttach;
 import com.demoweb.dto.Member;
 
 public class BoardDao {
@@ -300,7 +301,7 @@ public class BoardDao {
 		}
 		return count;
 	}
-
 	
+
 
 }

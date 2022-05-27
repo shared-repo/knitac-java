@@ -1,6 +1,7 @@
 package com.demoweb.dto;
 
 import java.util.Date;
+import java.util.List;
 
 // Board Table의 데이터를 저장하기 위한 클래스
 public class Board { 
@@ -12,6 +13,8 @@ public class Board {
 	private Date regDate;
 	private int readCount;
 	private boolean deleted;
+	
+	private List<BoardAttach> files;
 	
 	public int getBoardNo() {
 		return boardNo;
@@ -55,5 +58,14 @@ public class Board {
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
+	
+	public List<BoardAttach> getFiles() {
+		return files;
+	}
+	public void setFiles(List<BoardAttach> files) {
+		this.files = files;
+	}
+	
+	
 	
 }
