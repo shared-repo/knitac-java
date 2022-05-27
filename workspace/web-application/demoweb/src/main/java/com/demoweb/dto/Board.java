@@ -14,6 +14,7 @@ public class Board {
 	private int readCount;
 	private boolean deleted;
 	
+	// Board 테이블과 BoardAttach 테이블 사이의 1 : Many 관계를 구현한 필드
 	private List<BoardAttach> files;
 	
 	public int getBoardNo() {
@@ -58,13 +59,13 @@ public class Board {
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
-	
 	public List<BoardAttach> getFiles() {
 		return files;
 	}
 	public void setFiles(List<BoardAttach> files) {
 		this.files = files;
 	}
+	
 	
 	
 	
