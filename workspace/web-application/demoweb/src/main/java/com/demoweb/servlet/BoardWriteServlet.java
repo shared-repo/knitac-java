@@ -104,7 +104,8 @@ public class BoardWriteServlet extends HttpServlet {
 						String uniqueFileName = Util.makeUniqueFileName(fileName);//고유한 파일이름 만들기
 						item.write(new File(path, uniqueFileName)); //파일 저장
 						item.delete(); //임시 파일 삭제
-												
+						
+						// 데이터데이스에 저장할 파일 정보를 DTO 객체에 저장
 						BoardAttach boardAttach = new BoardAttach();						
 						boardAttach.setUserFileName(fileName);
 						boardAttach.setSavedFileName(uniqueFileName);
@@ -117,8 +118,10 @@ public class BoardWriteServlet extends HttpServlet {
 			ex.printStackTrace();
 		}
 		
-		//여기까지 실행되면 1. 파일저장, 2. Upload 객체, 3. UploadFile 객체
-		board.setFiles(files);		
+		// 여기까지 실행되면 1. 파일저장, 2. Board 객체 생성, 3. BoardAttach 객체 생성
+		
+		// board 객체에는 title, writer, content 정보 + 첨부파일 정보가 저장됩니다.
+		board.setFiles(files); 	
 		
 		//서비스 객체에 데이터 처리 요청
 		BoardService boardService = new BoardService();

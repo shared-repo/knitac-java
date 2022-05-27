@@ -64,13 +64,12 @@ public class Util {
 	//////////////////////////////////////////////////////////////////
 	/**
 	 * 특정 폴더에서 고유한 파일 이름을 만드는 메서드 <br> 
-	 * 파일이름이 중복되면 뒤에 .1, .2와 같은 접미사 추가
+	 * 파일이름이 중복되면 뒤에 _1, _2와 같은 접미사 추가
 	 * @param path
 	 * @param fileName
 	 * @return
 	 */
-	public static String makeUniqueFileName(String path, String fileName)
-    {	
+	public static String makeUniqueFileName(String path, String fileName) {	
         String name =
             fileName.substring(0, fileName.lastIndexOf("."));
         String ext =
@@ -93,10 +92,8 @@ public class Util {
 	 * @param fileName
 	 * @return
 	 */
-	public static String makeUniqueFileName(String fileName)
-    {   
-        String ext =
-            fileName.substring(fileName.lastIndexOf("."));
+	public static String makeUniqueFileName(String fileName) {   
+        String ext = fileName.substring(fileName.lastIndexOf("."));
         
         String name = UUID.randomUUID().toString();
 

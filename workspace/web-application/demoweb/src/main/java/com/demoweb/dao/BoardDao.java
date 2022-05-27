@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.demoweb.dto.Board;
+import com.demoweb.dto.BoardAttach;
 import com.demoweb.dto.Member;
 
 public class BoardDao {
@@ -301,6 +302,147 @@ public class BoardDao {
 		return count;
 	}
 	
+	//////////////////////////////////////////
+	
+	public void insertBoardAttach(BoardAttach attach) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			//1. 드라이버 등록
+			Class.forName("com.mysql.cj.jdbc.Driver");			
+			
+			// 2. 데이터베이스에 연결 ( 연결 객체 준비 )
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/demoweb", // db server url
+					"knit", "mysql"); // 계정 정보
+			
+			//3. SQL 작성 + 명령 만들기
+			String sql = 
+				"insert boardattach " +
+				"(boardno, userfilename, savedfilename) " +
+				"VALUES (?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, attach.getAttachNo());			
+			pstmt.setString(2, attach.getUserFileName());
+			pstmt.setString(3, attach.getSavedFileName());
+			
+			//4. 명령 실행
+			pstmt.executeUpdate(); // insert, update, delete를 위한 메서드
+			
+			//5. 결과가 있다면 결과 처리 (select)
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			//6. 연결 종료
+			try { pstmt.close(); } catch (Exception ex) {}
+			try { conn.close(); } catch (Exception ex) {}
+		}
+	}
 
+	public List<BoardAttach> selectBoardAttachByBoardNo(int boardNo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; //조회 결과를 참조하는 변수
+		
+		// 조회 결과를 저장할 변수
+		ArrayList<BoardAttach> files = new ArrayList<>(); 
+		
+		try {
+			//1. 드라이버 등록
+			Class.forName("com.mysql.cj.jdbc.Driver");			
+			
+			// 2. 데이터베이스에 연결 ( 연결 객체 준비 )
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/demoweb", // db server url
+					"knit", "mysql"); // 계정 정보
+			
+			//3. SQL 작성 + 명령 만들기
+			String sql = 
+					"select attachno, boardno, userfilename, savedfilename, downloadcount " +
+					"FROM boardattach " +
+					"WHERE boardno = ?";					
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			//4. 명령 실행
+			rs = pstmt.executeQuery(); // select를 위한 메서드
+			
+			//5. 결과가 있다면 결과 처리 (select)
+			while (rs.next()) { //조회된 데이터가 있다면
+				//조회된 데이터를 UploadFile 객체에 저장
+				BoardAttach file = new BoardAttach();
+				file.setAttachNo(rs.getInt(1));
+				file.setBoardNo(rs.getInt(2));
+				file.setUserFileName(rs.getString(3));
+				file.setSavedFileName(rs.getString(4));
+				file.setDownloadCount(rs.getInt(5));
+				//한 건의 데이터를 목록에 추가
+				files.add(file);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			//6. 연결 종료
+			try { rs.close(); } catch (Exception ex) {}
+			try { pstmt.close(); } catch (Exception ex) {}
+			try { conn.close(); } catch (Exception ex) {}
+		}
+		
+		return files; //조회된 데이터를 저장한 객체 반환
+	}
+
+	public BoardAttach selectBoardAttachByAttachNo(int attachNo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; //조회 결과를 참조하는 변수
+		
+		// 조회 결과를 저장할 변수
+		BoardAttach file = null;
+		
+		try {
+			//1. 드라이버 등록
+			Class.forName("com.mysql.cj.jdbc.Driver");			
+			
+			// 2. 데이터베이스에 연결 ( 연결 객체 준비 )
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/demoweb", // db server url
+					"knit", "mysql"); // 계정 정보
+			
+			//3. SQL 작성 + 명령 만들기
+			String sql = 
+					"select attachno, boardno, userfilename, savedfilename, downloadcount " +
+					"from boardattach " +
+					"where attachno = ?";					
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, attachNo);
+			
+			//4. 명령 실행
+			rs = pstmt.executeQuery(); // select를 위한 메서드
+			
+			//5. 결과가 있다면 결과 처리 (select)
+			if (rs.next()) { //조회된 데이터가 있다면
+				//조회된 데이터를 UploadFile 객체에 저장
+				file = new BoardAttach();
+				file.setAttachNo(rs.getInt(1));
+				file.setBoardNo(rs.getInt(2));
+				file.setUserFileName(rs.getString(3));
+				file.setSavedFileName(rs.getString(4));
+				file.setDownloadCount(rs.getInt(5));
+				
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			//6. 연결 종료
+			try { rs.close(); } catch (Exception ex) {}
+			try { pstmt.close(); } catch (Exception ex) {}
+			try { conn.close(); } catch (Exception ex) {}
+		}
+		
+		return file; //조회된 데이터를 저장한 객체 반환
+	}
+
+	
 
 }
