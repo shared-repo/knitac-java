@@ -48,6 +48,8 @@ public class BoardWriteServlet extends HttpServlet {
 		// 로그인 여부 확인 (로그인 안했으면 로그인 화면으로 이동)
 		// --> Filter에서 일괄처리하는 방식으로 변경
 		
+		req.setCharacterEncoding("utf-8");
+		
 		//파일 업로드를 포함한 요청인지 확인 (multipart/form-data 형식 확인)
 		// if (ServletFileUpload.isMultipartContent(req) == false) {
 		if (!ServletFileUpload.isMultipartContent(req)) {

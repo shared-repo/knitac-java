@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.demoweb.dao.BoardDao;
 import com.demoweb.dto.Board;
+import com.demoweb.dto.BoardAttach;
 
 public class BoardService {
 
@@ -11,7 +12,16 @@ public class BoardService {
 	
 	public void writeBoard(Board board) {
 		
-		boardDao.insertBoard(board);
+		// 게시물 데이터를 DB에 저장
+		// c1. 이 위치에서 boardNo : 없음
+		boardDao.insertBoard(board); // c1., c2. 를 반영해서 insertBoard에서 boardNo 조회하도록 구현 
+		// c2. 이 위치에서 boardNo : 데이터베이스에 있음 ( 데이터베이스의 boardNo를 조회할 필요 있음 )
+		
+		// 첨부파일 데이터를 DB에 저장
+		for (BoardAttach file : board.getFiles()) {
+			file.setBoardNo(board.getBoardNo()); // insertBoard 실행할 때 조회된 자동증가 boardNo 사용
+			boardDao.insertBoardAttach(file);
+		}
 		
 	}
 
@@ -32,7 +42,9 @@ public class BoardService {
 
 	public Board findByBoardNo(int boardNo) {
 		
-		Board board = boardDao.selectByBoardNo(boardNo);
+		Board board = boardDao.selectByBoardNo(boardNo); // 게시물 데이터 조회
+		List<BoardAttach> files = boardDao.selectBoardAttachByBoardNo(boardNo);	// 첨부 파일 데이터 조회
+		board.setFiles(files);
 		return board;
 	}
 
@@ -51,6 +63,11 @@ public class BoardService {
 	public int findBoardCount() {
 		int count = boardDao.selectBoardCount();
 		return count;
+	}
+
+	public BoardAttach findBoardAttachByAttachNo(int attachNo) {
+		BoardAttach attach = boardDao.selectBoardAttachByAttachNo(attachNo);
+		return attach;
 	}
 
 

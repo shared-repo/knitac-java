@@ -16,7 +16,8 @@ public class BoardDao {
 	public void insertBoard(Board board) {
 		
 		Connection conn = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt = null, pstmt2 = null;
+		ResultSet rs = null;
 		
 		try {
 			// 1. JDBC 드라이버 준비
@@ -38,14 +39,24 @@ public class BoardDao {
 			
 			// 4. 명령 실행 ( select인 경우 ResultSet 형식의 결과 반환 )
 			pstmt.executeUpdate(); // executeQuery : select, exeucteUpdate : select 이외의 sql
+						
+			// 자동 증가 컬럼값 조회를 위한 sql 실행
+			sql = "select last_insert_id()"; // oracle : select sequence.currval from dual
+			pstmt2 = conn.prepareStatement(sql);
+			rs = pstmt2.executeQuery();
 			
 			// 5. 결과가 있으면 (select 명령인 경우) 결과 처리
+			rs.next();
+			int newBoardNo = rs.getInt(1);
+			board.setBoardNo(newBoardNo);
 			
 		} catch (Exception ex) {
 			ex.printStackTrace(); // 오류 메시지를 화면에 출력
 		} finally {
 			// 6. 연결 종료
+			try { rs.close(); } catch (Exception ex) {}
 			try { pstmt.close(); } catch (Exception ex) {}
+			try { pstmt2.close(); } catch (Exception ex) {}
 			try { conn.close(); } catch (Exception ex) {}
 		}
 	}
@@ -323,7 +334,7 @@ public class BoardDao {
 				"(boardno, userfilename, savedfilename) " +
 				"VALUES (?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, attach.getAttachNo());			
+			pstmt.setInt(1, attach.getBoardNo());			
 			pstmt.setString(2, attach.getUserFileName());
 			pstmt.setString(3, attach.getSavedFileName());
 			
