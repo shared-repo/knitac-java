@@ -3,8 +3,6 @@
 <%@ page language="java" 
 		 contentType="text/html; charset=utf-8"
     	 pageEncoding="utf-8"%>
-    	 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <!DOCTYPE html>
@@ -38,26 +36,25 @@
 					<th style="width:120px">작성일</th>
 					<th style="width:80px">조회수</th>
 				</tr>
-				<c:forEach var="board" items="${ boardList }">
+				<% List<Board> boardList = (List<Board>)request.getAttribute("boardList"); %>
+				<% for(Board board : boardList) { %>				
 				<tr style="height:25px">
-					<td>${ board.boardNo }</td>
+					<td><%= board.getBoardNo() %></td>
 					<td style='text-align:left;padding-left:5px'>
-					<c:choose>
-					<c:when test="${ board.deleted }">
-						<span style="color:lightgray">${ board.title } [삭제된 글]</span>
-					</c:when>
-					<c:otherwise>
-						<a href='detail.action?boardno=${ board.boardNo }&pageNo=${ pageNo }'>
-						${ board.title }
+					<% if (board.isDeleted()) { // 삭제된 경우 %>
+						<span style="color:lightgray"><%= board.getTitle() %> [삭제된 글]</span>
+					<% } else { %>
+						<a href='detail.action?boardno=<%= board.getBoardNo() %>&pageNo=<%= request.getAttribute("pageNo") %>'>
+						<%= board.getTitle() %>
 						</a>
-					</c:otherwise>
-					</c:choose>
+					<% } %>
+					
 					</td>
-					<td>${ board.writer }</td>
-					<td>${ board.regDate }</td>
-					<td>${ board.readCount }</td>
+					<td><%= board.getWriter() %></td>
+					<td><%= board.getRegDate() %></td>
+					<td><%= board.getReadCount() %></td>
 				</tr>
-				</c:forEach>
+				<% } %>
 			</table>
 			
 			<br><br>
