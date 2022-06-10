@@ -62,7 +62,7 @@
 			
 			<br><br>
 			
-			<%= request.getAttribute("pager") %>
+			${ pager }
 			
 		</div>
 	</div>
