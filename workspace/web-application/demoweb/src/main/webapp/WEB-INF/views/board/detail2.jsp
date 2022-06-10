@@ -30,15 +30,15 @@
 		        <table>
 		            <tr>
 		                <th>제목</th>
-		                <td>${ board.title }</td>
+		                <td><%= board.getTitle() %></td>
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
-		                <td>${ requestScope.board.writer }</td>
+		                <td><%= board.getWriter() %></td>
 		            </tr>
 		            <tr>
 		                <th>작성일</th>
-		                <td>${ board.regDate }</td>
+		                <td><%= board.getRegDate() %></td>
 		            </tr>
 					<tr>
 		                <th>조회수</th>

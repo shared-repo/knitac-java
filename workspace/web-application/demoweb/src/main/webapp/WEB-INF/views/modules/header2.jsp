@@ -2,30 +2,26 @@
 <%@ page language="java" 
 		 contentType="text/html; charset=UTF-8"
     	 pageEncoding="UTF-8"%>
-    	 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    	<c:choose>
-    	<c:when>
+    	
+    	<% String bgColor = request.getParameter("bg_color"); %>
+    	<% if (bgColor != null && bgColor.length() > 0) { %>
 		<div id="header" style='background-color:<%= bgColor %>'>
-		</c:when>
-		<c:otherwise>
+		<% } else { %>
 		<div id="header">
-		</c:otherwise>
-		</c:choose>
+		<% } %>
 			<div class="title">
                 <a href="/demoweb/home.action">DEMO WEBSITE</a>
             </div>
-            <div class="links">            
-            <c:choose>
-            <c:when test="${ empty loginuser }">                        
+            <div class="links">
+            <% Member member = // 세션에서 인증 데이터 읽기 : 로그인 여부 확인용 데이터
+            	(Member)session.getAttribute("loginuser"); %>            
+            <% if (member == null) { // 세션에 데이터 없음 : 로그인하지 않은 경우 %>
             	<a href="/demoweb/account/login.action">로그인</a>
                 <a href="/demoweb/account/register.action">회원가입</a>
-            </c:when>
-            <c:otherwise>
-            	${ loginuser.memberId }님 반갑습니다
+            <% } else { %>
+            	<%= member.getMemberId() %>님 반갑습니다
             	<a href="/demoweb/account/logout.action">로그아웃</a>
-            </c:otherwise>
-            </c:choose>
+            <% } %>
             </div>
         </div>
                 

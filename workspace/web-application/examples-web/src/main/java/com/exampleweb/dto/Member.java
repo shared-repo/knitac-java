@@ -1,4 +1,4 @@
-package com.demoweb.dto;
+package com.exampleweb.dto;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -7,7 +7,7 @@ import java.util.Date;
 public class Member implements Serializable {
 	
 	// 필드는 대상 테이블의 컬럼을 기준으로 작성
-	private String memberId;
+	private String memberId2;
 	private String passwd;
 	private String email;
 	private String userType;
@@ -17,10 +17,10 @@ public class Member implements Serializable {
 	public Member() {} // 전달인자 없는 생성자 메서드 (기본 생성자)
 	
 	public String getMemberId() {
-		return memberId;
+		return memberId2;
 	}
 	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+		this.memberId2 = memberId;
 	}
 	public String getPasswd() {
 		return passwd;
