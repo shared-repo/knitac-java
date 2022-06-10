@@ -4,9 +4,10 @@
     	 pageEncoding="UTF-8"%>
     	 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
     	<c:choose>
-    	<c:when>
-		<div id="header" style='background-color:<%= bgColor %>'>
+    	<c:when test="${ not empty param.bg_color }">
+		<div id="header" style='background-color:${ param.bg_color }'>
 		</c:when>
 		<c:otherwise>
 		<div id="header">

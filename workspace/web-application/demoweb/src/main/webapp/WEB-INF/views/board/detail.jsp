@@ -4,6 +4,9 @@
 <%@ page language="java" 
 		 contentType="text/html; charset=utf-8" 
 		 pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <!DOCTYPE html>
 
@@ -25,8 +28,7 @@
 		<div style="padding-top:25px;text-align:center">
 		<div id="inputcontent">
 		    <div id="inputmain">
-		        <div class="inputsubtitle">게시글 내용</div>
-		        <% Board board = (Board)request.getAttribute("board"); %>
+		        <div class="inputsubtitle">게시글 내용</div>		       
 		        <table>
 		            <tr>
 		                <th>제목</th>
@@ -42,34 +44,36 @@
 		            </tr>
 					<tr>
 		                <th>조회수</th>
-		                <td><%= board.getReadCount() %></td>
+		                <td>${ board.readCount }</td>
 		            </tr>
 		            <tr>
 		                <th>첨부파일</th>
 		                <td>
-		                <% for (BoardAttach file : board.getFiles()) { %>
-		                <a href="download.action?attachno=<%= file.getAttachNo() %>">
-		                <%= file.getUserFileName() %>
+		                <c:forEach var="file" items="${ board.files }">
+		                <a href="download.action?attachno=${ file.attachNo }">
+		                ${ file.userFileName }
 		                </a>
 		                <br>
-		                <% } %>		                
+		                </c:forEach>
 		                </td>
 		            </tr>
 		            <tr>
 		                <th>내용</th>
 		                <td style="height:200px;vertical-align:top">
-		                <%= board.getContent().replace("\r\n", "<br>") %>
+<% String enter2 = "\r\n"; %>
+<c:set var="enter" value="
+" />
+		                ${ fn:replace(board.content, enter, '<br>') }
 		                </td>
 		            </tr>
 		        </table>
 		        <div class="buttons">
-		        	<% Member member = (Member)session.getAttribute("loginuser"); %>
-		        	<% if (member.getMemberId().equals(board.getWriter())) { %>
-		        	[&nbsp;<a href='edit.action?boardno=<%= board.getBoardNo() %>'>수정</a>&nbsp;]
-		        	[&nbsp;<a href='delete.action?boardno=<%= board.getBoardNo() %>'>삭제</a>&nbsp;]
+		        	<c:if test="${ loginuser.memberId eq board.writer }">
+		        	[&nbsp;<a href='edit.action?boardno=${ board.boardNo }'>수정</a>&nbsp;]
+		        	[&nbsp;<a href='delete.action?boardno=${ board.boardNo }'>삭제</a>&nbsp;]
 		        	[&nbsp;<a id='delete-btn' href='javascript:'>확인삭제</a>&nbsp;]
-		        	<% } %>
-		        	[&nbsp;<a href='list.action?pageNo=<%= request.getAttribute("pageNo") %>'>목록보기</a>&nbsp;]
+		        	</c:if>
+		        	[&nbsp;<a href='list.action?pageNo=${ pageNo }'>목록보기</a>&nbsp;]
 		        </div>
 		    </div>
 		</div>
@@ -86,7 +90,7 @@
 		event.preventDefault();
 		var ok = confirm('삭제할까요?');
 		if (ok) {
-			location.href = 'delete.action?boardno=<%= board.getBoardNo() %>';
+			location.href = 'delete.action?boardno=${ board.boardNo }';
 		}
 	});
 	</script>
