@@ -15,14 +15,9 @@
 <head>
 
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>글쓰기</title>
-	
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-		  rel="stylesheet">
-	
 	<link rel="Stylesheet" href="/demoweb/styles/default.css" />
-	<link rel="Stylesheet" href="/demoweb/styles/input2.css" />	
+	<link rel="Stylesheet" href="/demoweb/styles/input2.css" />
 
 </head>
 <body>
@@ -95,8 +90,7 @@
 	</div>
 	<br><br><br><br><br>
 	
-	<script src="/demoweb/js/jquery-3.6.0.js"></script>
-	<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/demoweb/js/jquery-3.6.0.js"></script>	
 	<script type="text/javascript">
 	/*
 	var deleteBtn = document.querySelector('#delete-btn');
