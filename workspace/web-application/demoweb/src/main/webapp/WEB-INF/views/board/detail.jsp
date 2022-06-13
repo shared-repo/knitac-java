@@ -83,7 +83,7 @@
 		        </div>
 		    </div>
 		</div>
-		
+		<br><br>
 		<!-- comment 쓰기 영역 -->	
 		<div>
 		</div>	

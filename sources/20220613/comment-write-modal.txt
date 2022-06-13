@@ -1,0 +1,39 @@
+	
+	
+	<!-- Modal -->
+	<div class="modal fade" id="reply-modal" tabindex="-1" role="dialog" aria-labelledby="reply-modal-label" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="reply-modal-label">댓글 쓰기</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            			<span aria-hidden="true">×</span>
+          			</button>					
+				</div>
+				<div class="modal-body">
+				<form id="reply-form">
+					<div class="form-group">
+						<label>Reply</label>
+						<input class="form-control" name='reply' id='modal-reply' value=''>
+					</div>
+					<div class="form-group">
+						<label>Replyer</label>
+						<input class="form-control" name='replyer' id='modal-replyer' value=''>
+					</div>
+					<input type="hidden" name='bno' value='${ board.bno }'>
+					<input type="hidden" name='rno'>
+					<input type="hidden" name='action'><!-- 댓글 or 댓글의 댓글 -->
+				</form>
+				</div>
+				<div class="modal-footer">
+					<button id='modalModBtn' type="button" class="btn btn-success">Modify</button>
+					<button id='modalRemoveBtn' type="button" class="btn btn-success">Remove</button>
+					<button id='modalRegisterBtn' type="button" class="btn btn-success">Register</button>
+					<button id='modalCloseBtn' type="button" class="btn btn-success">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
