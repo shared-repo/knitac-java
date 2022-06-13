@@ -18,7 +18,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>글쓰기</title>
 	
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
 		  rel="stylesheet">
 	
 	<link rel="Stylesheet" href="/demoweb/styles/default.css" />
@@ -86,6 +86,8 @@
 		<br><br>
 		<!-- comment 쓰기 영역 -->	
 		<div>
+			<button id="add-comment-btn" type="button" 
+					class="btn btn-outline-primary btn-sm">댓글쓰기</button>
 		</div>	
 		<!-- / comment 쓰기 영역 -->	
 			
@@ -95,8 +97,46 @@
 	</div>
 	<br><br><br><br><br>
 	
+	<!-- Modal -->
+	<div id="comment-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="comment-modal-label" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="comment-modal-label">댓글 쓰기</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            			<span aria-hidden="true">×</span>
+          			</button>					
+				</div>
+				<div class="modal-body">
+				<form id="comment-form">
+					<div class="form-group">
+						<label>댓글</label>
+						<input class="form-control" name='comment' id='modal-comment' value=''>
+					</div>
+					<div class="form-group">
+						<label>작성자</label>
+						<input class="form-control" name='writer' id='modal-commenter' value=''>
+					</div>
+					<input type="hidden" name='bno' value='${ board.boardNo }'>
+					<input type="hidden" name='rno'>
+					<input type="hidden" name='action'><!-- 댓글 or 댓글의 댓글 -->
+				</form>
+				</div>
+				<div class="modal-footer">
+					<button id='modalModBtn' type="button" class="btn btn-success">Modify</button>
+					<button id='modalRemoveBtn' type="button" class="btn btn-success">Remove</button>
+					<button id='modalRegisterBtn' type="button" class="btn btn-success">Register</button>
+					<button id='modalCloseBtn' type="button" class="btn btn-success">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	
 	<script src="/demoweb/js/jquery-3.6.0.js"></script>
-	<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+	<script	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript">
 	/*
 	var deleteBtn = document.querySelector('#delete-btn');
@@ -116,6 +156,16 @@
 			location.href = 'delete.action?boardno=${ board.boardNo }';
 		}
 		
+	});
+	
+	///////////////////////////////////////////////////
+	
+	$('#add-comment-btn').on('click', function(event) {
+		$('#comment-modal').modal('show'); // show modal
+	});
+	
+	$('#modalCloseBtn').on('click', function(event) {
+		$('#comment-modal').modal('hide'); // hide modal
 	});
 	</script>
 
