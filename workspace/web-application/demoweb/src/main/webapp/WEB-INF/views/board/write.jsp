@@ -75,12 +75,23 @@
 	</div>
 	</div>
 	
+	<!-- <script src="/demoweb/js/jquery-3.6.0.min.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 	<script type="text/javascript">
+	/* 
 	var writeLink = document.querySelector("#write");
 	writeLink.addEventListener("click", function(event) {
 		event.preventDefault();
 		var writeForm = document.querySelector("#writeform");
 		writeForm.submit(); // submit : form을 서버로 전송 (submit button click과 같은 효과)
+	}); 
+	*/
+	$(function() {
+		$('#write').on('click', function(event) { // on : jquery의 이벤트 연결 함수 (addEventListener)
+			event.preventDefault();
+			$('#writeform').submit();
+		});
 	});
 	</script>
 

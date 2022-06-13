@@ -84,8 +84,11 @@
 		<!-- / comment 표시 영역 -->        
 	</div>
 	</div>
-	<br><br><br><br><br>	
+	<br><br><br><br><br>
+	
+	<script src="/demoweb/js/jquery-3.6.0.js"></script>	
 	<script type="text/javascript">
+	/*
 	var deleteBtn = document.querySelector('#delete-btn');
 	deleteBtn.addEventListener('click', function(event) {
 		event.preventDefault();
@@ -93,6 +96,16 @@
 		if (ok) {
 			location.href = 'delete.action?boardno=${ board.boardNo }';
 		}
+	});
+	*/
+	// $('#delete-btn').on('click', function(event)) {
+	$('#delete-btn').click(function(event) {
+		event.preventDefault();
+		var ok = confirm('삭제할까요?');
+		if (ok) {
+			location.href = 'delete.action?boardno=${ board.boardNo }';
+		}
+		
 	});
 	</script>
 

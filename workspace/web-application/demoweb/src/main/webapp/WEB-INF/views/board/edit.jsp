@@ -69,12 +69,20 @@
 	</div>
 	</div>
 	
+	<script src="/demoweb/js/jquery-3.6.0.js"></script>
+	
 	<script type="text/javascript">
+	/* 
 	var editBtn = document.querySelector("#edit-btn");
 	editBtn.addEventListener('click', function(event) {
 		event.preventDefault();
 		var editForm = document.querySelector("#editform");
 		editForm.submit(); // 전송 명령
+	});
+	*/
+	$('#edit-btn').on('click', function(event) {
+		event.preventDefault();
+		$('#editform').submit();
 	});
 	</script>
 
