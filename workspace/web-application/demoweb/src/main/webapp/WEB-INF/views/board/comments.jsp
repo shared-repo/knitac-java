@@ -17,7 +17,7 @@
 	                    <div style='display:${ loginuser.memberId eq comment.writer ? "block" : "none" }'>
 	                    	<a class="editcomment" data-commentno='${ comment.commentNo }' href="javascript:">편집</a>
 	                    	&nbsp;
-	                    	<a class="deletecomment" 
+	                    	<a class="deletecomment"
 	                    	   href="javascript:"
 	                    	   data-commentno="${ comment.commentNo }">삭제</a>
 	                    </div>

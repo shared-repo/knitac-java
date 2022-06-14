@@ -212,6 +212,30 @@
 				}
 			});
 		});
+		
+		// $('.deletecomment').on('click', function(event) { // 현재 존재하는 .deletecomment
+		$('#comment-list').on('click', '.deletecomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+			// 어느 댓글을 삭제할까요? --> 삭제할 댓글 번호는 무엇?
+			var commentNo = $(this).attr("data-commentno"); // this : 이벤트 발생 객체 (여기서는 <a>)
+			// alert(commentNo);
+			
+			$.ajax({
+				"url": "comment-delete.action",
+				"method" : "get",
+				"async" : true,
+				"data" : "commentno=" + commentNo,
+				"dataType" : "text",
+				"success" : function(data, status, xhr) {
+					alert('삭제 성공');
+					// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+					$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
+				},
+				"error" : function(xhr, status, err) {
+					alert('삭제 실패');
+				}
+			});
+		});
+		
 	
 	});
 	</script>
