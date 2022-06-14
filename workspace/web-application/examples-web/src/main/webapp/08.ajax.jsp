@@ -32,10 +32,15 @@ $(function() {
 			"async" : true,
 			"dataType" : "text",
 			"success" : function(data, status, xhr) { // 정상 응답일 때 호출되는 함수
+				/*
 				var resultHtml = $("<h3>" + data + "</h3>"); // 지정된 HTML로 확장요소집합 생성
 				var div = $('#result');
 				// resultHtml.appendTo(div);
 				div.append(resultHtml);
+				*/
+				
+				// $("<h3>" + data + "</h3>").appendTo('#result');
+				$("#result").append("<h3>" + data + "</h3>");
 			},
 			"error" : function(xhr, status, err) { // 오류가 있을 때 호출되는 함수
 				alert('비동기 요청 처리 중 오류 발생');
