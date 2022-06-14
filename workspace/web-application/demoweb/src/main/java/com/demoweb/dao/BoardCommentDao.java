@@ -94,7 +94,7 @@ public class BoardCommentDao {
 				comment.setWriter(rs.getString(3));
 				comment.setContent(rs.getString(4));
 				comment.setRegDate(rs.getDate(5));
-				//comment.setDeleted(rs.getBoolean(6));
+				comment.setDeleted(rs.getBoolean(6));
 				comment.setGroupNo(rs.getInt(7));
 				comment.setStep(rs.getInt(8));
 				comment.setDepth(rs.getInt(9));

@@ -10,6 +10,7 @@ public class BoardComment {
 	private String writer;
 	private String content;
 	private Date regDate;
+	private boolean deleted;
 	
 	private int groupNo;
 	private int step;
@@ -63,5 +64,12 @@ public class BoardComment {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	
 }
