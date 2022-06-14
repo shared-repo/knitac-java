@@ -92,7 +92,6 @@
 		<!-- / comment 쓰기 영역 -->	
 			
         <!-- comment 표시 영역 -->
-        
 		<!-- / comment 표시 영역 -->        
 	</div>
 	</div>
