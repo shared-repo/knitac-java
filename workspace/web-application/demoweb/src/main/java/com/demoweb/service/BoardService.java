@@ -2,9 +2,11 @@ package com.demoweb.service;
 
 import java.util.List;
 
+import com.demoweb.dao.BoardCommentDao;
 import com.demoweb.dao.BoardDao;
 import com.demoweb.dto.Board;
 import com.demoweb.dto.BoardAttach;
+import com.demoweb.dto.BoardComment;
 
 public class BoardService {
 
@@ -68,6 +70,16 @@ public class BoardService {
 	public BoardAttach findBoardAttachByAttachNo(int attachNo) {
 		BoardAttach attach = boardDao.selectBoardAttachByAttachNo(attachNo);
 		return attach;
+	}
+	
+	/////////////////////////////////////////////////////////////////////////
+
+	private BoardCommentDao boardCommentDao = new BoardCommentDao();
+	
+	public void writeBoardComment(BoardComment comment) {
+		
+		boardCommentDao.insertBoardComment(comment);
+		
 	}
 
 

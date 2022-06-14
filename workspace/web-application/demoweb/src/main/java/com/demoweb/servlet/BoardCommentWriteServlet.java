@@ -30,7 +30,7 @@ public class BoardCommentWriteServlet extends HttpServlet {
 		int boardNo = Integer.parseInt(req.getParameter("boardno"));
 		String writer = req.getParameter("writer");
 		String content = req.getParameter("content");
-		System.out.println(boardNo + " / " + writer + " / " + content);
+		// System.out.println(boardNo + " / " + writer + " / " + content);
 		
 		//2. 요청 처리
 		BoardComment comment = new BoardComment();
@@ -39,7 +39,7 @@ public class BoardCommentWriteServlet extends HttpServlet {
 		comment.setContent(content);
 		
 		BoardService boardService = new BoardService();
-		// boardService.writeBoardComment(comment);
+		boardService.writeBoardComment(comment);
 		
 		//3. 응답
 		PrintWriter out = resp.getWriter();
