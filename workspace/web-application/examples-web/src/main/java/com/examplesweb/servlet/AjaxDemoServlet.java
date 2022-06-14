@@ -16,6 +16,10 @@ public class AjaxDemoServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		try {
+			Thread.sleep(5000);// 5초간 실행 중지
+		} catch (InterruptedException e) {	} 
+		
 		PrintWriter out = resp.getWriter();
 		
 		out.print(new Date().toString());

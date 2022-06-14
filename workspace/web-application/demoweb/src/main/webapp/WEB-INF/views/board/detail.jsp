@@ -111,14 +111,12 @@
 				<form id="comment-form">
 					<div class="form-group">
 						<label>댓글</label>
-						<input class="form-control" name='comment' id='modal-comment' value=''>
+						<textarea class="form-control" 
+								  name='content' id='modal-content'></textarea>
 					</div>
-					<div class="form-group">
-						<label>작성자</label>
-						<input class="form-control" name='writer' id='modal-commenter' value=''>
-					</div>
-					<input type="hidden" name='bno' value='${ board.boardNo }'>
-					<input type="hidden" name='rno'>
+					<input type="hidden" name='memberid' value='${ loginuser.memberId }'>
+					<input type="hidden" name='boardno' value='${ board.boardNo }'>
+					<input type="hidden" name='commentno'>
 					<input type="hidden" name='action'><!-- 댓글 or 댓글의 댓글 -->
 				</form>
 				</div>
@@ -166,6 +164,35 @@
 	
 	$('#modalCloseBtn').on('click', function(event) {
 		$('#comment-modal').modal('hide'); // hide modal
+	});
+	
+	$('#modalRegisterBtn').on('click', function(event) {
+		event.preventDefault();
+		
+		var content = $('#modal-content').val(); // val() == value 속성
+		if (content.length == 0) {
+			alert('내용을 작성하세요');
+			return;
+		}
+		
+		var formData = $('#comment-form').serialize();
+		// var formData = $('#comment-form').serializeArray();
+		// alert(formData);		
+		// return;
+		
+		$.ajax({
+			"url" : "comment-write.action",
+			"method" : "post",
+			"async" : true,
+			"data" : formData, // boardno=1&writer=imauser1&content=test
+			"dataType" : "text",
+			"success" : function(data, status, xhr) {
+				
+			},
+			"error" : function(xhr, status, err) {
+				alert('댓글 쓰는 중 오류 발생');
+			}
+		});
 	});
 	</script>
 
