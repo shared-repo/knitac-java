@@ -142,69 +142,77 @@
 	<script src="/demoweb/js/jquery-3.6.0.js"></script>
 	<script	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript">
-	/*
-	var deleteBtn = document.querySelector('#delete-btn');
-	deleteBtn.addEventListener('click', function(event) {
-		event.preventDefault();
-		var ok = confirm('삭제할까요?');
-		if (ok) {
-			location.href = 'delete.action?boardno=${ board.boardNo }';
-		}
-	});
-	*/
-	// $('#delete-btn').on('click', function(event)) {
-	$('#delete-btn').click(function(event) {
-		event.preventDefault();
-		var ok = confirm('삭제할까요?');
-		if (ok) {
-			location.href = 'delete.action?boardno=${ board.boardNo }';
-		}
-		
-	});
 	
-	///////////////////////////////////////////////////
+	$(function() { // 수신된 html의 dom객체 구성 완료되었을 때 호출 ( 화면 준비 완료 )
 	
-	$('#add-comment-btn').on('click', function(event) {
-		$('#comment-modal').modal('show'); // show modal
-	});
-	
-	$('#modalCloseBtn').on('click', function(event) {
-		$('#comment-modal').modal('hide'); // hide modal
-	});
-	
-	$('#modalRegisterBtn').on('click', function(event) {
-		event.preventDefault();
-		
-		var content = $('#modal-content').val(); // val() == value 속성
-		if (content.length == 0) {
-			alert('내용을 작성하세요');
-			return;
-		}
-		
-		var formData = $('#comment-form').serialize();
-		// var formData = $('#comment-form').serializeArray();
-		// alert(formData);		
-		// return;
-		
-		$.ajax({
-			"url" : "comment-write.action",
-			"method" : "post",
-			"async" : true,
-			"data" : formData, // boardno=1&writer=imauser1&content=test
-			"dataType" : "text",
-			"success" : function(data, status, xhr) {
-				if (data === "success") {
-					$('#comment-modal').modal('hide');
-					// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
-					$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
-				} else {
-					alert('댓글 쓰기 실패');
-				}
-			},
-			"error" : function(xhr, status, err) {
-				alert('댓글 쓰는 중 오류 발생');
+		/*
+		var deleteBtn = document.querySelector('#delete-btn');
+		deleteBtn.addEventListener('click', function(event) {
+			event.preventDefault();
+			var ok = confirm('삭제할까요?');
+			if (ok) {
+				location.href = 'delete.action?boardno=${ board.boardNo }';
 			}
 		});
+		*/
+		// $('#delete-btn').on('click', function(event)) {
+		$('#delete-btn').click(function(event) {
+			event.preventDefault();
+			var ok = confirm('삭제할까요?');
+			if (ok) {
+				location.href = 'delete.action?boardno=${ board.boardNo }';
+			}
+			
+		});
+		
+		///////////////////////////////////////////////////
+		
+		// comment 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+		$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
+		
+		$('#add-comment-btn').on('click', function(event) {
+			$('#comment-modal').modal('show'); // show modal
+		});
+		
+		$('#modalCloseBtn').on('click', function(event) {
+			$('#comment-modal').modal('hide'); // hide modal
+		});
+		
+		$('#modalRegisterBtn').on('click', function(event) {
+			event.preventDefault();
+			
+			var content = $('#modal-content').val(); // val() == value 속성
+			if (content.length == 0) {
+				alert('내용을 작성하세요');
+				return;
+			}
+			
+			var formData = $('#comment-form').serialize();
+			// var formData = $('#comment-form').serializeArray();
+			// alert(formData);		
+			// return;
+			
+			$.ajax({
+				"url" : "comment-write.action",
+				"method" : "post",
+				"async" : true,
+				"data" : formData, // boardno=1&writer=imauser1&content=test
+				"dataType" : "text",
+				"success" : function(data, status, xhr) {
+					if (data === "success") {
+						$('#comment-modal').modal('hide');
+						// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+						$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
+					} else {
+						alert('댓글 쓰기 실패');
+					}
+				},
+				"error" : function(xhr, status, err) {
+					alert('댓글 쓰는 중 오류 발생');
+				}
+			});
+		});
+	
 	});
 	</script>
 
