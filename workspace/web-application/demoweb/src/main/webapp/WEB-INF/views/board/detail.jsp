@@ -91,7 +91,14 @@
 		</div>	
 		<!-- / comment 쓰기 영역 -->	
 			
-        <!-- comment 표시 영역 -->        			
+        <!-- comment 표시 영역 -->
+        <br>
+       	<hr style="width:800px;margin:0 auto">
+       	<br>
+       	<table id="comment-list" style="width:800px;margin:0 auto">
+ 
+        
+        </table> 			
 		<!-- / comment 표시 영역 -->        
 	</div>
 	</div>
