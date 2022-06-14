@@ -63,27 +63,26 @@ public class BoardCommentDao {
 		}
 	}
 
-	public List<BoardComment> selectAll() {
+	public List<BoardComment> selectByBoardNo(int boardNo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<BoardComment> commentList = new ArrayList<>(); // 조회 결과를 저장할 변수
-		
 		try {
 			// 1. JDBC 드라이버 준비
 			// DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-			Class.forName("com.mysql.cj.jdbc.Driver");			
-			
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			// 2. 데이터베이스에 연결 ( 연결 객체 준비 )
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/demoweb", // db server url
 					"knit", "mysql"); // 계정 정보
-			
 			// 3. SQL 작성 + 명령 객체 만들기
 			String sql = "select commentno, boardno, writer, content, regdate, deleted, groupno, step, depth " +
-						 "from boardcomment "; // +
-						 // "order by groupno desc"; // 최근에 작성된 글을 앞에 표시
+						 "from boardcomment " +
+						 "where boardno = ? " +
+						 "order by commentno desc"; // 최근에 작성된 글을 앞에 표시
 			pstmt = conn.prepareStatement(sql); // 명령객체 만들기
+			pstmt.setInt(1, boardNo);
 			
 			// 4. 명령 실행 ( select인 경우 ResultSet 형식의 결과 반환 )
 			rs = pstmt.executeQuery(); // executeQuery : select, exeucteUpdate : select 이외의 sql

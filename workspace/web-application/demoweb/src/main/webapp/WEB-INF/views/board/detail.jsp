@@ -92,6 +92,12 @@
 		<!-- / comment 쓰기 영역 -->	
 			
         <!-- comment 표시 영역 -->
+        <br>
+        <hr style="width:800px;margin:0 auto">
+        <br>
+        <table id="comment-list" style="width:800px;margin:0 auto">
+        
+        </table>
 		<!-- / comment 표시 영역 -->        
 	</div>
 	</div>
@@ -189,6 +195,8 @@
 			"success" : function(data, status, xhr) {
 				if (data === "success") {
 					$('#comment-modal').modal('hide');
+					// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+					$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
 				} else {
 					alert('댓글 쓰기 실패');
 				}

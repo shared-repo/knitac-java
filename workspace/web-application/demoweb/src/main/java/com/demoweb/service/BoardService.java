@@ -82,6 +82,11 @@ public class BoardService {
 		
 	}
 
+	public List<BoardComment> findCommentsByBoardNo(int boardNo) {
+		List<BoardComment> comments = boardCommentDao.selectByBoardNo(boardNo);
+		return comments;
+	}
+
 
 
 }
