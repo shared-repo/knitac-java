@@ -114,7 +114,7 @@
 						<textarea class="form-control" 
 								  name='content' id='modal-content'></textarea>
 					</div>
-					<input type="hidden" name='memberid' value='${ loginuser.memberId }'>
+					<input type="hidden" name='writer' value='${ loginuser.memberId }'>
 					<input type="hidden" name='boardno' value='${ board.boardNo }'>
 					<input type="hidden" name='commentno'>
 					<input type="hidden" name='action'><!-- 댓글 or 댓글의 댓글 -->
@@ -187,7 +187,11 @@
 			"data" : formData, // boardno=1&writer=imauser1&content=test
 			"dataType" : "text",
 			"success" : function(data, status, xhr) {
-				
+				if (data === "success") {
+					$('#comment-modal').modal('hide');
+				} else {
+					alert('댓글 쓰기 실패');
+				}
 			},
 			"error" : function(xhr, status, err) {
 				alert('댓글 쓰는 중 오류 발생');
