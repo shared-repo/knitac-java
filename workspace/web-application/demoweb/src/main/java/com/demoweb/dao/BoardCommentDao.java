@@ -79,7 +79,7 @@ public class BoardCommentDao {
 			// 3. SQL 작성 + 명령 객체 만들기
 			String sql = "select commentno, boardno, writer, content, regdate, deleted, groupno, step, depth " +
 						 "from boardcomment " +
-						 "where boardno = ? " +
+						 "where boardno = ? and deleted = false " +
 						 "order by commentno desc"; // 최근에 작성된 글을 앞에 표시
 			pstmt = conn.prepareStatement(sql); // 명령객체 만들기
 			pstmt.setInt(1, boardNo);
@@ -179,7 +179,7 @@ public class BoardCommentDao {
 			
 			// 3. SQL 작성 + 명령 객체 만들기
 			// String sql = "delete from board where boardno = ?";
-			String sql = "update boardcoment set deleted = true where commentno = ?";
+			String sql = "update boardcomment set deleted = true where commentno = ?";
 			pstmt = conn.prepareStatement(sql); // 명령객체 만들기
 			pstmt.setInt(1, commentNo);
 			

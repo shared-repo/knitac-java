@@ -87,6 +87,10 @@ public class BoardService {
 		return comments;
 	}
 
+	public void deleteComment(int commentNo) {
+		boardCommentDao.delete(commentNo);
+	}
+
 
 
 }
