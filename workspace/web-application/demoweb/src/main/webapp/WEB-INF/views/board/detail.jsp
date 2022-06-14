@@ -236,6 +236,11 @@
 			});
 		});
 		
+		$('#comment-list').on('click', '.editcomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+			var commentNo = $(this).attr("data-commentno");
+			$('#commentview' + commentNo).css('display', 'none');
+			$('#commentedit' + commentNo).css('display', 'block');
+		});
 	
 	});
 	</script>
