@@ -213,7 +213,7 @@ public class BoardCommentDao {
 					"knit", "mysql"); // 계정 정보
 			
 			// 3. SQL 작성 + 명령 객체 만들기
-			String sql = "update board " +
+			String sql = "update boardcomment " +
 						 "set content = ? " +
 						 "where commentno = ?";
 			pstmt = conn.prepareStatement(sql); // 명령객체 만들기

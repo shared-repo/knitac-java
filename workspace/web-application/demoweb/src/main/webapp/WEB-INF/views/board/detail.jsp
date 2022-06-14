@@ -236,10 +236,48 @@
 			});
 		});
 		
-		$('#comment-list').on('click', '.editcomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+		function toggleEditDisplay(commentNo, isEdit) {
+			$('#commentview' + commentNo).css('display', isEdit ? 'none' : 'block');
+			$('#commentedit' + commentNo).css('display', isEdit ? 'block' : 'none');
+		}
+		
+		var currentEditCommentNo = null;
+		$('#comment-list').on('click', '.editcomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment			
 			var commentNo = $(this).attr("data-commentno");
-			$('#commentview' + commentNo).css('display', 'none');
-			$('#commentedit' + commentNo).css('display', 'block');
+			if (currentEditCommentNo) {
+				toggleEditDisplay(currentEditCommentNo, false);
+			}
+			currentEditCommentNo = commentNo;			
+			toggleEditDisplay(commentNo, true);
+		});
+		
+		$('#comment-list').on('click', '.cancel', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+			var commentNo = $(this).attr("data-commentno");
+			toggleEditDisplay(commentNo, false);
+			currentEditCommentNo = null;
+		});
+		
+		$('#comment-list').on('click', '.updatecomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
+			var commentNo = $(this).attr("data-commentno");
+			var formData = $('#updateform' + commentNo).serialize();
+			$.ajax({
+				"url" : "comment-update.action",
+				"method" : "post",
+				"async" : true,
+				"data" : formData,
+				"dataType" : "text",
+				"success" : function(data, status, xhr) {
+					alert('수정 성공')	;
+					// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
+					$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
+				}, 
+				"error" : function(xhr, status, err) {
+					alert('수정 실패')	;
+				}
+			
+			});
+			
+			
 		});
 	
 	});

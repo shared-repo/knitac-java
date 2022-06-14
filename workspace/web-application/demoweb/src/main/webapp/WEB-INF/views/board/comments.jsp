@@ -20,9 +20,7 @@
 	                    	<a class="deletecomment"
 	                    	   href="javascript:"
 	                    	   data-commentno="${ comment.commentNo }">삭제</a>
-	                    </div>
-	                    <a class="recomment-link btn btn-sm btn-success" 
-	                       data-commentno="${ comment.commentNo }">댓글 쓰기</a>
+	                    </div>	                    
 	                </div>
 	                
 	                <div id='commentedit${ comment.commentNo }' style="display: none">

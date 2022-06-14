@@ -91,6 +91,11 @@ public class BoardService {
 		boardCommentDao.delete(commentNo);
 	}
 
+	public void updateBoardComment(BoardComment comment) {
+		boardCommentDao.update(comment);
+		
+	}
+
 
 
 }
