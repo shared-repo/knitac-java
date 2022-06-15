@@ -127,10 +127,8 @@
 				</form>
 				</div>
 				<div class="modal-footer">
-					<button id='modalModBtn' type="button" class="btn btn-success">Modify</button>
-					<button id='modalRemoveBtn' type="button" class="btn btn-success">Remove</button>
-					<button id='modalRegisterBtn' type="button" class="btn btn-success">Register</button>
-					<button id='modalCloseBtn' type="button" class="btn btn-success">Close</button>
+					<button id='modalRegisterBtn' type="button" class="btn btn-success btn-sm">댓글쓰기</button>
+					<button id='modalCloseBtn' type="button" class="btn btn-success btn-sm">취소</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -171,6 +169,7 @@
 		$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
 		
 		$('#add-comment-btn').on('click', function(event) {
+			$('#modal-content').val("");
 			$('#comment-modal').modal('show'); // show modal
 		});
 		
@@ -201,6 +200,7 @@
 				"success" : function(data, status, xhr) {
 					if (data === "success") {
 						$('#comment-modal').modal('hide');
+						
 						// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
 						$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
 					} else {
@@ -217,7 +217,10 @@
 		$('#comment-list').on('click', '.deletecomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment
 			// 어느 댓글을 삭제할까요? --> 삭제할 댓글 번호는 무엇?
 			var commentNo = $(this).attr("data-commentno"); // this : 이벤트 발생 객체 (여기서는 <a>)
-			// alert(commentNo);
+			var ok = confirm(commentNo + "번 댓글을 삭제할까요?");
+			if (!ok) {
+				return;
+			}
 			
 			$.ajax({
 				"url": "comment-delete.action",
@@ -225,8 +228,7 @@
 				"async" : true,
 				"data" : "commentno=" + commentNo,
 				"dataType" : "text",
-				"success" : function(data, status, xhr) {
-					alert('삭제 성공');
+				"success" : function(data, status, xhr) {					
 					// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
 					$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
 				},
@@ -244,9 +246,7 @@
 		var currentEditCommentNo = null;
 		$('#comment-list').on('click', '.editcomment', function(event) { // 현재 + 미래에 존재하는 .deletecomment			
 			var commentNo = $(this).attr("data-commentno");
-			if (currentEditCommentNo) {
-				toggleEditDisplay(currentEditCommentNo, false);
-			}
+			
 			currentEditCommentNo = commentNo;			
 			toggleEditDisplay(commentNo, true);
 		});

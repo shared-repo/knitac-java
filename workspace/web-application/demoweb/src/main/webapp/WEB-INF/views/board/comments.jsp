@@ -6,6 +6,7 @@
 			<c:forEach var="comment" items="${ comments }">
 			<tr id="tr${ comment.commentNo }">
 				<td style="text-align:left;margin:5px;border-bottom: solid 1px;padding-left:${comment.depth * 20}px">
+	        		
 	        		<div id='commentview${ comment.commentNo }'>
 	        			${ comment.writer } &nbsp;&nbsp;
 	        			[${ comment.regDate }]

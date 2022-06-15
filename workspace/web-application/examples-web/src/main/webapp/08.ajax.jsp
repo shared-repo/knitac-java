@@ -30,6 +30,7 @@ $(function() {
 			"url" : "/examples-web/get-time.action",
 			"method" : "get",
 			"async" : true,
+			"data" : "a=1&b=2",
 			"dataType" : "text",
 			"success" : function(data, status, xhr) { // 정상 응답일 때 호출되는 함수
 				/*

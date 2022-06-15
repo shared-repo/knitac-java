@@ -88,10 +88,12 @@
 	}); 
 	*/
 	$(function() {
+		
 		$('#write').on('click', function(event) { // on : jquery의 이벤트 연결 함수 (addEventListener)
 			event.preventDefault();
 			$('#writeform').submit();
 		});
+		
 	});
 	</script>
 
