@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<description>Example configuration to get you started.</description>
+
+	<context:component-scan base-package="com.springexample.ioc" />
+	
+	<!-- property : serviceConsumer.setMessageService(messageService) -->
+	<!-- constructor-arg : new ServiceConsumer(timeService) -->
+	<bean id="serviceConsumer" 
+		  class="com.springexample.ioc.MyServiceConsumer">
+		
+		<property name="messageService" ref="messageService" />
+		<constructor-arg ref="timeService" />
+		  
+	</bean>
+	
+	<bean id="messageService"
+		  class="com.springexample.ioc.MyMessageService">
+	</bean>
+
+	<bean id="timeService"
+		  class="com.springexample.ioc.MyTimeService">
+	</bean>
+
+</beans>
+
+
+
+
+

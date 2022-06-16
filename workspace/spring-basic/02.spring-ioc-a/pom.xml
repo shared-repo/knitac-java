@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.springexample</groupId>
+	<artifactId>ioc-a</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>02.spring-ioc-a</name>
+	
+	<properties>
+		<spring.framework.version>5.3.21</spring.framework.version>
+	</properties>
+
+	<!-- 
+	dependencies : 프로젝트가 사용할 라이브러리 등록 
+	(maven이 자동으로 .jar 다운로드 및 참조) 
+	-->
+	<dependencies>
+	
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.framework.version}</version>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- 아래 플러그인은 프로젝트에서 사용할 자바 컴파일러 등록 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
