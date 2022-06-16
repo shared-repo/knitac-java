@@ -12,7 +12,7 @@ public class ServiceConsumerImpl implements ServiceConsumer {
 		//2. 
 		// MessageService messageService = new MessageServiceImpl();
 		
-		//3. 
+		//3. MessageServiceImpl 클래스를 사용하지만 드러나지 않습니다.
 		int no = (int)(Math.random() * 2) + 1; //1 or 2
 		MessageServiceFactory factory = new MessageServiceFactory();
 		MessageService messageService = factory.getInstance(no + "");
