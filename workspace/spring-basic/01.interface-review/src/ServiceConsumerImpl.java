@@ -4,14 +4,11 @@ public class ServiceConsumerImpl implements ServiceConsumer {
 	public void doSomething() {
 		
 		//0.
-		// MessageService messageService = new MessageService(); //오류 : interface는 new 불가
-		
+		// MessageService messageService = new MessageService(); //오류 : interface는 new 불가		
 		//1.
-		// MessageServiceImpl messageService = new MessageServiceImpl();
-		
+		// MessageServiceImpl messageService = new MessageServiceImpl();		
 		//2. 
-		// MessageService messageService = new MessageServiceImpl();
-		
+		// MessageService messageService = new MessageServiceImpl();		
 		//3. MessageServiceImpl 클래스를 사용하지만 드러나지 않습니다.
 		int no = (int)(Math.random() * 2) + 1; //1 or 2
 		MessageServiceFactory factory = new MessageServiceFactory();

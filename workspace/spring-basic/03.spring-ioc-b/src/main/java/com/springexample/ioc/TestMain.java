@@ -1,5 +1,6 @@
 package com.springexample.ioc;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class TestMain {
@@ -13,8 +14,8 @@ public class TestMain {
 		// ServiceConsumer serviceConsumer = new MyServiceConsumer();
 		
 		//3. 스프링의 IoC Container 사용 ( 의존성 제거 )
-		GenericXmlApplicationContext context = 
-				new GenericXmlApplicationContext("app-context.xml");
+		AnnotationConfigApplicationContext context = 
+				new AnnotationConfigApplicationContext(BeanConfig.class);
 		ServiceConsumer serviceConsumer = 
 				context.getBean("serviceConsumer", ServiceConsumer.class);
 		
