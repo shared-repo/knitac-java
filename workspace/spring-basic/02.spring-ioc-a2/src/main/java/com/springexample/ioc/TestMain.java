@@ -20,13 +20,6 @@ public class TestMain {
 		
 		serviceConsumer.doSomething();
 		
-		ServiceConsumer serviceConsumer2 = 
-				context.getBean("serviceConsumer", ServiceConsumer.class);
-		
-		serviceConsumer2.doSomething();
-		
-		System.out.println(serviceConsumer == serviceConsumer2); // 참조 비교
-		
 		context.close();
 	}
 
