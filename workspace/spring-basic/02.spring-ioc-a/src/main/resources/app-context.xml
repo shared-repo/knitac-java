@@ -7,6 +7,18 @@
 	
 	<!-- MyServiceConsumer serviceConsumer = new MyServiceConsumer() -->
 	<bean id="serviceConsumer" class="com.springexample.ioc.MyServiceConsumer">
+		<!--  serviceConsumer.setMessageService(messageService) -->
+		<!--  name : setMethod의 이름, ref : 컨테이너가 관리하는 객체의 id -->
+		<property name="messageService" ref="messageService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+	
+	<!-- MyMessageService messageService = new MyMessageService() -->
+	<bean id="messageService" class="com.springexample.ioc.MyMessageService"></bean>
+	
+	<!-- MyTimeService timeService = new MyTimeService("yyyy년 MM월 dd일 hh시 mm분 ss초") -->
+	<bean id="timeService" class="com.springexample.ioc.MyTimeService">
+		<constructor-arg value="yyyy년 MM월 dd일 hh시 mm분 ss초" />
 	</bean>
 	
 	
