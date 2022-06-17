@@ -6,7 +6,8 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<!-- MyServiceConsumer serviceConsumer = new MyServiceConsumer() -->
-	<bean id="serviceConsumer" class="com.springexample.ioc.MyServiceConsumer" scope="prototype">
+	<bean id="serviceConsumer" class="com.springexample.ioc.MyServiceConsumer" 
+		  scope="prototype">
 		<!--  serviceConsumer.setMessageService(messageService) -->
 		<!--  name : setMethod의 이름, ref : 컨테이너가 관리하는 객체의 id -->
 		<property name="messageService" ref="messageService" />
@@ -14,7 +15,8 @@
 	</bean>
 	
 	<!-- MyMessageService messageService = new MyMessageService() -->
-	<bean id="messageService" class="com.springexample.ioc.MyMessageService" scope="prototype"></bean>
+	<bean id="messageService" class="com.springexample.ioc.MyMessageService" 
+		  scope="prototype"></bean>
 	
 	<!-- MyTimeService timeService = new MyTimeService("yyyy년 MM월 dd일 hh시 mm분 ss초") -->
 	<bean id="timeService" class="com.springexample.ioc.MyTimeService">
