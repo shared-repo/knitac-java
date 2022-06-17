@@ -2,7 +2,7 @@ package com.springexample.ioc;
 
 public class MyServiceConsumer implements ServiceConsumer {
 	
-	private MessageService messageService = new MyMessageService();
+	private MessageService messageService;
 	public void setMessageService(MessageService messageService) { //의존성 주입 통로
 		this.messageService = messageService;
 	}	
@@ -10,10 +10,13 @@ public class MyServiceConsumer implements ServiceConsumer {
 	public void setTimeService(TimeService timeService) { //의존성 주입 통로
 		this.timeService = timeService;
 	}
-	public void doSomething() {		
-		String message = messageService.getMessage();
+	public void doSomething() {
 		
+		String message = messageService.getMessage();		
 		System.out.println(message);
+		
+		String timeString = timeService.getTimeString();
+		System.out.println(timeString);
 		
 	}
 

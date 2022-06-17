@@ -8,7 +8,18 @@ public class BeanConfig {
 	
 	@Bean //(name = "serviceConsumer") app-context.xml에서는 <bean id="serviceConsumer" ...
 	public ServiceConsumer serviceConsumer() {
-		return new MyServiceConsumer();
+		MyServiceConsumer serviceConsumer = new MyServiceConsumer();
+		serviceConsumer.setMessageService(messageService());
+		serviceConsumer.setTimeService(timeService("yyyy-MM-dd hh:mm:ss"));
+		return serviceConsumer;
+	}	
+	@Bean
+	public MessageService messageService() {
+		return new MyMessageService();
+	}	
+	@Bean
+	public TimeService timeService(String format) {
+		return new MyTimeService(format);
 	}
 
 }
