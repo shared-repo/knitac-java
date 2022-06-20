@@ -138,13 +138,28 @@ public class DemoController {
 	//11. JSP로 데이터 전달 ( ModelAndView 타입의 반환 값 사용 )	
 	@PostMapping(path = { "/demo/param.action" })
 	public ModelAndView processPostRequest(Person person, // DTO 전달인자는 자동으로 request에 저장 
-									 String name) { // DTO와 별개로 개별 데이터 수신 가능 
+									 	   Model model) {  
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("result"); // "/WEB-INF/views/" + result + ".jsp"
-		mav.addObject("myperson", person);
+		mav.addObject("myperson", person); // request에 저장
+		
+		model.addAttribute("myperson2", person); // request에 저장
 		
 		return mav;
+	}
+	
+	//12-1. redirect ( 다른 컨트롤러로 이동할 때 활용 )
+	@GetMapping(path = { "/demo/redirect.action" })
+	public String processRedirectRequest() {  
+		
+		return "redirect:redirect2.action"; // "redirect:" : redirect 처리 설정
+	}
+	//12-2. redirect	
+	@GetMapping(path = { "/demo/redirect2.action" })
+	public String processRedirect2Request() {  
+		
+		return "target";
 	}
 
 }
