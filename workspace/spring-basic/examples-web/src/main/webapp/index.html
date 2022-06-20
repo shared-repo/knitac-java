@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Home</title>
+</head>
+<body>
+	<h2>Java Web Application Examples Home</h2>
+	<hr>
+	<h3><a href="hello.action">서블릿 처리 요청 1</a></h3>
+	<h3><a href="hello2.action">서블릿 처리 요청 2</a></h3>
+	<h3><a href="hello3.action">서블릿 처리 요청 3</a></h3>
+	<hr>
+	<h3><a href="lotto.abc">로또 번호 뽑기</a></h3>
+	<hr>
+	<h3>요청 데이터 전송 및 처리 테스트</h3>
+	<h4>1. GET 방식 데이터 전송</h4>
+	<form action="request-process.action" method="get">
+		Name : <input type="text" name="name"><br>
+		Email : <input type="text" name="email"><br>
+		<input type="submit" value="전송">
+	</form>
+	<h4>2. POST 방식 데이터 전송</h4>
+	<form action="request-process.action" method="post">
+		Name : <input type="text" name="name"><br>
+		Email : <input type="text" name="email"><br>
+		<input type="submit" value="전송">
+	</form>
+	<h4>3. 연습 1</h4>
+	<form action="select-lotto-numbers.action" method="post">
+		몇 게임 할까요 : <input type="text" id="count" name="cnt"><br>
+		<input type="submit" value="전송">
+	</form>
+	<h4>3. 연습 2</h4>
+	<form action="rps-game.action" method="get">
+		<table>
+			<tr>
+				<td style='text-align:center'>
+					<img style='width:100px' src='images/0.png'><br>
+					<input type="radio" name="myselection" value="scissors">
+				</td>
+				<td style='text-align:center'>
+					<img style='width:100px' src='images/1.png'><br>
+					<input type="radio" name="myselection" value="rock">
+				</td>
+				<td style='text-align:center'>
+					<img style='width:100px' src='images/2.png'><br>
+					<input type="radio" name="myselection" value="paper">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" style='text-align:center'>
+					<input type="submit" value="게임시작">
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	<hr>
+	<h3>4. Redirect / Forward 테스트</h3>
+	<h4>4-1. <a href="02.forward.jsp">Forward Test</a></h4>
+	<h4>4-2. <a href="02.redirect.jsp">Redirect Test</a></h4>
+	
+	<hr>
+	<h3>5. <a href="model2.action">요청 처리과 응답 컨텐츠 생산 분리 (Model 2) 테스트</a></h3>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
