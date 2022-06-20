@@ -161,6 +161,14 @@ public class DemoController {
 		
 		return "target";
 	}
+	
+	//13. forward	
+	@GetMapping(path = { "/demo/forward.action" })
+	public String processForwardRequest() {  
+		
+		// return "forward:/forward-target.html";
+		return "forward:/resources/forward-target.html";
+	}
 
 }
 
