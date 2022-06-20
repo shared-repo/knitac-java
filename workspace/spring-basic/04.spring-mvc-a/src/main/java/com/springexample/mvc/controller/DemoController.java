@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.springexample.mvc.dto.Person;
+
 @Controller
 public class DemoController {
 
@@ -75,14 +77,35 @@ public class DemoController {
 	}
 	
 	//7. method 속성으로 요청 구분 ( post 요청 수신 )
-	// @RequestMapping(path = { "/demo/param.action" }, method = RequestMethod.POST)
+//	// @RequestMapping(path = { "/demo/param.action" }, method = RequestMethod.POST)
+//	@PostMapping(path = { "/demo/param.action" })
+//	public String processPostRequest(String name, 
+//									 String phone,
+//									 String email, 
+//									 int age) {
+//		
+//		Person person = new Person();
+//		person.setName(name);
+//		person.setPhone(phone);
+//		person.setEmail(email);
+//		person.setAge(age);
+//		
+//		// System.out.printf("[%s][%s][%s][%d]\n", name, phone, email, age);
+//		System.out.printf(person.toString());
+//		
+//		return "result"; // "/WEB-INF/views/" + result + ".jsp"
+//	}
+	
+	//7. DTO 전달인자 사용	
+	//   DTO 전달인자 사용하면 자동으로 DTO객체 생성하고 setXXX 메서드 호출
+	//   이 때 property 이름과 요청 데이터 이름이 같아야 합니다
+	//   예를 들어 요청 데이터가 name이면 setName 호출
 	@PostMapping(path = { "/demo/param.action" })
-	public String processPostRequest(String name, 
-									 String phone,
-									 String email, 
-									 int age) {
-		
-		System.out.printf("[%s][%s][%s][%d]\n", name, phone, email, age);
+	public String processPostRequest(Person person, 
+									 String name) { // DTO와 별개로 개별 데이터 수신 가능 
+
+		System.out.println(person.toString());
+		System.out.println("name = " + name);
 		
 		return "result"; // "/WEB-INF/views/" + result + ".jsp"
 	}
