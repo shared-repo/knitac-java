@@ -13,7 +13,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>게시물 목록</title>
-	<link rel="Stylesheet" href="/demoweb/styles/default.css" />
+	<link rel="Stylesheet" href="/demoweb/resources/styles/default.css" />
 	<style type="text/css">
 	a { text-decoration: none; }
 	</style>	
@@ -25,8 +25,8 @@
 	<div id="pageContainer">		
 		<div style="padding-top:25px;text-align:center">
 			
-			[&nbsp;<a href="/demoweb/board/write.action">글쓰기</a>&nbsp;]
-			[&nbsp;<a href="write.action">글쓰기</a>&nbsp;]
+			[&nbsp;<a href="/demoweb/board/write">글쓰기</a>&nbsp;]
+			[&nbsp;<a href="write">글쓰기</a>&nbsp;]
 				
 			<br /><br />
 			
@@ -47,7 +47,7 @@
 						<span style="color:lightgray">${ board.title } [삭제된 글]</span>
 					</c:when>
 					<c:otherwise>
-						<a href='detail.action?boardno=${ board.boardNo }&pageNo=${ pageNo }'>
+						<a href='detail?boardno=${ board.boardNo }&pageNo=${ pageNo }'>
 						${ board.title }
 						</a>
 					</c:otherwise>

@@ -6,8 +6,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>로그인</title>
-	<link rel="Stylesheet" href="/demoweb/styles/default.css" />
-	<link rel="Stylesheet" href="/demoweb/styles/input.css" />	
+	<link rel="Stylesheet" href="/demoweb/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/demoweb/resources/styles/input.css" />	
 </head>
 <body>
 	
@@ -20,7 +20,7 @@
 		    <div id="inputmain">
 		        <div class="inputsubtitle">로그인정보</div>
 		        
-		        <form action="/demoweb/account/login.action" method="post">
+		        <form action="/demoweb/account/login" method="post">
 		       
 		        <table>
 		            <tr>

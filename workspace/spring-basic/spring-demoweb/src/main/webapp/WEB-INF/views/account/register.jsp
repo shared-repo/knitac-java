@@ -6,8 +6,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>사용자등록</title>
-	<link rel="Stylesheet" href="/demoweb/styles/default.css" />
-	<link rel="Stylesheet" href="/demoweb/styles/input.css" />
+	<link rel="Stylesheet" href="/demoweb/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/demoweb/resources/styles/input.css" />
 
 </head>
 <body>
@@ -22,7 +22,7 @@
 		        <div class="inputsubtitle">회원기본정보</div>
 
 		        <form id="registerform" 
-		        	  action="/demoweb/account/register.action" method="post">
+		        	  action="/demoweb/account/register" method="post">
 		        <table>
 		            <tr>
 		                <th>아이디(ID)</th>

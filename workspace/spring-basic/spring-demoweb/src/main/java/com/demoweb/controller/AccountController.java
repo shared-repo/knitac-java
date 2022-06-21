@@ -1,5 +1,68 @@
 package com.demoweb.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.demoweb.dto.Member;
+import com.demoweb.service.AccountService;
+import com.demoweb.service.AccountServiceImpl;
+
+@Controller
+@RequestMapping(path = { "/account" })
 public class AccountController {
+	
+	// @GetMapping(path = { "/account/register" })
+	@GetMapping(path = { "/register" }) // /account 경로를 Controller 클래스에 설정
+	public String showRegisterForm() {
+		
+		return "account/register"; // -> /WEB-INF/views/account/register.jsp
+	}
+	
+	@PostMapping(path = { "/register" })
+	public String register(Member member) {
+		
+		AccountService accountService = new AccountServiceImpl();
+		accountService.registerMember(member);
+		
+		return "redirect:login";
+	}
+	
+	@GetMapping(path = { "/login" })
+	public String showLoginForm() {
+		
+		return "account/login";
+	}
+	
+	@PostMapping(path = { "/login" })
+	public String login(Member member, HttpSession session) {
+		
+		AccountService accountService = new AccountServiceImpl();
+		Member member2 = accountService.findMemberByIdAndPasswd(member);
+		
+		if (member2 != null) {
+			session.setAttribute("loginuser", member2);
+		} else {			
+		}
+		
+		return "redirect:/home";
+	}
+	
+	@GetMapping(path = { "/logout" })
+	public String logout(HttpSession session) {
+		
+		session.removeAttribute("loginuser");
+		
+		return "redirect:/home";
+	}
 
 }
+
+
+
+
+
+

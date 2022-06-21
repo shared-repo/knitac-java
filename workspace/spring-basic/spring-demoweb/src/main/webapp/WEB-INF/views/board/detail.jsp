@@ -21,8 +21,8 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
 		  rel="stylesheet">
 	
-	<link rel="Stylesheet" href="/demoweb/styles/default.css" />
-	<link rel="Stylesheet" href="/demoweb/styles/input2.css" />	
+	<link rel="Stylesheet" href="/demoweb/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/demoweb/resources/styles/input2.css" />	
 
 </head>
 <body>
@@ -56,7 +56,7 @@
 		                <th>첨부파일</th>
 		                <td>
 		                <c:forEach var="file" items="${ board.files }">
-		                <a href="download.action?attachno=${ file.attachNo }">
+		                <a href="download?attachno=${ file.attachNo }">
 		                ${ file.userFileName }
 		                </a>
 		                <br>
@@ -75,11 +75,11 @@
 		        </table>
 		        <div class="buttons">
 		        	<c:if test="${ loginuser.memberId eq board.writer }">
-		        	[&nbsp;<a href='edit.action?boardno=${ board.boardNo }'>수정</a>&nbsp;]
-		        	[&nbsp;<a href='delete.action?boardno=${ board.boardNo }'>삭제</a>&nbsp;]
+		        	[&nbsp;<a href='edit?boardno=${ board.boardNo }'>수정</a>&nbsp;]
+		        	[&nbsp;<a href='delete?boardno=${ board.boardNo }'>삭제</a>&nbsp;]
 		        	[&nbsp;<a id='delete-btn' href='javascript:'>확인삭제</a>&nbsp;]
 		        	</c:if>
-		        	[&nbsp;<a href='list.action?pageNo=${ pageNo }'>목록보기</a>&nbsp;]
+		        	[&nbsp;<a href='list?pageNo=${ pageNo }'>목록보기</a>&nbsp;]
 		        </div>
 		    </div>
 		</div>
@@ -149,7 +149,7 @@
 			event.preventDefault();
 			var ok = confirm('삭제할까요?');
 			if (ok) {
-				location.href = 'delete.action?boardno=${ board.boardNo }';
+				location.href = 'delete?boardno=${ board.boardNo }';
 			}
 		});
 		*/
@@ -158,7 +158,7 @@
 			event.preventDefault();
 			var ok = confirm('삭제할까요?');
 			if (ok) {
-				location.href = 'delete.action?boardno=${ board.boardNo }';
+				location.href = 'delete?boardno=${ board.boardNo }';
 			}
 			
 		});
@@ -166,7 +166,7 @@
 		///////////////////////////////////////////////////
 		
 		// comment 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
-		$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
+		$('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
 		
 		$('#add-comment-btn').on('click', function(event) {
 			$('#modal-content').val("");
@@ -192,7 +192,7 @@
 			// return;
 			
 			$.ajax({
-				"url" : "comment-write.action",
+				"url" : "comment-write",
 				"method" : "post",
 				"async" : true,
 				"data" : formData, // boardno=1&writer=imauser1&content=test
@@ -202,7 +202,7 @@
 						$('#comment-modal').modal('hide');
 						
 						// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
-						$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
+						$('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
 					} else {
 						alert('댓글 쓰기 실패');
 					}
@@ -223,14 +223,14 @@
 			}
 			
 			$.ajax({
-				"url": "comment-delete.action",
+				"url": "comment-delete",
 				"method" : "get",
 				"async" : true,
 				"data" : "commentno=" + commentNo,
 				"dataType" : "text",
 				"success" : function(data, status, xhr) {					
 					// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
-					$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
+					$('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
 				},
 				"error" : function(xhr, status, err) {
 					alert('삭제 실패');
@@ -263,14 +263,14 @@
 			var commentNo = $(this).attr("data-commentno");
 			var formData = $('#updateform' + commentNo).serialize();
 			$.ajax({
-				"url" : "comment-update.action",
+				"url" : "comment-update",
 				"method" : "post",
 				"async" : true,
 				"data" : formData,
 				"dataType" : "text",
 				"success" : function(data, status, xhr) {
 					// 갱신된 목록 표시 ( load : 비동기 요청 결과 HTML을 지정된 요소에 삽입)
-					$('#comment-list').load('comment-list.action?boardno=' + ${ board.boardNo });
+					$('#comment-list').load('comment-list?boardno=' + ${ board.boardNo });
 				}, 
 				"error" : function(xhr, status, err) {
 					alert('수정 실패')	;

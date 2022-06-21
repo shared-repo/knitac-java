@@ -14,17 +14,17 @@
 		</c:otherwise>
 		</c:choose>
 			<div class="title">
-                <a href="/demoweb/home.action">DEMO WEBSITE</a>
+                <a href="/demoweb/home">DEMO WEBSITE</a>
             </div>
             <div class="links">            
             <c:choose>
             <c:when test="${ empty loginuser }">                        
-            	<a href="/demoweb/account/login.action">로그인</a>
-                <a href="/demoweb/account/register.action">회원가입</a>
+            	<a href="/demoweb/account/login">로그인</a>
+                <a href="/demoweb/account/register">회원가입</a>
             </c:when>
             <c:otherwise>
             	${ loginuser.memberId }님 반갑습니다
-            	<a href="/demoweb/account/logout.action">로그아웃</a>
+            	<a href="/demoweb/account/logout">로그아웃</a>
             </c:otherwise>
             </c:choose>
             </div>
@@ -36,7 +36,7 @@
                     <li><a href="#">사용자관리</a></li>
 					<li><a href="#">메일보내기</a></li>
 					<li><a href="#">자료실</a></li>
-					<li><a href="/demoweb/board/list.action">게시판</a></li>
+					<li><a href="/demoweb/board/list">게시판</a></li>
                 </ul>
             </div>
 		</div>

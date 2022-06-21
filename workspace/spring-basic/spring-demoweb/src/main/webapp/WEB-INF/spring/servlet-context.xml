@@ -26,6 +26,17 @@
 	
 	<context:component-scan base-package="com.demoweb.controller" />
 	
+	<beans:bean id="accountService" class="com.demoweb.service.AccountDaoImpl"></beans:bean>
+	<beans:bean id="memberDao" class="com.demoweb.dao.MemberDaoImpl"></beans:bean>
+	
 	
 	
 </beans:beans>
+
+
+
+
+
+
+
+

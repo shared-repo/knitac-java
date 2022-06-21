@@ -9,8 +9,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>글쓰기</title>
-	<link rel="Stylesheet" href="/demoweb/styles/default.css" />
-	<link rel="Stylesheet" href="/demoweb/styles/input2.css" />
+	<link rel="Stylesheet" href="/demoweb/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/demoweb/resources/styles/input2.css" />
 	<style type="text/css">
 	a { text-decoration: none }
 	</style>
@@ -27,7 +27,7 @@
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시글 쓰기</div>
 		        <form id="writeform" 
-		        	  action="write.action" 
+		        	  action="write" 
 		        	  method="post"
 		        	  enctype="multipart/form-data">
 		        <table>
@@ -65,8 +65,8 @@
 		        <div class="buttons">		        	
 		        	[<a id="write" href="javascript:">글쓰기</a>]
 		        	&nbsp;&nbsp;
-		        	[<a href="list.action">목록보기(상대경로)</a>]
-		        	[<a href="/demoweb/board/list.action">목록보기(절대경로)</a>]
+		        	[<a href="list">목록보기(상대경로)</a>]
+		        	[<a href="/demoweb/board/list">목록보기(절대경로)</a>]
 		        </div>
 		        </form>
 		    </div>

@@ -9,8 +9,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>글수정</title>
-	<link rel="Stylesheet" href="/demoweb/styles/default.css" />
-	<link rel="Stylesheet" href="/demoweb/styles/input2.css" />
+	<link rel="Stylesheet" href="/demoweb/resources/styles/default.css" />
+	<link rel="Stylesheet" href="/demoweb/resources/styles/input2.css" />
 	<style type="text/css">
 	a { text-decoration: none }
 	</style>	
@@ -26,7 +26,7 @@
 		<div id="inputcontent">
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시판 글 수정</div>
-		        <form id="editform" action="edit.action" method="post">
+		        <form id="editform" action="edit" method="post">
 		        <% Board board = (Board)request.getAttribute("board"); %>
 		        <table>
 		        	<tr>
@@ -59,7 +59,7 @@
 		        <div class="buttons">        	
 		        	[&nbsp;<a id="edit-btn" href="javascript:">글수정</a>&nbsp;]
 		        	&nbsp;&nbsp;
-		        	[&nbsp;<a href='detail.action?boardno=<%= board.getBoardNo() %>'>취소1</a>&nbsp;]
+		        	[&nbsp;<a href='detail?boardno=<%= board.getBoardNo() %>'>취소1</a>&nbsp;]
 		        	[&nbsp;<a href='javascript:history.back()'>취소2</a>&nbsp;]
 		        </div>
 		        </form>
