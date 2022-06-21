@@ -2,6 +2,8 @@ package com.demoweb.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,10 @@ import com.demoweb.service.AccountServiceImpl;
 @RequestMapping(path = { "/account" })
 public class AccountController {
 	
+	@Autowired
+	@Qualifier("accountService")
+	private AccountService accountService;
+	
 	// @GetMapping(path = { "/account/register" })
 	@GetMapping(path = { "/register" }) // /account 경로를 Controller 클래스에 설정
 	public String showRegisterForm() {
@@ -25,7 +31,7 @@ public class AccountController {
 	@PostMapping(path = { "/register" })
 	public String register(Member member) {
 		
-		AccountService accountService = new AccountServiceImpl();
+		// AccountService accountService = new AccountServiceImpl();
 		accountService.registerMember(member);
 		
 		return "redirect:login";
@@ -40,7 +46,7 @@ public class AccountController {
 	@PostMapping(path = { "/login" })
 	public String login(Member member, HttpSession session) {
 		
-		AccountService accountService = new AccountServiceImpl();
+		// AccountService accountService = new AccountServiceImpl();
 		Member member2 = accountService.findMemberByIdAndPasswd(member);
 		
 		if (member2 != null) {
