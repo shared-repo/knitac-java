@@ -9,7 +9,7 @@ public class HomeController {
 	@GetMapping(path = { "/", "/home" })
 	public String home() {
 		
-		return "home2";	// /WEB-INF/views/ + "home2" + .jsp -> /WEB-INF/views/home2.jsp
+		return "home";	// /WEB-INF/views/ + "home" + .jsp -> /WEB-INF/views/home2.jsp
 		
 	}
 
