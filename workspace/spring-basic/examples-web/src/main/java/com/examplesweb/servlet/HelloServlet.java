@@ -16,6 +16,8 @@ public class HelloServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		req.getSession().setAttribute("test", "test");
+		
 		// 클라이언트에게 데이터를 응답하는 통로 (Stream)
 		// Writer (Stream)에 데이터를 쓰면(write) 데이터가 browser에게 전달됩니다.
 		PrintWriter out = resp.getWriter(); 

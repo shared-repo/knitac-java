@@ -25,15 +25,15 @@ public class AccountController {
 	// 아래 코드와 같이 컨트롤러의 역할이 오직 jsp로 전달하는 것이라면 
 	// 설정 파일을 통해 대체 가능 ( <view-controller 요소 사용 )
 	
-//	// @GetMapping(path = { "/account/register" })
-//	@GetMapping(path = { "/register" }) // /account 경로를 Controller 클래스에 설정
-//	public String showRegisterForm() {
-//		
-//		return "account/register"; // -> /WEB-INF/views/account/register.jsp
-//	}
+	// @GetMapping(path = { "/account/register" })
+	@GetMapping(path = { "/register" }) // /account 경로를 Controller 클래스에 설정
+	public String showRegisterForm() {
+		
+		return "account/register"; // -> /WEB-INF/views/account/register.jsp
+	}
 	
 	
-	@PostMapping(path = { "/register" })
+	@PostMapping(path = { "/register2" })
 	public String register(Member member) {
 		
 		// AccountService accountService = new AccountServiceImpl();
@@ -42,13 +42,11 @@ public class AccountController {
 		return "redirect:login";
 	}
 	
-	// 아래 코드와 같이 컨트롤러의 역할이 오직 jsp로 전달하는 것이라면 
-	// 설정 파일을 통해 대체 가능 ( <view-controller 요소 사용 )
-//	@GetMapping(path = { "/login" })
-//	public String showLoginForm() {
-//		
-//		return "account/login";
-//	}
+	@GetMapping(path = { "/login" })
+	public String showLoginForm() {
+		
+		return "account/login";
+	}
 	
 	@PostMapping(path = { "/login" })
 	public String login(Member member, HttpSession session) {
