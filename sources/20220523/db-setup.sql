@@ -1,3 +1,13 @@
+create database demoweb;
+
+create user knit@localhost identified by "mysql";
+create user knit@"%" identified by "mysql"
+
+grant all privileges on demoweb.* to knit@localhost;
+grant all privileges on demoweb.* to knit@"%";
+
+flush privileges;
+
 USE demoweb;
 
 CREATE TABLE member 
