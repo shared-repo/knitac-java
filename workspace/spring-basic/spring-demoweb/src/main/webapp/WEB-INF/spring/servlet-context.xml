@@ -31,12 +31,6 @@
 	<view-controller path="/account/login" view-name="account/login" />
 	-->
 	
-	<beans:bean id="accountService" class="com.demoweb.service.AccountServiceImpl">
-		<beans:property name="memberDao" ref="memberDao" />
-	</beans:bean>
-	<beans:bean id="memberDao" class="com.demoweb.dao.MemberDaoImpl"></beans:bean>
-	
-	
 	
 </beans:beans>
 
