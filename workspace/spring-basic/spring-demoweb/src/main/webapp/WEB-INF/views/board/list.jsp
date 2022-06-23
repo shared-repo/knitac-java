@@ -38,7 +38,7 @@
 					<th style="width:120px">작성일</th>
 					<th style="width:80px">조회수</th>
 				</tr>
-				<c:forEach var="board" items="${ boardList }">
+				<c:forEach var="board" items="${ requestScope.boardList }">
 				<tr style="height:25px">
 					<td>${ board.boardNo }</td>
 					<td style='text-align:left;padding-left:5px'>

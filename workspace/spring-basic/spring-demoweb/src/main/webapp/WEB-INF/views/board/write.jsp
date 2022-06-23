@@ -28,7 +28,8 @@
 		        <div class="inputsubtitle">게시글 쓰기</div>
 		        <form id="writeform" 
 		        	  action="write" 
-		        	  method="post">
+		        	  method="post"
+		        	  enctype="multipart/form-data">
 		        <table>
 		            <tr>
 		                <th>제목</th>
