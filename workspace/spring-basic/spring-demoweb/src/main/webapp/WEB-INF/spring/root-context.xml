@@ -12,7 +12,9 @@
 	<bean id="memberDao" class="com.demoweb.dao.MemberDaoImpl"></bean>
 	
 	<bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
+		<property name="boardDao" ref="boardDao" />
 	</bean>
+	<bean id="boardDao" class="com.demoweb.dao.BoardDaoImpl"></bean>
 	
 </beans>
 

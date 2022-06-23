@@ -4,13 +4,17 @@ import java.util.List;
 
 import com.demoweb.dao.BoardCommentDao;
 import com.demoweb.dao.BoardDao;
+import com.demoweb.dao.BoardDaoImpl;
 import com.demoweb.dto.Board;
 import com.demoweb.dto.BoardAttach;
 import com.demoweb.dto.BoardComment;
 
+import lombok.Setter;
+
 public class BoardServiceImpl implements BoardService {
 
-	private BoardDao boardDao = new BoardDao();
+	@Setter
+	private BoardDao boardDao;
 	
 	@Override
 	public void writeBoard(Board board) {
@@ -21,9 +25,11 @@ public class BoardServiceImpl implements BoardService {
 		// c2. 이 위치에서 boardNo : 데이터베이스에 있음 ( 데이터베이스의 boardNo를 조회할 필요 있음 )
 		
 		// 첨부파일 데이터를 DB에 저장
-		for (BoardAttach file : board.getFiles()) {
-			file.setBoardNo(board.getBoardNo()); // insertBoard 실행할 때 조회된 자동증가 boardNo 사용
-			boardDao.insertBoardAttach(file);
+		if (board.getFiles() != null) {
+			for (BoardAttach file : board.getFiles()) {
+				file.setBoardNo(board.getBoardNo()); // insertBoard 실행할 때 조회된 자동증가 boardNo 사용
+				boardDao.insertBoardAttach(file);
+			}
 		}
 		
 	}
