@@ -9,7 +9,10 @@
 	<bean id="accountService" class="com.demoweb.service.AccountServiceImpl">
 		<property name="memberDao" ref="memberDao" />
 	</bean>
-	<bean id="memberDao" class="com.demoweb.dao.MemberDaoImpl"></bean>	
+	<bean id="memberDao" class="com.demoweb.dao.MemberDaoImpl"></bean>
+	
+	<bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
+	</bean>
 	
 </beans>
 

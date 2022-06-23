@@ -40,12 +40,11 @@
 		            <tr>
 		                <th>작성자</th>
 		                <td>
-		                	<% Member member = (Member)session.getAttribute("loginuser"); %>
 							<%-- <input type="text" name="writer" style="width:550px" 
-								   value="<%= member.getMemberId() %>" readonly> --%>
-							<%= member.getMemberId() %>
+								   value="${ loginuser.memberId }" readonly> --%>
+							${ loginuser.memberId }
 							<input type="hidden" 
-								   name="writer" value="<%= member.getMemberId() %>">
+								   name="writer" value="${ loginuser.memberId }">
 		                </td>
 		            </tr>
 		            <tr>
