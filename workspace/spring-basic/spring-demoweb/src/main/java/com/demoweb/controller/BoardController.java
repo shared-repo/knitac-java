@@ -1,6 +1,10 @@
 package com.demoweb.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,8 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.demoweb.common.Util;
 import com.demoweb.dto.Board;
+import com.demoweb.dto.BoardAttach;
 import com.demoweb.service.BoardService;
 import com.demoweb.ui.ThePager;
 
@@ -54,11 +61,30 @@ public class BoardController {
 	
 	@PostMapping(path = { "/write" })
 	public String write(Board board,
-						MultipartFile attach) {
+						MultipartFile[] attach,
+						HttpServletRequest req) {
 		
-		String userFileName = attach.getOriginalFilename();
-		System.out.println("UPLOADED FILE : " + userFileName);
+		// getRealPath : 웹경로 -> 컴퓨터 경로
+		//               http:// ..... /a/b/c ---> C:\......\a\b\c
+		String uploadDir = req.getServletContext().getRealPath("/resources/upload-files");
 		
+		ArrayList<BoardAttach> files = new ArrayList<>();
+		for (MultipartFile file : attach) {
+			BoardAttach f = new BoardAttach();
+			String userFileName = file.getOriginalFilename();
+			String savedFileName = Util.makeUniqueFileName(userFileName); 
+			f.setUserFileName(userFileName);
+			f.setSavedFileName(savedFileName);
+			try {
+				File path = new File(uploadDir, savedFileName);
+				file.transferTo(path); // 파일 저장
+				files.add(f);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		
+		board.setFiles(files);
 		boardService.writeBoard(board);		
 		
 		// return "redirect:/board/list";
