@@ -91,4 +91,39 @@ public class BoardController {
 		return "redirect:list"; // 
 	}
 	
+	@GetMapping(path = { "/detail" })
+	public String detail(@RequestParam(name="boardno", defaultValue = "-1")int boardNo, 
+						 @RequestParam(name="pageNo", defaultValue = "-1")int pageNo,
+						 Model model) {
+		
+		if (boardNo == -1 || pageNo == -1) {
+			return "redirect:list";
+		}
+		
+		Board board = boardService.findByBoardNo(boardNo);
+		if (board == null) { // 해당 번호의 게시글이 없는 경우
+			return "redirect:list";
+		}
+		
+		model.addAttribute("board", board);
+		model.addAttribute("pageNo", pageNo);
+		
+		return "board/detail";
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
