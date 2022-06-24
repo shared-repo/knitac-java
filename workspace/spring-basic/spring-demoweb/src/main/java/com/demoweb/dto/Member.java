@@ -3,16 +3,30 @@ package com.demoweb.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+
 
 // DTO 클래스 : 데이터 전달을 위한 클래스, 대상 테이블(member table) 에 일치하도록 구현
 public class Member implements Serializable {
 	
 	// 필드는 대상 테이블의 컬럼을 기준으로 작성
-	@NotBlank
+	@NotBlank(message = "아이디를 입력하세요")
+	//@Length(min=8, max=20, message = "아이디는 8~20문자 범위입니다.")
+	@Pattern(regexp = "[A-Za-z0-9]{8,20}", message = "아이디는 8~20개의 영문자/숫자 조합입니다.")
 	private String memberId;
+	
+	@NotBlank(message = "패스워드를 입력하세요")
+	@Pattern(regexp = "[A-Za-z0-9@#$]{8,20}", message = "패스워드 형식 오류")
 	private String passwd;
+	
+	@NotBlank(message = "이메일을 입력하세요")
+	@Email(message = "이메일 형식이 아닙니다")
 	private String email;
+	
 	private String userType;
 	private boolean active;
 	private Date regDate;

@@ -27,7 +27,7 @@ public class AccountController {
 	
 	// @GetMapping(path = { "/account/register" })
 	@GetMapping(path = { "/register" }) // /account 경로를 Controller 클래스에 설정
-	public String showRegisterForm() {
+	public String showRegisterForm(Member member) {
 				
 		return "account/register"; // -> /WEB-INF/views/account/register.jsp
 	}
