@@ -155,8 +155,14 @@ public class BoardController {
 	}
 	
 	@GetMapping(path = { "/delete" })
-	public String delete() {
+	public String delete(
+			@RequestParam(name = "boardno", defaultValue = "-1") int boardNo,
+			@RequestParam(defaultValue = "-1") int pageNo) {
 		
+		if (boardNo > 0 && pageNo > 0) {
+			boardService.delete(boardNo);
+			return "redirect:list?pageNo=" + pageNo;
+		}
 		
 		return "redirect:list";
 	}

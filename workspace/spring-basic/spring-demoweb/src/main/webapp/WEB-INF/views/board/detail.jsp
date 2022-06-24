@@ -79,8 +79,8 @@
 		        </table>
 		        <div class="buttons">
 		        	<c:if test="${ loginuser.memberId eq board.writer }">
-		        	[&nbsp;<a href='edit?boardno=${ board.boardNo }'>수정</a>&nbsp;]
-		        	[&nbsp;<a href='delete?boardno=${ board.boardNo }'>삭제</a>&nbsp;]
+		        	[&nbsp;<a href='edit?boardno=${ board.boardNo }&pageNo=${ pageNo }'>수정</a>&nbsp;]
+		        	[&nbsp;<a href='delete?boardno=${ board.boardNo }&pageNo=${ pageNo }'>삭제</a>&nbsp;]
 		        	[&nbsp;<a id='delete-btn' href='javascript:'>확인삭제</a>&nbsp;]
 		        	</c:if>
 		        	[&nbsp;<a href='list?pageNo=${ pageNo }'>목록보기</a>&nbsp;]
@@ -141,28 +141,17 @@
 	</div>
 	<!-- /.modal -->
 	
-	<script src="/demoweb/js/jquery-3.6.0.js"></script>
+	<script src="/demoweb/resources/js/jquery-3.6.0.js"></script>
 	<script	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript">
 	
 	$(function() { // 수신된 html의 dom객체 구성 완료되었을 때 호출 ( 화면 준비 완료 )
-	
-		/*
-		var deleteBtn = document.querySelector('#delete-btn');
-		deleteBtn.addEventListener('click', function(event) {
-			event.preventDefault();
-			var ok = confirm('삭제할까요?');
-			if (ok) {
-				location.href = 'delete?boardno=${ board.boardNo }';
-			}
-		});
-		*/
 		// $('#delete-btn').on('click', function(event)) {
 		$('#delete-btn').click(function(event) {
 			event.preventDefault();
 			var ok = confirm('삭제할까요?');
 			if (ok) {
-				location.href = 'delete?boardno=${ board.boardNo }';
+				location.href = 'delete?boardno=${ board.boardNo }&pageNo=${ pageNo }';
 			}
 			
 		});
