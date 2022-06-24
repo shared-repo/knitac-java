@@ -119,6 +119,8 @@ public class BoardController {
 			return "redirect:list";
 		}
 		
+		BoardAttach boardAttach = boardService.findBoardAttachByAttachNo(attachNo);
+		
 		return "";
 	}
 	
