@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
 <!DOCTYPE html>
 
 <html>
@@ -21,31 +19,31 @@
 		<div id="inputcontent">
 			<br /><br />
 		    <div id="inputmain">
-		        <div class="inputsubtitle"><spring:message code="register.title" /></div>
+		        <div class="inputsubtitle">회원기본정보</div>
 
 		        <form id="registerform" 
 		        	  action="/demoweb/account/register" method="post">
 		        <table>
 		            <tr>
-		                <th><spring:message code="register.id" /></th>
+		                <th>아이디(ID)</th>
 		                <td>
 		                    <input type="text" id="memberId" name="memberId" style="width:280px" />
 		                </td>
 		            </tr>
 		            <tr>
-		                <th><spring:message code="register.passwd" /></th>
+		                <th>비밀번호</th>
 		                <td>
 		                	<input type="password" id="passwd" name="passwd" style="width:280px" />
 		                </td>
 		            </tr>
 		            <tr>
-		                <th><spring:message code="register.confirm" /></th>
+		                <th>비밀번호 확인</th>
 		                <td>
 		                    <input type="password" id="confirm" name="confirm" style="width:280px" />
 		                </td>
 		            </tr>
 		            <tr>
-		                <th><spring:message code="register.email" /></th>
+		                <th>이메일</th>
 		                <td>
 		                	<input type="text" id="email" name="email" style="width:280px" />
 		                </td>
@@ -53,12 +51,8 @@
 		                       		            
 		        </table>
 		        <div class="buttons">
-		        	<button id="register" style="height:25px">
-		        		<spring:message code="register.register" />
-		        	</button>
-		        	<button id="cancel" style="height:25px">
-		        		<spring:message code="register.cancel" />
-		        	</button>
+		        	<input id="register" type="submit" value="등록" style="height:25px" />
+		        	<input id="cancel" type="button" value="취소" style="height:25px"  />
 
 		        </div>
 		        </form>

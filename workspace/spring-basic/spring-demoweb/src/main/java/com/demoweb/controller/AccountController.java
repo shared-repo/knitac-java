@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.demoweb.dto.Member;
 import com.demoweb.service.AccountService;
-import com.demoweb.service.AccountServiceImpl;
 
 @Controller
 @RequestMapping(path = { "/account" })
@@ -20,15 +19,14 @@ public class AccountController {
 	@Autowired
 	@Qualifier("accountService")
 	private AccountService accountService;
-	
-	
+		
 	// 아래 코드와 같이 컨트롤러의 역할이 오직 jsp로 전달하는 것이라면 
 	// 설정 파일을 통해 대체 가능 ( <view-controller 요소 사용 )
 	
 	// @GetMapping(path = { "/account/register" })
 	@GetMapping(path = { "/register" }) // /account 경로를 Controller 클래스에 설정
 	public String showRegisterForm() {
-		
+				
 		return "account/register"; // -> /WEB-INF/views/account/register.jsp
 	}
 	
