@@ -190,6 +190,20 @@ public class BoardController {
 		return "board/edit";
 	}
 	
+	@PostMapping(path = { "/edit" })
+	public String edit(Board board,
+					   @RequestParam(defaultValue = "-1") int pageNo) {
+		
+		if (pageNo < 1) {
+			return "redirect:list";
+		}
+		
+		boardService.update(board);
+		
+		return String.format("redirect:detail?boardno=%d&pageNo=%d", 
+							 board.getBoardNo(), pageNo);
+	}
+	
 }
 
 

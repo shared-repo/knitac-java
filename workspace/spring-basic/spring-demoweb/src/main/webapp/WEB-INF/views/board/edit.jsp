@@ -26,13 +26,14 @@
 		<div id="inputcontent">
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시판 글 수정</div>
-		        <form id="editform" action="edit" method="post">		        
+		        <form id="editform" action="edit" method="post">
+		        <input type="hidden" name="pageNo" value="${ pageNo }">		        
 		        <table>
 		        	<tr>
 		                <th>글번호</th>
 		                <td>
 		                	<input type="hidden" 
-		                		   name="boardno" value="${ board.boardNo }">
+		                		   name="boardNo" value="${ board.boardNo }">
 		                	${ board.boardNo }
 		                </td>
 		            </tr>
@@ -71,14 +72,7 @@
 	<script src="/demoweb/resources/js/jquery-3.6.0.js"></script>
 	
 	<script type="text/javascript">
-	/* 
-	var editBtn = document.querySelector("#edit-btn");
-	editBtn.addEventListener('click', function(event) {
-		event.preventDefault();
-		var editForm = document.querySelector("#editform");
-		editForm.submit(); // 전송 명령
-	});
-	*/
+	
 	$('#edit-btn').on('click', function(event) {
 		event.preventDefault();
 		$('#editform').submit();
