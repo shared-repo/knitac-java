@@ -73,18 +73,20 @@ public class BoardController {
 		String uploadDir = req.getServletContext().getRealPath("/resources/upload-files");
 		
 		ArrayList<BoardAttach> files = new ArrayList<>();
-		for (MultipartFile file : attach) {
-			BoardAttach f = new BoardAttach();
+		for (MultipartFile file : attach) {			
 			String userFileName = file.getOriginalFilename();
-			String savedFileName = Util.makeUniqueFileName(userFileName); 
-			f.setUserFileName(userFileName);
-			f.setSavedFileName(savedFileName);
-			try {
-				File path = new File(uploadDir, savedFileName);
-				file.transferTo(path); // 파일 저장
-				files.add(f);
-			} catch (Exception ex) {
-				ex.printStackTrace();
+			if (userFileName != null && userFileName.length() > 0) {
+				BoardAttach f = new BoardAttach();			
+				String savedFileName = Util.makeUniqueFileName(userFileName); 
+				f.setUserFileName(userFileName);
+				f.setSavedFileName(savedFileName);
+				try {
+					File path = new File(uploadDir, savedFileName);
+					file.transferTo(path); // 파일 저장
+					files.add(f);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 			}
 		}
 		
@@ -165,6 +167,27 @@ public class BoardController {
 		}
 		
 		return "redirect:list";
+	}
+	
+	@GetMapping(path = { "/edit" })
+	public String showEditForm(
+			@RequestParam(name = "boardno", defaultValue = "-1") int boardNo,
+			@RequestParam(defaultValue = "-1") int pageNo,
+			Model model) {
+		
+		if (boardNo < 1 && pageNo < 1) {
+			return "redirect:list";
+		}
+		
+		Board board = boardService.findByBoardNo(boardNo);
+		if (board == null) { // 해당 번호의 게시글이 없는 경우
+			return "redirect:list";
+		}
+		
+		model.addAttribute("board", board);
+		model.addAttribute("pageNo", pageNo);
+		
+		return "board/edit";
 	}
 	
 }

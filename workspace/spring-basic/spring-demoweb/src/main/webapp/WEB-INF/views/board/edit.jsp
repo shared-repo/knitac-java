@@ -26,40 +26,39 @@
 		<div id="inputcontent">
 		    <div id="inputmain">
 		        <div class="inputsubtitle">게시판 글 수정</div>
-		        <form id="editform" action="edit" method="post">
-		        <% Board board = (Board)request.getAttribute("board"); %>
+		        <form id="editform" action="edit" method="post">		        
 		        <table>
 		        	<tr>
 		                <th>글번호</th>
 		                <td>
 		                	<input type="hidden" 
-		                		   name="boardno" value="<%= board.getBoardNo() %>">
-		                	<%= board.getBoardNo() %>
+		                		   name="boardno" value="${ board.boardNo }">
+		                	${ board.boardNo }
 		                </td>
 		            </tr>
 		            <tr>
 		                <th>제목</th>
 		                <td>
 		                    <input type="text" name="title" style="width:560px"
-		                    	   value="<%= board.getTitle() %>">
+		                    	   value="${ board.title }">
 		                </td>
 		            </tr>
 		            <tr>
 		                <th>작성자</th>
-		                <td><%= board.getWriter() %></td>
+		                <td>${ board.writer }</td>
 		            </tr>
 		            <tr>
 		                <th>내용</th>
 		                <td>		                    
 		                    <textarea name="content" style="resize:none" cols="76" 
-		                    	rows="15"><%= board.getContent() %></textarea>
+		                    	rows="15">${ board.content }</textarea>
 		                </td>
 		            </tr>
 		        </table>
 		        <div class="buttons">        	
 		        	[&nbsp;<a id="edit-btn" href="javascript:">글수정</a>&nbsp;]
 		        	&nbsp;&nbsp;
-		        	[&nbsp;<a href='detail?boardno=<%= board.getBoardNo() %>'>취소1</a>&nbsp;]
+		        	[&nbsp;<a href='detail?boardno=${ board.boardNo }&pageNo=${ pageNo }'>취소1</a>&nbsp;]
 		        	[&nbsp;<a href='javascript:history.back()'>취소2</a>&nbsp;]
 		        </div>
 		        </form>
@@ -69,7 +68,7 @@
 	</div>
 	</div>
 	
-	<script src="/demoweb/js/jquery-3.6.0.js"></script>
+	<script src="/demoweb/resources/js/jquery-3.6.0.js"></script>
 	
 	<script type="text/javascript">
 	/* 
