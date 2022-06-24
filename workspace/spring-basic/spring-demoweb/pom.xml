@@ -73,6 +73,13 @@
 		    <version>2.11.0</version>
 		</dependency>
 		
+		<!-- validation component -->
+		<dependency>
+		    <groupId>org.hibernate.validator</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>6.2.3.Final</version>
+		</dependency>
+		
 		  
 	</dependencies>
     <build>

@@ -1,10 +1,12 @@
 package com.demoweb.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +33,12 @@ public class AccountController {
 	}
 	
 	
-	@PostMapping(path = { "/register2" })
-	public String register(Member member) {
-		
+	@PostMapping(path = { "/register" })
+	public String register(@Valid Member member, 
+						   BindingResult br) { // BindingResult : @Valid로 발생한 오류 정보를 저장
+		if (br.hasErrors()) {
+			return "account/register";
+		}
 		// AccountService accountService = new AccountServiceImpl();
 		accountService.registerMember(member);
 		

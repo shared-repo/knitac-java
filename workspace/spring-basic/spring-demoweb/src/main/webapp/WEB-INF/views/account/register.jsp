@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 
@@ -23,19 +24,22 @@
 		    <div id="inputmain">
 		        <div class="inputsubtitle"><spring:message code="register.title" /></div>
 
-		        <form id="registerform" 
-		        	  action="/demoweb/account/register" method="post">
+		        <form:form id="registerform" 
+		        	  	   action="/demoweb/account/register" method="post"
+		        	  	   modelAttribute="member"><%-- controller에서 전달하는 객체 --%>
 		        <table>
 		            <tr>
 		                <th><spring:message code="register.id" /></th>
 		                <td>
-		                    <input type="text" id="memberId" name="memberId" style="width:280px" />
+		                    <form:input type="text" id="memberId" path="memberId" style="width:280px" />
+		                    <form:errors path="memberId" /><!-- BindingResult에 등록된 오류 메시지 표시 -->
 		                </td>
 		            </tr>
 		            <tr>
 		                <th><spring:message code="register.passwd" /></th>
 		                <td>
-		                	<input type="password" id="passwd" name="passwd" style="width:280px" />
+		                	<form:input type="password" id="passwd" path="passwd" style="width:280px" />
+		                	<form:errors path="passwd" />
 		                </td>
 		            </tr>
 		            <tr>
@@ -47,7 +51,8 @@
 		            <tr>
 		                <th><spring:message code="register.email" /></th>
 		                <td>
-		                	<input type="text" id="email" name="email" style="width:280px" />
+		                	<form:input type="text" id="email" path="email" style="width:280px" />
+		                	<form:errors path="email" />
 		                </td>
 		            </tr>
 		                       		            
@@ -61,11 +66,25 @@
 		        	</button>
 
 		        </div>
-		        </form>
+		        </form:form>
 		    </div>
 		</div>   	
 	
 	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$("#register").on('click', function(event) {
+			event.preventDefault();
+			$('#registerform').submit();
+		});
+		$("#cancel").on('click', function(event) {
+			event.preventDefault();
+			location.href = '/demoweb/home';
+		});
+	});
+	</script>
 
 </body>
 </html>

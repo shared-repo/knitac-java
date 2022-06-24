@@ -43,12 +43,17 @@
 		</interceptor>
 	</interceptors>
 	
+	<beans:bean id="validator"
+				class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<beans:property name="validationMessageSource" ref="messageSource" />
+	</beans:bean>
 	
 	<beans:bean id="messageSource"
 				class="org.springframework.context.support.ResourceBundleMessageSource">
 		<beans:property name="basenames">
 			<beans:list>
 				<beans:value>message.message</beans:value>
+				<beans:value>message.validation</beans:value>
 			</beans:list>
 		</beans:property>			
 	</beans:bean>

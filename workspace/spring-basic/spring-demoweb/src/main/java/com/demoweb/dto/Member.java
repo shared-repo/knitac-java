@@ -3,10 +3,13 @@ package com.demoweb.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+
 // DTO 클래스 : 데이터 전달을 위한 클래스, 대상 테이블(member table) 에 일치하도록 구현
 public class Member implements Serializable {
 	
 	// 필드는 대상 테이블의 컬럼을 기준으로 작성
+	@NotBlank
 	private String memberId;
 	private String passwd;
 	private String email;
