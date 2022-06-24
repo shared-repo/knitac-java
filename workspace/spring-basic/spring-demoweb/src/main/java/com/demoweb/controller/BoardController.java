@@ -111,6 +111,17 @@ public class BoardController {
 		return "board/detail";
 	}
 	
+	@GetMapping(path = { "/download" })
+	public String download(
+			@RequestParam(name = "attachno", defaultValue = "-1") int attachNo) {
+		
+		if (attachNo < 1) {
+			return "redirect:list";
+		}
+		
+		return "";
+	}
+	
 }
 
 
