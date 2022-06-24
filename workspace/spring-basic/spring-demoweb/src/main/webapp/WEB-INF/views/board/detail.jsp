@@ -59,6 +59,10 @@
 		                <a href="download?attachno=${ file.attachNo }">
 		                ${ file.userFileName }
 		                </a>
+		                &nbsp;|&nbsp;
+		                <a href="download2/${ file.attachNo }">
+		                ${ file.userFileName }
+		                </a>
 		                <br>
 		                </c:forEach>
 		                </td>
