@@ -1,6 +1,10 @@
 package com.demoweb.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.demoweb.dto.Member;
 
@@ -26,9 +30,24 @@ public class MemberDaoWithJdbcTemplate implements MemberDao {
 		// 3. SQL 작성 + 명령 객체 만들기
 		String sql = "select memberid, email, usertype, active, regdate " +
 					 "from member " +
-					 "where memberid = ? and passwd = ? and active = true";
-		
-		return null;
+					 "where memberid = ? and passwd = ? and active = true";		
+		Member member3 = jdbcTemplate.queryForObject(
+				sql,
+				new RowMapper<Member>() { // 행 처리기
+					@Override
+					public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Member member2 = new Member();
+						member2.setMemberId(rs.getString(1));
+						member2.setEmail(rs.getString(2));
+						member2.setUserType(rs.getString(3));
+						member2.setActive(rs.getBoolean(4));
+						member2.setRegDate(rs.getDate(5));
+						return member2;
+					}					
+				},
+				member.getMemberId(), member.getPasswd()
+		);
+		return member3;
 	}
 
 }
