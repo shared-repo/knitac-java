@@ -18,9 +18,11 @@
 	</bean>
 	
 	<bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
-		<property name="boardDao" ref="boardDao" />
+		<property name="boardDao" ref="boardDaoWithJdbcTemplate" />
 	</bean>
-	<bean id="boardDao" class="com.demoweb.dao.BoardDaoImpl"></bean>
+	<bean id="boardDaoWithJdbcTemplate" class="com.demoweb.dao.BoardDaoWithJdbcTemplate">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
 	
 	
 	

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.demoweb.dao.BoardCommentDao;
 import com.demoweb.dao.BoardDao;
-import com.demoweb.dao.BoardDaoImpl;
+import com.demoweb.dao.BoardDaoWithJdbcTemplate;
 import com.demoweb.dto.Board;
 import com.demoweb.dto.BoardAttach;
 import com.demoweb.dto.BoardComment;

@@ -4,17 +4,43 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import com.demoweb.dto.Board;
 import com.demoweb.dto.BoardAttach;
 import com.demoweb.dto.Member;
 
-public class BoardDaoImpl implements BoardDao {
+import lombok.Setter;
+
+public class BoardDaoWithJdbcTemplate implements BoardDao {
+	
+	@Setter
+	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public void insertBoard(Board board) {
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder(); // 자동 증가된 컬럼의 데이터를 받는 변수
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				String sql = "insert into board (title, writer, content) values (?, ?, ?)";
+				PreparedStatement pstmt = con.prepareStatement(sql); // 명령객체 만들기
+					pstmt.setString(1, board.getTitle());
+					pstmt.setString(2, board.getWriter());
+					pstmt.setString(3, board.getContent());
+				
+					return pstmt;
+			}
+		}, keyHolder); // 자동 증가값 저장
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null, pstmt2 = null;

@@ -33,6 +33,7 @@ public class MemberDaoWithJdbcTemplate implements MemberDao {
 					 "where memberid = ? and passwd = ? and active = true";		
 		Member member3 = jdbcTemplate.queryForObject(
 				sql,
+				// RowMapper를 구현한 익명 클래스 만들기 + 그 클래스의 인스턴스 만들
 				new RowMapper<Member>() { // 행 처리기
 					@Override
 					public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -49,5 +50,6 @@ public class MemberDaoWithJdbcTemplate implements MemberDao {
 		);
 		return member3;
 	}
-
+	
+	
 }
