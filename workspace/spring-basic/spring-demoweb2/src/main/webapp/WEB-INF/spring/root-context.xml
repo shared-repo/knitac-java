@@ -7,16 +7,22 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<bean id="accountService" class="com.demoweb.service.AccountServiceImpl">
-		<property name="memberDao" ref="memberDao" />
+		<!-- <property name="memberDao" ref="memberDaoWithDataSource" /> -->
+		<property name="memberDao" ref="memberDaoWithJdbcTemplate" />
 	</bean>
-	<bean id="memberDao" class="com.demoweb.dao.MemberDaoWithDataSource">
+	<bean id="memberDaoWithDataSource" class="com.demoweb.dao.MemberDaoWithDataSource">
 		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="memberDaoWithJdbcTemplate" class="com.demoweb.dao.MemberDaoWithJdbcTemplate">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 	
 	<bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
 		<property name="boardDao" ref="boardDao" />
 	</bean>
 	<bean id="boardDao" class="com.demoweb.dao.BoardDaoImpl"></bean>
+	
+	
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
@@ -26,6 +32,10 @@
 		<property name="maxTotal" value="20" />
 		<property name="maxIdle" value="10" />
 		<property name="maxWaitMillis" value="-1" />
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
 </beans>
