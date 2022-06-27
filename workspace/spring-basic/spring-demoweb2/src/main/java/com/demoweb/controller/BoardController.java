@@ -110,7 +110,7 @@ public class BoardController {
 		if (board == null) { // 해당 번호의 게시글이 없는 경우
 			return "redirect:list";
 		}
-		
+				
 		model.addAttribute("board", board);
 		model.addAttribute("pageNo", pageNo);
 		

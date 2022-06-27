@@ -15,7 +15,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("Pre Handle");
+		//System.out.println("Pre Handle");
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("loginuser");
 		if (member == null) {
@@ -29,13 +29,13 @@ public class AuthInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println("Post Handle");
+		//System.out.println("Post Handle");
 	}
 	// View까지 처리된 후에 호출
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		System.out.println("After Completion");
+		//System.out.println("After Completion");
 	}
 
 }

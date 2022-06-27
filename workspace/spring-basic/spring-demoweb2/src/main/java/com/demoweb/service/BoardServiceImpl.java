@@ -57,6 +57,10 @@ public class BoardServiceImpl implements BoardService {
 		Board board = boardDao.selectByBoardNo(boardNo); // 게시물 데이터 조회
 		List<BoardAttach> files = boardDao.selectBoardAttachByBoardNo(boardNo);	// 첨부 파일 데이터 조회
 		board.setFiles(files);
+		
+		boardDao.updateBoardReadCount(boardNo);
+		board.setReadCount(board.getReadCount() + 1);
+		
 		return board;
 	}
 

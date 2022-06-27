@@ -27,4 +27,6 @@ public interface BoardDao {
 
 	BoardAttach selectBoardAttachByAttachNo(int attachNo);
 
+	void updateBoardReadCount(int boardNo);
+
 }
