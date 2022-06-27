@@ -5,24 +5,23 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.sql.DataSource;
+
 import com.demoweb.dto.Member;
 
-public class MemberDaoImpl implements MemberDao {
+import lombok.Setter;
+
+public class MemberDaoWithDataSource implements MemberDao {
 	
+	@Setter
+	private DataSource dataSource; // Connection Pool interface
 	@Override
 	public void insertMember(Member member) {
 		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
+		PreparedStatement pstmt = null;		
 		try {
-			// 1. JDBC 드라이버 준비
-			// DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-			Class.forName("com.mysql.cj.jdbc.Driver");			
-			
-			// 2. 데이터베이스에 연결 ( 연결 객체 준비 )
-			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb", // db server url
-					"knit", "mysql"); // 계정 정보
+			// 1. JDBC 드라이버 준비 + 2. 데이터베이스에 연결 ( 연결 객체 준비 )
+			conn = dataSource.getConnection();
 			
 			// 3. SQL 작성 + 명령 객체 만들기
 			String sql = "insert into member (memberid, passwd, email) " +
@@ -54,14 +53,8 @@ public class MemberDaoImpl implements MemberDao {
 		Member member2 = null; // 조회 결과를 저장할 변수
 		
 		try {
-			// 1. JDBC 드라이버 준비
-			// DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-			Class.forName("com.mysql.cj.jdbc.Driver");			
-			
-			// 2. 데이터베이스에 연결 ( 연결 객체 준비 )
-			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/demoweb", // db server url
-					"knit", "mysql"); // 계정 정보
+			// 1. JDBC 드라이버 준비 + 2. 데이터베이스에 연결 ( 연결 객체 준비 )
+			conn = dataSource.getConnection();
 			
 			// 3. SQL 작성 + 명령 객체 만들기
 			String sql = "select memberid, email, usertype, active, regdate " +

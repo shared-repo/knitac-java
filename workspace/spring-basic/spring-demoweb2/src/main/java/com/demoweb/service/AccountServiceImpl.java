@@ -2,7 +2,7 @@ package com.demoweb.service;
 
 import com.demoweb.common.Util;
 import com.demoweb.dao.MemberDao;
-import com.demoweb.dao.MemberDaoImpl;
+import com.demoweb.dao.MemberDaoWithDataSource;
 import com.demoweb.dto.Member;
 
 import lombok.Setter;
