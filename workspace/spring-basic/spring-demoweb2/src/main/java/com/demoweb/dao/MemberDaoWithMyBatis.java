@@ -1,20 +1,12 @@
 package com.demoweb.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
 import com.demoweb.dto.Member;
 
 import lombok.Setter;
 
 public class MemberDaoWithMyBatis implements MemberDao {
-	
-	@Setter
-	private JdbcTemplate jdbcTemplate;
 	
 	@Setter
 	private SqlSessionTemplate sqlSessionTemplate;
