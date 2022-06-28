@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -57,53 +58,22 @@ public class BoardDaoWithMyBatis implements BoardDao {
 
 	@Override
 	public List<Board> selectAll() {
-			
-		// 3. SQL 작성 + 명령 객체 만들기
-		String sql = "select boardno, title, writer, readcount, regdate, deleted " +
-					 "from board " +
-					 "order by boardno desc"; // 최근에 작성된 글을 앞에 표시
 
-		List<Board> boardList = jdbcTemplate.query(sql, new RowMapper<Board>() {
-
-			@Override
-			public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Board board = new Board();
-				board.setBoardNo(rs.getInt(1));
-				board.setTitle(rs.getString(2));
-				board.setWriter(rs.getString(3));
-				board.setReadCount(rs.getInt(4));
-				board.setRegDate(rs.getDate(5));
-				board.setDeleted(rs.getBoolean(6));
-				return board;
-			}
-		});
+		List<Board> boardList = 
+				sqlSessionTemplate.selectList(BOARD_MAPPER + ".selectAll");
 			
 		return boardList;
 	}
 
 	@Override
 	public List<Board> selectByRange(int from, int count) {
-		String sql = "select boardno, title, writer, readcount, regdate, deleted " +
-					 "from board " +
-					 "order by boardno desc " + // 최근에 작성된 글을 앞에 표시
-					 "limit ?, ?";
 		
-		List<Board> boardList = jdbcTemplate.query(sql, new RowMapper<Board>() {
-
-			@Override
-			public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Board board = new Board();
-				board.setBoardNo(rs.getInt(1));
-				board.setTitle(rs.getString(2));
-				board.setWriter(rs.getString(3));
-				board.setReadCount(rs.getInt(4));
-				board.setRegDate(rs.getDate(5));
-				board.setDeleted(rs.getBoolean(6));
-				return board;
-			}
-			
-		}, from, count);
-			
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("from", from);
+		params.put("count", count);
+		
+		List<Board> boardList = 
+			sqlSessionTemplate.selectList(BOARD_MAPPER + ".selectByRange", params);
 		return boardList;
 	}
 	
@@ -159,17 +129,7 @@ public class BoardDaoWithMyBatis implements BoardDao {
 	@Override
 	public int selectBoardCount() {
 			
-		String sql = "select count(*) from board ";
-
-		int count = jdbcTemplate.queryForObject(sql, new RowMapper<Integer>() {
-
-			@Override
-			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getInt(1);
-			}
-			
-		});
-			
+		int count = sqlSessionTemplate.selectOne(BOARD_MAPPER + ".selectBoardCount");
 		return count;
 	}
 	

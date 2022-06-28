@@ -6,4 +6,27 @@
               <!-- package..class로 가정하고 사용 -->				 
 <mapper namespace="com.demoweb.mapper.BoardMapper">
 
+	<select id="selectAll" resultType="Board">
+		SELECT boardno, title, writer, readcount, regdate, deleted
+		FROM board
+		ORDER BY boardno DESC
+	</select>
+	
+	<select id="selectByRange" parameterType="hashmap" resultType="Board">
+		SELECT boardno, title, writer, readcount, regdate, deleted
+		FROM board
+		ORDER BY boardno DESC
+		LIMIT #{from}, #{count}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int">
+		SELECT COUNT(*) FROM board
+	</select>
+	
+	
+	
+	
+	
+	
+
 </mapper>
