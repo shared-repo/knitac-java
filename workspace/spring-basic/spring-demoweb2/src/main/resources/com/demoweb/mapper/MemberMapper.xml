@@ -10,5 +10,12 @@
 		INSERT INTO member (memberid, passwd, email)
 		VALUES (#{memberId}, #{passwd}, #{email})
 	</insert>
+	
+	<select id="selectMemberByIdAndPasswd" parameterType="com.demoweb.dto.Member"
+										   resultType="com.demoweb.dto.Member">
+		SELECT memberid, email, usertype, active, regdate
+		FROM member								  
+		WHERE memberid = #{memberId} AND passwd = #{passwd} AND active = true
+	</select>
 
 </mapper>

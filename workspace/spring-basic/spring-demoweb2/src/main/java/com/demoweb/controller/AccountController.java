@@ -59,7 +59,8 @@ public class AccountController {
 		
 		if (member2 != null) {
 			session.setAttribute("loginuser", member2);
-		} else {			
+		} else {
+			System.out.println("login fail");
 		}
 		
 		return "redirect:/home";
