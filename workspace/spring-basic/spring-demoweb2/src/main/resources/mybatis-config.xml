@@ -5,8 +5,16 @@
 
 <configuration>
 
+	<typeAliases>
+		<typeAlias type="com.demoweb.dto.Member" alias="Member" />
+		<typeAlias type="com.demoweb.dto.Board" alias="Board" />
+		<typeAlias type="com.demoweb.dto.BoardAttach" alias="BoardAttach" />
+		<typeAlias type="com.demoweb.dto.BoardComment" alias="BoardComment" />
+	</typeAliases>
+
 	<mappers>
 		<mapper resource="com/demoweb/mapper/MemberMapper.xml" />
+		<mapper resource="com/demoweb/mapper/BoardMapper.xml" />
 	</mappers>
 	
 </configuration>

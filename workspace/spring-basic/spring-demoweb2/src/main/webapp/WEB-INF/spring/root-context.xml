@@ -22,10 +22,14 @@
 	</bean>
 	
 	<bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
-		<property name="boardDao" ref="boardDaoWithJdbcTemplate" />
+		<!-- <property name="boardDao" ref="boardDaoWithJdbcTemplate" /> -->
+		<property name="boardDao" ref="boardDaoWithMyBatis" />
 	</bean>
 	<bean id="boardDaoWithJdbcTemplate" class="com.demoweb.dao.BoardDaoWithJdbcTemplate">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	<bean id="boardDaoWithMyBatis" class="com.demoweb.dao.BoardDaoWithMyBatis">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
 	

@@ -6,13 +6,13 @@
               <!-- package..class로 가정하고 사용 -->				 
 <mapper namespace="com.demoweb.mapper.MemberMapper">
 
-	<insert id="insertMember" parameterType="com.demoweb.dto.Member">
+	<insert id="insertMember" parameterType="Member">
 		INSERT INTO member (memberid, passwd, email)
 		VALUES (#{memberId}, #{passwd}, #{email})
 	</insert>
 	
-	<select id="selectMemberByIdAndPasswd" parameterType="com.demoweb.dto.Member"
-										   resultType="com.demoweb.dto.Member">
+	<select id="selectMemberByIdAndPasswd" parameterType="Member"
+										   resultType="Member">
 		SELECT memberid, email, usertype, active, regdate
 		FROM member				  
 		WHERE memberid = #{memberId} AND passwd = #{passwd} AND active = true
