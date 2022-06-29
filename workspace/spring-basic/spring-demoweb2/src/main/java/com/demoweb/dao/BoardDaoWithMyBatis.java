@@ -52,51 +52,28 @@ public class BoardDaoWithMyBatis implements BoardDao {
 	
 	@Override
 	public Board selectByBoardNo(int boardNo) {
-			
-		String sql = "select boardno, title, writer, content, readcount, regdate " +
-					 "from board " +
-					 "where boardno = ? and deleted = false";
 		
-		Board board = jdbcTemplate.queryForObject(sql, new RowMapper<Board>() {
-
-			@Override
-			public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Board board = new Board();
-				board.setBoardNo(rs.getInt(1));
-				board.setTitle(rs.getString(2));
-				board.setWriter(rs.getString(3));
-				board.setContent(rs.getString(4)); // 추가
-				board.setReadCount(rs.getInt(5));
-				board.setRegDate(rs.getDate(6));
-				
-				return board;
-			}
-		}, boardNo);
-
+		Board board = 
+			sqlSessionTemplate.selectOne(BOARD_MAPPER + ".selectByBoardNo", boardNo);
 		return board;
 		
 	}
 	
 	@Override
 	public void updateBoardReadCount(int boardNo) {
-		String sql = "update board set readcount = readcount + 1 where boardno = ?";
-		jdbcTemplate.update(sql, boardNo);
+		sqlSessionTemplate.update(BOARD_MAPPER + ".updateBoardReadCount", boardNo);
 	}
 
 	@Override
 	public void delete(int boardNo) {
 		
-		String sql = "update board set deleted = true where boardno = ?";
-		jdbcTemplate.update(sql, boardNo);
+		sqlSessionTemplate.delete(BOARD_MAPPER + ".delete", boardNo);
 			
 	}
 
 	@Override
 	public void update(Board board) {
-		String sql = "update board " +
-					 "set title = ?, content = ? " +
-					 "where boardno = ?";
-		jdbcTemplate.update(sql, board.getTitle(), board.getContent(), board.getBoardNo());
+		sqlSessionTemplate.update(BOARD_MAPPER + ".update", board);
 	}
 
 	@Override
@@ -118,51 +95,16 @@ public class BoardDaoWithMyBatis implements BoardDao {
 	@Override
 	public List<BoardAttach> selectBoardAttachByBoardNo(int boardNo) {
 		
-		String sql = 
-				"select attachno, boardno, userfilename, savedfilename, downloadcount " +
-				"FROM boardattach " +
-				"WHERE boardno = ?";					
-	
-		List<BoardAttach> files = jdbcTemplate.query(sql, new RowMapper<BoardAttach>() {
-
-			@Override
-			public BoardAttach mapRow(ResultSet rs, int rowNum) throws SQLException {
-				BoardAttach file = new BoardAttach();
-				file.setAttachNo(rs.getInt(1));
-				file.setBoardNo(rs.getInt(2));
-				file.setUserFileName(rs.getString(3));
-				file.setSavedFileName(rs.getString(4));
-				file.setDownloadCount(rs.getInt(5));
-				return file;
-			}
-			
-		}, boardNo);
-		
+		List<BoardAttach> files = 
+			sqlSessionTemplate.selectList(BOARD_MAPPER + ".selectBoardAttachByBoardNo", boardNo);
 		return files; //조회된 데이터를 저장한 객체 반환
 	}
 
 	@Override
 	public BoardAttach selectBoardAttachByAttachNo(int attachNo) {
 		
-		String sql = 
-				"select attachno, boardno, userfilename, savedfilename, downloadcount " +
-				"from boardattach " +
-				"where attachno = ?";					
-		
-		BoardAttach file = jdbcTemplate.queryForObject(sql, new RowMapper<BoardAttach>() {
-
-			@Override
-			public BoardAttach mapRow(ResultSet rs, int rowNum) throws SQLException {
-				BoardAttach file = new BoardAttach();
-				file.setAttachNo(rs.getInt(1));
-				file.setBoardNo(rs.getInt(2));
-				file.setUserFileName(rs.getString(3));
-				file.setSavedFileName(rs.getString(4));
-				file.setDownloadCount(rs.getInt(5));
-				return file;
-			}
-			
-		}, attachNo);
+		BoardAttach file = 
+			sqlSessionTemplate.selectOne(BOARD_MAPPER + ".selectBoardAttachByAttachNo", attachNo);
 		
 		return file; //조회된 데이터를 저장한 객체 반환
 	}
