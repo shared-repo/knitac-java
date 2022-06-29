@@ -1,5 +1,6 @@
 package com.demoweb.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.demoweb.dto.Board;
@@ -11,7 +12,7 @@ public interface BoardDao {
 
 	List<Board> selectAll();
 
-	List<Board> selectByRange(int from, int count);
+	List<Board> selectByRange(HashMap<String, Object> params);
 
 	Board selectByBoardNo(int boardNo);
 

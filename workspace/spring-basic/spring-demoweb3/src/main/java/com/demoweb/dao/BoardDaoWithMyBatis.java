@@ -39,12 +39,8 @@ public class BoardDaoWithMyBatis implements BoardDao {
 	}
 
 	@Override
-	public List<Board> selectByRange(int from, int count) {
-		
-		HashMap<String, Object> params = new HashMap<>();
-		params.put("from", from);
-		params.put("count", count);
-		
+	public List<Board> selectByRange(HashMap<String, Object> params) {
+				
 		List<Board> boardList = 
 			sqlSessionTemplate.selectList(BOARD_MAPPER + ".selectByRange", params);
 		return boardList;

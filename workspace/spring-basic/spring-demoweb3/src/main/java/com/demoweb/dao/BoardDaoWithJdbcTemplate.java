@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -76,7 +77,7 @@ public class BoardDaoWithJdbcTemplate implements BoardDao {
 	}
 
 	@Override
-	public List<Board> selectByRange(int from, int count) {
+	public List<Board> selectByRange(HashMap<String, Object> params) {
 		String sql = "select boardno, title, writer, readcount, regdate, deleted " +
 					 "from board " +
 					 "order by boardno desc " + // 최근에 작성된 글을 앞에 표시
@@ -96,7 +97,7 @@ public class BoardDaoWithJdbcTemplate implements BoardDao {
 				return board;
 			}
 			
-		}, from, count);
+		}, params.get("from"), params.get("count"));
 			
 		return boardList;
 	}

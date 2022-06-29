@@ -1,5 +1,6 @@
 package com.demoweb.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.demoweb.dao.BoardCommentDao;
@@ -43,7 +44,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Board> findAll() {
 
-		List<Board> boardList = boardDao.selectAll();
+		// List<Board> boardList = boardDao.selectAll();
+		List<Board> boardList = boardMapper.selectAll();
 		return boardList;
 	}
 	
@@ -53,18 +55,28 @@ public class BoardServiceImpl implements BoardService {
 		int from = (pageNo - 1) * pageSize;
 		int count = pageSize;
 		
-		List<Board> boardList = boardDao.selectByRange(from, count);
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("from", from);
+		params.put("count", count);
+		
+		// List<Board> boardList = boardDao.selectByRange(params);
+		List<Board> boardList = boardMapper.selectByRange(params);
+		
 		return boardList;
 	}
 
 	@Override
 	public Board findByBoardNo(int boardNo) {
 		
-		Board board = boardDao.selectByBoardNo(boardNo); // 게시물 데이터 조회
-		List<BoardAttach> files = boardDao.selectBoardAttachByBoardNo(boardNo);	// 첨부 파일 데이터 조회
+		// Board board = boardDao.selectByBoardNo(boardNo); // 게시물 데이터 조회
+		Board board = boardMapper.selectByBoardNo(boardNo); // 게시물 데이터 조회
+		
+		// List<BoardAttach> files = boardDao.selectBoardAttachByBoardNo(boardNo);	// 첨부 파일 데이터 조회
+		List<BoardAttach> files = boardMapper.selectBoardAttachByBoardNo(boardNo);	// 첨부 파일 데이터 조회
 		board.setFiles(files);
 		
-		boardDao.updateBoardReadCount(boardNo);
+		// boardDao.updateBoardReadCount(boardNo);
+		boardMapper.updateBoardReadCount(boardNo);
 		board.setReadCount(board.getReadCount() + 1);
 		
 		return board;
@@ -73,26 +85,30 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void delete(int boardNo) {
 		
-		boardDao.delete(boardNo);
+		// boardDao.delete(boardNo);
+		boardMapper.delete(boardNo);
 		
 	}
 
 	@Override
 	public void update(Board board) {
 
-		boardDao.update(board);
+		// boardDao.update(board);
+		boardMapper.update(board);
 		
 	}
 
 	@Override
 	public int findBoardCount() {
-		int count = boardDao.selectBoardCount();
+		// int count = boardDao.selectBoardCount();
+		int count = boardMapper.selectBoardCount();
 		return count;
 	}
 
 	@Override
 	public BoardAttach findBoardAttachByAttachNo(int attachNo) {
-		BoardAttach attach = boardDao.selectBoardAttachByAttachNo(attachNo);
+		// BoardAttach attach = boardDao.selectBoardAttachByAttachNo(attachNo);
+		BoardAttach attach = boardMapper.selectBoardAttachByAttachNo(attachNo);
 		return attach;
 	}
 	
