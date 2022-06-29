@@ -23,11 +23,20 @@
 		SELECT COUNT(*) FROM board
 	</select>
 	
+	<!-- 
 	<insert id="insertBoard" parameterType="Board"
 			useGeneratedKeys="true" keyColumn="boardno" keyProperty="boardNo">
 		INSERT INTO board (title, writer, content) 
 		VALUES (#{title}, #{writer}, #{content})
-	</insert>	
+	</insert>
+	-->	
+	<insert id="insertBoard" parameterType="Board">
+		<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO board (title, writer, content) 
+		VALUES (#{title}, #{writer}, #{content})
+	</insert>
 	<insert id="insertBoardAttach" parameterType="BoardAttach">
 		INSERT boardattach (boardno, userfilename, savedfilename)
 		VALUES (#{boardNo}, #{userFileName}, #{savedFileName})
