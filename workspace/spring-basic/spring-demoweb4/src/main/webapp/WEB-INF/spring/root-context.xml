@@ -31,10 +31,12 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	<!-- Spring-Mybatis가 자동으로 만들어주는 DAO -->
+	<!-- 
 	<bean id="boardMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 		<property name="mapperInterface" value="com.demoweb.mapper.BoardMapper" />
 	</bean>
+	-->
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />

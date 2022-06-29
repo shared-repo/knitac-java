@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-              <!-- package..class로 가정하고 사용 -->				 
+              <!-- package..class로 가정하고 사용 -->
 <mapper namespace="com.demoweb.mapper.MemberMapper">
 
 	<insert id="insertMember" parameterType="Member">
@@ -11,8 +11,17 @@
 		VALUES (#{memberId}, #{passwd}, #{email})
 	</insert>
 	
+	<resultMap id="memberResultMap" type="Member">
+		<id column="memberid" property="memberId" />
+		<result column="passwd" property="passwd" />
+		<result column="email" property="email" />
+		<result column="usertype" property="userType" />
+		<result column="active" property="active" />
+		<result column="regdate" property="regDate" />
+	</resultMap>
+	
 	<select id="selectMemberByIdAndPasswd" parameterType="Member"
-										   resultType="Member">
+										   resultMap="memberResultMap">
 		SELECT memberid, email, usertype, active, regdate
 		FROM member				  
 		WHERE memberid = #{memberId} AND passwd = #{passwd} AND active = true

@@ -3,9 +3,12 @@ package com.demoweb.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.demoweb.dto.Board;
 import com.demoweb.dto.BoardAttach;
 
+@Mapper
 public interface BoardMapper {
 
 	void insertBoard(Board board);
