@@ -8,6 +8,7 @@ import com.demoweb.dao.BoardDaoWithJdbcTemplate;
 import com.demoweb.dto.Board;
 import com.demoweb.dto.BoardAttach;
 import com.demoweb.dto.BoardComment;
+import com.demoweb.mapper.BoardMapper;
 
 import lombok.Setter;
 
@@ -16,19 +17,24 @@ public class BoardServiceImpl implements BoardService {
 	@Setter
 	private BoardDao boardDao;
 	
+	@Setter
+	private BoardMapper boardMapper; // Spring Mybatis가 자동으로 생성한 DAO 주입
+	
 	@Override
 	public void writeBoard(Board board) {
 		
 		// 게시물 데이터를 DB에 저장
 		// c1. 이 위치에서 boardNo : 없음
-		boardDao.insertBoard(board); // c1., c2. 를 반영해서 insertBoard에서 boardNo 조회하도록 구현 
+		// boardDao.insertBoard(board); // c1., c2. 를 반영해서 insertBoard에서 boardNo 조회하도록 구현
+		boardMapper.insertBoard(board);
 		// c2. 이 위치에서 boardNo : 데이터베이스에 있음 ( 데이터베이스의 boardNo를 조회할 필요 있음 )
 		
 		// 첨부파일 데이터를 DB에 저장
 		if (board.getFiles() != null) {
 			for (BoardAttach file : board.getFiles()) {
 				file.setBoardNo(board.getBoardNo()); // insertBoard 실행할 때 조회된 자동증가 boardNo 사용
-				boardDao.insertBoardAttach(file);
+				// boardDao.insertBoardAttach(file);
+				boardMapper.insertBoardAttach(file);
 			}
 		}
 		

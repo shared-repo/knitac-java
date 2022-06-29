@@ -21,9 +21,15 @@
 	
 	<bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
 		<property name="boardDao" ref="boardDaoWithMyBatis" />
+		<property name="boardMapper" ref="boardMapper" />
 	</bean>
 	<bean id="boardDaoWithMyBatis" class="com.demoweb.dao.BoardDaoWithMyBatis">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	<!-- Spring-Mybatis가 자동으로 만들어주는 DAO -->
+	<bean id="boardMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="mapperInterface" value="com.demoweb.mapper.BoardMapper" />
 	</bean>
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
