@@ -7,33 +7,24 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<bean id="accountService" class="com.demoweb.service.AccountServiceImpl">
-		<!-- <property name="memberDao" ref="memberDaoWithDataSource" /> -->
-		<!-- <property name="memberDao" ref="memberDaoWithJdbcTemplate" /> -->
 		<property name="memberDao" ref="memberDaoWithMyBatis" />
-	</bean>
-	<bean id="memberDaoWithDataSource" class="com.demoweb.dao.MemberDaoWithDataSource">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	<bean id="memberDaoWithJdbcTemplate" class="com.demoweb.dao.MemberDaoWithJdbcTemplate">
-		<property name="jdbcTemplate" ref="jdbcTemplate" />
-	</bean>
+		<property name="memberMapper" ref="memberMapper" />
+	</bean>	
 	<bean id="memberDaoWithMyBatis" class="com.demoweb.dao.MemberDaoWithMyBatis">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
-	</bean>	
-	
+	</bean>
+	<!-- Spring-Mybatis가 자동으로 만들어주는 DAO -->
+	<bean id="memberMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="mapperInterface" value="com.demoweb.mapper.MemberMapper" />
+	</bean>
 	
 	<bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
-		<!-- <property name="boardDao" ref="boardDaoWithJdbcTemplate" /> -->
 		<property name="boardDao" ref="boardDaoWithMyBatis" />
-	</bean>
-	<bean id="boardDaoWithJdbcTemplate" class="com.demoweb.dao.BoardDaoWithJdbcTemplate">
-		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 	<bean id="boardDaoWithMyBatis" class="com.demoweb.dao.BoardDaoWithMyBatis">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
-	
-	
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
