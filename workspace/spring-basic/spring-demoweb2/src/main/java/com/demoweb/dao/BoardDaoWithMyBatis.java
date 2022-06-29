@@ -34,26 +34,7 @@ public class BoardDaoWithMyBatis implements BoardDao {
 
 	@Override
 	public void insertBoard(Board board) {
-		
-		KeyHolder keyHolder = new GeneratedKeyHolder(); // 자동 증가된 컬럼의 데이터를 받는 변수
-		jdbcTemplate.update(new PreparedStatementCreator() {
-			
-			@Override
-			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-				String sql = "insert into board (title, writer, content) values (?, ?, ?)";
-				PreparedStatement pstmt = 
-						con.prepareStatement(sql, new String[] { "boardno" }); // insert 실행 후 조회할 새로 삽입된 행의 특정 컬럼 지정
-				pstmt.setString(1, board.getTitle());
-				pstmt.setString(2, board.getWriter());
-				pstmt.setString(3, board.getContent());
-			
-				return pstmt;
-			}
-		}, keyHolder); // 자동 증가값 저장
-		
-		board.setBoardNo(keyHolder.getKey().intValue());
-		System.out.println(board.getBoardNo());
-		
+		sqlSessionTemplate.insert(BOARD_MAPPER + ".insertBoard", board);
 	}
 
 	@Override
@@ -138,11 +119,7 @@ public class BoardDaoWithMyBatis implements BoardDao {
 	@Override
 	public void insertBoardAttach(BoardAttach attach) {
 
-		String sql = 
-			"insert boardattach " +
-			"(boardno, userfilename, savedfilename) " +
-			"VALUES (?, ?, ?)";
-		jdbcTemplate.update(sql, attach.getBoardNo(), attach.getUserFileName(), attach.getSavedFileName());
+		sqlSessionTemplate.insert(BOARD_MAPPER + ".insertBoardAttach", attach);
 		
 	}
 
