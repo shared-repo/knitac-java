@@ -3,6 +3,9 @@ package com.demoweb.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -50,7 +53,7 @@ public class WebConfiguration implements WebMvcConfigurer {
 		registry.addInterceptor(authInterceptor())
 				.addPathPatterns("/board/**");
 	}
-
+	
 }
 
 

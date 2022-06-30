@@ -59,6 +59,7 @@ public class RootConfiguration implements ApplicationContextAware {
 		boardService.setBoardMapper(applicationContext.getBean(BoardMapper.class));
 		return boardService;
 	}	
+	
 	private ApplicationContext applicationContext;
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
