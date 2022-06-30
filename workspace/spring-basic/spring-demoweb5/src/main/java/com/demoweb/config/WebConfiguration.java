@@ -54,6 +54,23 @@ public class WebConfiguration implements WebMvcConfigurer {
 				.addPathPatterns("/board/**");
 	}
 	
+	@Bean
+	public ResourceBundleMessageSource messageSource() {
+		ResourceBundleMessageSource src = new ResourceBundleMessageSource();
+		src.setBasenames("message.message", "message.validation");
+		return src;
+	}	
+	@Bean 
+	public LocalValidatorFactoryBean validator() {
+		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+		validator.setValidationMessageSource(messageSource());
+		return validator;
+	}
+	
+	@Override
+	public Validator getValidator() {		
+		return validator();
+	}
 }
 
 
