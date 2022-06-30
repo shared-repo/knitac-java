@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+              <!-- package..class로 가정하고 사용 -->				 
+<mapper namespace="com.demoweb.mapper.BoardMapper">
+
+	<select id="selectAll" resultType="Board">
+		SELECT boardno, title, writer, readcount, regdate, deleted
+		FROM board
+		ORDER BY boardno DESC
+	</select>
+	
+	<select id="selectByRange" parameterType="hashmap" resultType="Board">
+		SELECT boardno, title, writer, readcount, regdate, deleted
+		FROM board
+		ORDER BY boardno DESC
+		LIMIT #{from}, #{count}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int">
+		SELECT COUNT(*) FROM board
+	</select>
+	
+	<!-- 
+	<insert id="insertBoard" parameterType="Board"
+			useGeneratedKeys="true" keyColumn="boardno" keyProperty="boardNo">
+		INSERT INTO board (title, writer, content) 
+		VALUES (#{title}, #{writer}, #{content})
+	</insert>
+	-->	
+	<insert id="insertBoard" parameterType="Board">
+		<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO board (title, writer, content) 
+		VALUES (#{title}, #{writer}, #{content})
+	</insert>
+	<insert id="insertBoardAttach" parameterType="BoardAttach">
+		INSERT boardattach (boardno, userfilename, savedfilename)
+		VALUES (#{boardNo}, #{userFileName}, #{savedFileName})
+	</insert>
+	
+	<select id="selectByBoardNo" parameterType="int" resultType="Board">
+		SELECT boardno, title, writer, content, readcount, regdate
+		FROM board
+		WHERE boardno = #{boardNo} AND deleted = FALSE
+	</select>
+	
+	<select id="selectBoardAttachByBoardNo" parameterType="int"
+											resultType="BoardAttach">
+		SELECT attachno, boardno, userfilename, savedfilename, downloadcount
+		FROM boardattach
+		WHERE boardno = #{boardNo}
+	</select>
+	
+	<update id="updateBoardReadCount" parameterType="int">
+		UPDATE board 
+		SET readcount = readcount + 1 
+		WHERE boardno = #{boardNo}
+	</update>
+	
+	<select id="selectBoardAttachByAttachNo" parameterType="int" 
+											 resultType="BoardAttach">
+		SELECT attachno, boardno, userfilename, savedfilename, downloadcount
+		FROM boardattach
+		WHERE attachno = #{attachNo}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		UPDATE board 
+		SET deleted = TRUE 
+		WHERE boardno = #{boardNo}
+	</delete>
+	
+	<update id="update" parameterType="Board">
+		UPDATE board
+		SET title = #{title}, content = #{content}
+		WHERE boardno = #{boardNo}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>
