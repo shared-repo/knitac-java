@@ -1,5 +1,8 @@
 package com.demoweb.web;
 
+import javax.servlet.Filter;
+
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.demoweb.config.RootConfiguration;
@@ -21,5 +24,11 @@ public class DemoWebInitializer extends AbstractAnnotationConfigDispatcherServle
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
 	}
+	
+	@Override
+	protected Filter[] getServletFilters() {
+		return new Filter[] { new CharacterEncodingFilter("utf-8", true) };
+	}
+
 
 }
