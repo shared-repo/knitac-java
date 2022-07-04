@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 
 import com.demoweb.dto.Board;
@@ -23,8 +24,15 @@ public interface BoardMapper {
 			   before = false)	
 	void insertBoard(Board board);
 
+	@Select("SELECT boardno, title, writer, readcount, regdate, deleted " +
+			"FROM board " +
+			"ORDER BY boardno DESC")
 	List<Board> selectAll();
 
+	@Select("SELECT boardno, title, writer, readcount, regdate, deleted " +
+			"FROM board " +
+			"ORDER BY boardno DESC " +
+			"LIMIT #{from}, #{count}")
 	List<Board> selectByRange(HashMap<String, Object> params);
 
 	// 두 개의 테이블에서 데이터 조회 방법 1
