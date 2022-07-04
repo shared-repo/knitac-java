@@ -21,9 +21,12 @@ public interface BoardMapper {
 	Board selectByBoardNo(int boardNo);
 	BoardAttach selectBoardAttachByAttachNo(int attachNo);
 	
-	// 두 개의 테이블에서 데이터 조회 방법 1 : 중첩 select
+	// 두 개의 테이블에서 데이터 조회 방법 2 : 중첩 select
 	Board selectByBoardNo2(int boardNo);
 	// BoardAttach selectBoardAttachByAttachNo2(int attachNo);
+	
+	// 두 개의 테이블에서 데이터 조회 방법 3 : 중첩 result
+	Board selectByBoardNo3(int boardNo);
 
 	void delete(int boardNo);
 

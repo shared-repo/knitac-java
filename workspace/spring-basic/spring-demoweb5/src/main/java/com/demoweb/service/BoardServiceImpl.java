@@ -77,7 +77,10 @@ public class BoardServiceImpl implements BoardService {
 //		board.setFiles(files);
 		
 		// 두 개의 테이블에서 데이터를 조회하는 방법 2 :
-		Board board = boardMapper.selectByBoardNo2(boardNo); // 게시물 데이터 조회
+//		Board board = boardMapper.selectByBoardNo2(boardNo); // 게시물 데이터 조회
+		
+		// 두 개의 테이블에서 데이터를 조회하는 방법 3 :
+		Board board = boardMapper.selectByBoardNo3(boardNo); // 게시물 데이터 조회
 		
 		// boardDao.updateBoardReadCount(boardNo);
 		boardMapper.updateBoardReadCount(boardNo);
