@@ -88,14 +88,9 @@
 		<result column="readcount" property="readCount" />
 		<result column="regdate" property="regDate" />
 		<collection property="files" 
-					select="selectBoardAttachByBoardNo2" 
+					resultMap="boardAttachResultMap3" 
 					column="boardno" />
 	</resultMap>
-	<select id="selectByBoardNo3" parameterType="int" resultMap="boardResultMap3">
-		SELECT boardno, title, writer, content, readcount, regdate
-		FROM board
-		WHERE boardno = #{boardNo} AND deleted = FALSE
-	</select>
 	<resultMap type="BoardAttach" id="boardAttachResultMap3">
 		<id column="attachno" property="attachNo" />
 		<result column="boardno" property="boardNo" />
@@ -103,12 +98,16 @@
 		<result column="savedfilename" property="savedFileName" />
 		<result column="downloadcount" property="downloadCount" />
 	</resultMap>
-	<select id="selectBoardAttachByBoardNo3" parameterType="int"
-											resultType="BoardAttach">
-		SELECT attachno, boardno, userfilename, savedfilename, downloadcount
-		FROM boardattach
-		WHERE boardno = #{boardNo}
+	<select id="selectByBoardNo3" parameterType="int" resultMap="boardResultMap3">
+		SELECT b.boardno, b.title, b.writer, b.content, b.readcount, b.regdate,
+			   ba.attachno, ba.userfilename, ba.savedfilename, ba.downloadcount
+		FROM board b
+		LEFT OUTER JOIN boardattach ba
+		ON b.boardno = ba.boardno
+		WHERE b.boardno = #{boardNo} AND b.deleted = FALSE
 	</select>
+	
+	
 	
 	
 	<update id="updateBoardReadCount" parameterType="int">
