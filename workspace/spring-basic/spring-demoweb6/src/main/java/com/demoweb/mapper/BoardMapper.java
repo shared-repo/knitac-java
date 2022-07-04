@@ -58,12 +58,14 @@ public interface BoardMapper {
 		@Result(id = true, column = "boardno", property = "boardNo"),
 		@Result(column = "title", property = "title"),
 		@Result(column = "writer", property = "writer"),
+		@Result(column = "content", property = "content"),
 		@Result(column = "readcount", property = "readCount"),
 		@Result(column = "regdate", property = "regDate"),
 		@Result(column = "boardno", property = "files",
 				many = @Many(select = "selectBoardAttachByBoardNo2"))
 	})	
 	Board selectByBoardNo2(int boardNo);
+	
 	@Select("SELECT attachno, boardno, userfilename, savedfilename " + 
 			"FROM boardattach " +
 			"WHERE boardno = #{ boardNo }")
@@ -80,6 +82,7 @@ public interface BoardMapper {
 		@Result(id = true, column = "boardno", property = "boardNo"),
 		@Result(column = "title", property = "title"),
 		@Result(column = "writer", property = "writer"),
+		@Result(column = "content", property = "content"),
 		@Result(column = "readcount", property = "readCount"),
 		@Result(column = "regdate", property = "regDate"),
 		@Result(column = "boardno", property = "files",
