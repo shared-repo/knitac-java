@@ -42,13 +42,37 @@
 		VALUES (#{boardNo}, #{userFileName}, #{savedFileName})
 	</insert>
 	
+	<!-- 두 개의 테이블에서 데이터 조회하는 방법 1 -->
 	<select id="selectByBoardNo" parameterType="int" resultType="Board">
 		SELECT boardno, title, writer, content, readcount, regdate
 		FROM board
 		WHERE boardno = #{boardNo} AND deleted = FALSE
+	</select>	
+	<select id="selectBoardAttachByBoardNo" parameterType="int"
+											resultType="BoardAttach">
+		SELECT attachno, boardno, userfilename, savedfilename, downloadcount
+		FROM boardattach
+		WHERE boardno = #{boardNo}
 	</select>
 	
-	<select id="selectBoardAttachByBoardNo" parameterType="int"
+	<!-- 두 개의 테이블에서 데이터 조회하는 방법 2 : 중첩 select 방식 -->
+	<resultMap type="Board" id="boardResultMap">
+		<id column="boardno" property="boardNo" />
+		<result column="title" property="title" />
+		<result column="writer" property="writer" />
+		<result column="content" property="content" />
+		<result column="readcount" property="readCount" />
+		<result column="regdate" property="regDate" />
+		<collection property="files" 
+					select="selectBoardAttachByBoardNo2" 
+					column="boardno" />
+	</resultMap>
+	<select id="selectByBoardNo2" parameterType="int" resultMap="boardResultMap">
+		SELECT boardno, title, writer, content, readcount, regdate
+		FROM board
+		WHERE boardno = #{boardNo} AND deleted = FALSE
+	</select>	
+	<select id="selectBoardAttachByBoardNo2" parameterType="int"
 											resultType="BoardAttach">
 		SELECT attachno, boardno, userfilename, savedfilename, downloadcount
 		FROM boardattach
