@@ -1,45 +1,3 @@
-package com.demoweb.mapper;
-
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Many;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
-
-import com.demoweb.dto.Board;
-import com.demoweb.dto.BoardAttach;
-
-@Mapper
-public interface BoardMapper {
-
-	@Insert("INSERT board (title, writer, content) " +
-			"VALUES (#{title}, #{writer}, #{content})")
-	// @Options(useGeneratedKeys = true, keyColumn = "boardno", keyProperty = "boardNo")
-	@SelectKey(statement = "SELECT LAST_INSERT_ID()",
-			   resultType = Integer.class,
-			   keyProperty = "boardNo", 
-			   before = false)	
-	void insertBoard(Board board);
-
-	@Select("SELECT boardno, title, writer, readcount, regdate, deleted " +
-			"FROM board " +
-			"ORDER BY boardno DESC")
-	List<Board> selectAll();
-
-	@Select("SELECT boardno, title, writer, readcount, regdate, deleted " +
-			"FROM board " +
-			"ORDER BY boardno DESC " +
-			"LIMIT #{from}, #{count}")
-	List<Board> selectByRange(HashMap<String, Object> params);
-
 	// 두 개의 테이블에서 데이터 조회 방법 1
 	@Select("SELECT boardno, title, content, writer, readcount, regdate " + 
 			"FROM board " +
@@ -127,5 +85,3 @@ public interface BoardMapper {
 			"SET readcount = readcount + 1 " +
 			"WHERE boardno = #{ boardNo }")
 	void updateBoardReadCount(int boardNo);
-
-}
