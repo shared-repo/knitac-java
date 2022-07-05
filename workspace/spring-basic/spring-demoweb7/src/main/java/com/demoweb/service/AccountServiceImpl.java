@@ -22,8 +22,8 @@ public class AccountServiceImpl implements AccountService {
 		passwd = Util.getHashedString(passwd, "SHA-256"); // 암호화
 		member.setPasswd(passwd);
 		
-		//memberDao.insertMember(member);
-		memberMapper.insertMember(member);		
+		memberDao.insertMember(member);
+		//memberMapper.insertMember(member);		
 	}
 	@Override
 	public Member findMemberByIdAndPasswd(Member member) {		
@@ -31,8 +31,8 @@ public class AccountServiceImpl implements AccountService {
 		passwd = Util.getHashedString(passwd, "SHA-256"); // 암호화
 		member.setPasswd(passwd);
 		
-		// Member member2 = memberDao.selectMemberByIdAndPasswd(member);
-		Member member2 = memberMapper.selectMemberByIdAndPasswd(member);
+		Member member2 = memberDao.selectMemberByIdAndPasswd(member);
+		//Member member2 = memberMapper.selectMemberByIdAndPasswd(member);
 		
 		return member2;
 	}

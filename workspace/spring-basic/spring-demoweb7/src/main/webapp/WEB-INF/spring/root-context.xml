@@ -4,9 +4,11 @@
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd">
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<bean id="accountService" class="com.demoweb.service.AccountServiceImpl">
 		<property name="memberDao" ref="memberDaoWithMyBatis" />
@@ -66,6 +68,28 @@
 	</bean>
 	
 	<mybatis:scan base-package="com.demoweb.mapper" />
+	
+	<bean id="demoAdvice" class="com.demoweb.advice.DemoAdvice" />
+	<aop:config>
+		<aop:aspect ref="demoAdvice">		
+			<aop:pointcut id="controllerPointcut"
+						  expression="execution(* *..controller.*.*(..))" />
+			<aop:pointcut id="controllerPointcut2"
+						  expression="execution(* *..*Controller.*(..))" />
+			<aop:pointcut id="servicePointcut"
+						  expression="within(*..*ServiceImpl)" />
+			<aop:pointcut id="daoPointcut"
+						  expression="bean(member*)" />						  
+ 			
+			<aop:before method="doBefore" pointcut="execution(* *..controller.*.*(..))" />
+			<aop:after method="doAfter" pointcut-ref="controllerPointcut2" />
+			<aop:around method="doAround" pointcut-ref="servicePointcut" />
+ 			<aop:after-returning method="doAfterReturning" pointcut-ref="daoPointcut" />
+		
+		</aop:aspect>
+	</aop:config>
+	
+	
 	
 </beans>
 

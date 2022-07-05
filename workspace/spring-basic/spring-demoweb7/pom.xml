@@ -12,6 +12,7 @@
 	<properties>
 		<java-version>11</java-version>
 		<org.springframework-version>5.3.21</org.springframework-version>
+		<!-- <org.springframework-version>4.3.30.RELEASE</org.springframework-version> -->
 	</properties>
 	
 	<dependencies>
