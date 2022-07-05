@@ -18,11 +18,11 @@ public class DemoAdvice {
 	
 	public Object doAround(ProceedingJoinPoint joinPoint) {
 		
-		String className = joinPoint.getTarget().getClass().getName();
-		String methodName = joinPoint.getSignature().getName();
+		//String className = joinPoint.getTarget().getClass().getName();
+		//String methodName = joinPoint.getSignature().getName();
 		Object returnValue = null;
 		
-		System.out.printf("doAround 1 with %s.%s\n", className, methodName); 	// Before
+		System.out.println("doAround 1"); 	// Before
 		
 		try {
 			returnValue = joinPoint.proceed(); // 실제 메서드 호출
@@ -30,7 +30,7 @@ public class DemoAdvice {
 			e.printStackTrace();
 		}
 		
-		System.out.printf("doAround 2 with %s.%s\n", className, methodName);	// After
+		System.out.println("doAround 2");	// After
 		
 		return returnValue;
 	}
