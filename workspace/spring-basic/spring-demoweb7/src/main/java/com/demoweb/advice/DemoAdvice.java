@@ -1,5 +1,6 @@
 package com.demoweb.advice;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 public class DemoAdvice {
@@ -8,8 +9,11 @@ public class DemoAdvice {
 		System.out.println("doBefore");
 	}
 	
-	public void doAfter() {
-		System.out.println("doAfter");
+	public void doAfter(JoinPoint joinPoint) { // JoinPoint : 현재 실행중인 메서드 정보
+		String className = joinPoint.getTarget().getClass().getName();
+		String methodName = joinPoint.getSignature().getName();
+		
+		System.out.printf("doAfter is called after %s.%s\n", className, methodName);
 	}
 	
 	public Object doAround(ProceedingJoinPoint joinPoint) {

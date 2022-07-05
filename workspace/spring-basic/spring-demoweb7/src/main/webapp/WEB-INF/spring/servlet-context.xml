@@ -65,16 +65,22 @@
 	<beans:bean id="demoAdvice" class="com.demoweb.advice.DemoAdvice" />
 	
 	<aop:config>
-	
+
 		<aop:aspect ref="demoAdvice">
 		
 			<aop:pointcut id="controllerPointcut"
 						  expression="execution(* *..controller.*.*(..))" />
+			<aop:pointcut id="controllerPointcut2"
+						  expression="execution(* *..*Controller.*(..))" />
+			<aop:pointcut id="servicePointcut"
+						  expression="within(*..*Service)" />
 						  
-			<aop:after method="doAfter" pointcut-ref="controllerPointcut" />
+			<aop:before method="doBefore" pointcut="execution(* *..controller.*.*(..))" />
+			<aop:after method="doAfter" pointcut-ref="controllerPointcut2" />
+			<aop:around method="doAround" pointcut-ref="servicePointcut" />
 		
 		</aop:aspect>
-		
+
 	</aop:config>
 	
 </beans:beans>
