@@ -13,6 +13,8 @@
 	</typeAliases>
 
 	<mappers>
+		<mapper resource="com/demoweb/mapper/MemberMapper.xml" />
+		<mapper resource="com/demoweb/mapper/BoardMapper.xml" />
 	</mappers>
 	
 </configuration>
