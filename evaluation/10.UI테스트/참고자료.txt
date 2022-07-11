@@ -1,0 +1,9 @@
+프로토타입 (Prototype), 
+사용성 테스트, 컨셉모델(Concept Model), 
+파일럿 테스트,
+UI 디자인 (User Interface Design), 
+에러 매트릭스, 
+효율성 매트릭스, 
+UX 디자인 (User Experinece Design), 
+성능 (Performance) 평가, 
+태스크 성공 매트릭스

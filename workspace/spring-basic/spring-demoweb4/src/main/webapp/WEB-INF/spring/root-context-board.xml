@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd">
+	
+	<bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
+		<property name="boardDao" ref="boardDaoWithMyBatis" />
+		<property name="boardMapper" ref="boardMapper" />
+	</bean>
+	<bean id="boardDaoWithMyBatis" class="com.demoweb.dao.BoardDaoWithMyBatis">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	<!-- Spring-Mybatis가 자동으로 만들어주는 DAO -->
+	<!-- 
+	<bean id="boardMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+		<property name="mapperInterface" value="com.demoweb.mapper.BoardMapper" />
+	</bean>
+	-->
+	
+	
+</beans>
+
+
+
+
+
+
+
+
