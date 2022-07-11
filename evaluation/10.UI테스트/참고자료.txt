@@ -1,5 +1,6 @@
 프로토타입 (Prototype), 
-사용성 테스트, 컨셉모델(Concept Model), 
+사용성 테스트, 
+컨셉모델(Concept Model), 
 파일럿 테스트,
 UI 디자인 (User Interface Design), 
 에러 매트릭스, 
