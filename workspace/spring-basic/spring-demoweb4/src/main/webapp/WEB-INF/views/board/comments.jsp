@@ -29,7 +29,7 @@
 	        			[${ comment.regDate }]
 						<br /><br />
 						<form id="updateform${ comment.commentNo }">
-						<input type="hidden" name="commentno" value="${ comment.commentNo }" />
+						<input type="hidden" name="commentNo" value="${ comment.commentNo }" />
 						<textarea name="content" style="width: 800px" rows="3" 
 							maxlength="200">${ comment.content }</textarea>
 						</form>

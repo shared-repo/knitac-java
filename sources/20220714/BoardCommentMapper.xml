@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+              <!-- package..class로 가정하고 사용 -->				 
+<mapper namespace="com.demoweb.mapper.BoardCommentMapper">
+
+	<insert id="insertBoardComment" parameterType="BoardComment"
+			useGeneratedKeys="true" keyColumn="commentno" keyProperty="commentNo">
+		INSERT INTO boardcomment (boardno, writer, content, groupno, step, depth)
+		VALUES (#{boardNo}, #{writer}, #{content}, 0, 1, 0)
+	</insert>
+
+	<select id="selectByBoardNo" parameterType="int" resultType="BoardComment">
+		SELECT commentno, boardno, writer, content, regdate, deleted, groupno, step, depth
+		FROM boardcomment
+		WHERE boardno = #{boardNo} and deleted = FALSE
+		ORDER BY commentno DESC
+	</select>	
+
+	<select id="selectRangeByBoardNo" parameterType="hashmap" resultType="BoardComment">
+		SELECT commentno, boardno, writer, content, regdate, deleted, groupno, step, depth
+		FROM boardcomment
+		WHERE boardno = #{boardNo} and deleted = FALSE
+		ORDER BY boardno DESC
+		LIMIT #{from}, #{count}
+	</select>
+	
+	<select id="selectCommentCount" resultType="int">
+		SELECT COUNT(*) FROM boardcomment
+	</select>
+		
+	<delete id="delete" parameterType="int">
+		UPDATE boardcomment 
+		SET deleted = TRUE 
+		WHERE commentno = #{ commentNo }
+	</delete>
+	
+	<update id="update" parameterType="BoardComment">
+		UPDATE boardcomment
+		SET content = #{content}
+		WHERE commentno = #{commentNo}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>

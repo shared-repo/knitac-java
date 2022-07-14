@@ -1,0 +1,89 @@
+1. BoardServiceImpl.java 수정
+
+	@Setter
+	private BoardCommentMapper boardCommentMapper;
+	
+	@Override
+	public void writeBoardComment(BoardComment comment) {
+		
+		boardCommentMapper.insertBoardComment(comment);
+		
+	}
+
+	@Override
+	public List<BoardComment> findCommentsByBoardNo(int boardNo) {
+		List<BoardComment> comments = boardCommentMapper.selectByBoardNo(boardNo);
+		return comments;
+	}
+
+	@Override
+	public void deleteComment(int commentNo) {
+		boardCommentMapper.delete(commentNo);
+	}
+
+	@Override
+	public void updateBoardComment(BoardComment comment) {
+		boardCommentMapper.update(comment);
+		
+	}
+
+/////////////////////////////////////////////////////////////
+
+
+2. board-context.xml
+
+	<bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
+		<property name="boardDao" ref="boardDaoWithMyBatis" />
+		<property name="boardMapper" ref="boardMapper" />
+		<property name="boardCommentMapper" ref="boardCommentMapper" />
+	</bean>
+
+
+///////////////////////////////////////////////////////////////
+
+3. BoardController.java
+
+/////////////////////////////////////////////////////////
+	
+	@PostMapping(path = { "/comment-write" }, produces = { "text/plain;charset=utf-8" })
+	@ResponseBody
+	public String writeComment(BoardComment boardComment) {
+		
+		boardService.writeBoardComment(boardComment);
+		
+		return "success";
+		
+	}
+	
+	@GetMapping(path = { "/comment-list" })
+	public String listComment(@RequestParam(name="boardno") int boardNo, Model model) {
+		
+		List<BoardComment> comments = boardService.findCommentsByBoardNo(boardNo);
+		
+		model.addAttribute("comments", comments);
+		
+		return "board/comments";
+		
+	}
+	
+	@GetMapping(path = { "/comment-delete" }, produces = { "text/plain; charset=utf-8" })
+	@ResponseBody
+	public String deleteComment(@RequestParam(name = "commentno") int commentNo) {
+	
+		boardService.deleteComment(commentNo);
+		
+		return "success";
+	}
+	
+	@PostMapping(path = { "/comment-update" }, produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String updateComment(BoardComment boardComment) {
+		
+		boardService.updateBoardComment(boardComment);
+		
+		return "success";
+		
+	}
+
+
+

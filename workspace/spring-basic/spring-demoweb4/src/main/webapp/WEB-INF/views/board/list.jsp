@@ -38,7 +38,26 @@
 					<th style="width:120px">작성일</th>
 					<th style="width:80px">조회수</th>
 				</tr>
-				
+				<c:forEach var="board" items="${ requestScope.boardList }">
+				<tr style="height:25px">
+					<td>${ board.boardNo }</td>
+					<td style='text-align:left;padding-left:5px'>
+					<c:choose>
+					<c:when test="${ board.deleted }">
+						<span style="color:lightgray">${ board.title } [삭제된 글]</span>
+					</c:when>
+					<c:otherwise>
+						<a href='detail?boardno=${ board.boardNo }&pageNo=${ pageNo }'>
+						${ board.title }
+						</a>
+					</c:otherwise>
+					</c:choose>
+					</td>
+					<td>${ board.writer }</td>
+					<td>${ board.regDate }</td>
+					<td>${ board.readCount }</td>
+				</tr>
+				</c:forEach>
 			</table>
 			
 			<br><br>

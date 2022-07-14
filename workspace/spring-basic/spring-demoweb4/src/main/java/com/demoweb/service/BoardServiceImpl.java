@@ -9,6 +9,7 @@ import com.demoweb.dao.BoardDaoWithJdbcTemplate;
 import com.demoweb.dto.Board;
 import com.demoweb.dto.BoardAttach;
 import com.demoweb.dto.BoardComment;
+import com.demoweb.mapper.BoardCommentMapper;
 import com.demoweb.mapper.BoardMapper;
 
 import lombok.Setter;
@@ -114,29 +115,31 @@ public class BoardServiceImpl implements BoardService {
 	
 	/////////////////////////////////////////////////////////////////////////
 
-	private BoardCommentDao boardCommentDao = new BoardCommentDao();
+	// private BoardCommentDao boardCommentDao = new BoardCommentDao();
+	@Setter
+	private BoardCommentMapper boardCommentMapper;
 	
 	@Override
 	public void writeBoardComment(BoardComment comment) {
 		
-		boardCommentDao.insertBoardComment(comment);
+		boardCommentMapper.insertBoardComment(comment);
 		
 	}
 
 	@Override
 	public List<BoardComment> findCommentsByBoardNo(int boardNo) {
-		List<BoardComment> comments = boardCommentDao.selectByBoardNo(boardNo);
+		List<BoardComment> comments = boardCommentMapper.selectByBoardNo(boardNo);
 		return comments;
 	}
 
 	@Override
 	public void deleteComment(int commentNo) {
-		boardCommentDao.delete(commentNo);
+		boardCommentMapper.delete(commentNo);
 	}
 
 	@Override
 	public void updateBoardComment(BoardComment comment) {
-		boardCommentDao.update(comment);
+		boardCommentMapper.update(comment);
 		
 	}
 

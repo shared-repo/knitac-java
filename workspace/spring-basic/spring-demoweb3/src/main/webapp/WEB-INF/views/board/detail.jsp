@@ -126,7 +126,7 @@
 					</div>
 					<input type="hidden" name='writer' value='${ loginuser.memberId }'>
 					<input type="hidden" name='boardno' value='${ board.boardNo }'>
-					<input type="hidden" name='commentno'>
+					<input type="hidden" name='commentno' value="0">
 					<input type="hidden" name='action'><!-- 댓글 or 댓글의 댓글 -->
 				</form>
 				</div>
