@@ -30,7 +30,17 @@
 /////////////////////////////////////////////////////////////
 
 
-2. board-context.xml
+2. BoardService.java
+
+	void writeBoardComment(BoardComment comment);
+	List<BoardComment> findCommentsByBoardNo(int boardNo);
+	void deleteComment(int commentNo);
+	void updateBoardComment(BoardComment comment);
+	
+/////////////////////////////////////////////////////////////////	
+
+
+3. board-context.xml
 
 	<bean id="boardService" class="com.demoweb.service.BoardServiceImpl">
 		<property name="boardDao" ref="boardDaoWithMyBatis" />
@@ -41,9 +51,7 @@
 
 ///////////////////////////////////////////////////////////////
 
-3. BoardController.java
-
-/////////////////////////////////////////////////////////
+4. BoardController.java
 	
 	@PostMapping(path = { "/comment-write" }, produces = { "text/plain;charset=utf-8" })
 	@ResponseBody

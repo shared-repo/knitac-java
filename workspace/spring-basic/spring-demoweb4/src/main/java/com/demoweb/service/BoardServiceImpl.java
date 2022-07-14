@@ -115,7 +115,6 @@ public class BoardServiceImpl implements BoardService {
 	
 	/////////////////////////////////////////////////////////////////////////
 
-	// private BoardCommentDao boardCommentDao = new BoardCommentDao();
 	@Setter
 	private BoardCommentMapper boardCommentMapper;
 	
