@@ -207,6 +207,7 @@ public class BoardController {
 	
 	/////////////////////////////////////////////////////////
 	
+	// @ResponseBody : return 값이 viewname이 아니고 응답 컨텐츠임을 알려주는 설정
 	@PostMapping(path = { "/comment-write" }, produces = { "text/plain;charset=utf-8" })
 	@ResponseBody
 	public String writeComment(BoardComment boardComment) {
