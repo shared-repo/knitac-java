@@ -22,5 +22,6 @@ public interface BoardService {
 	List<BoardComment> findCommentsByBoardNo(int boardNo);
 	void deleteComment(int commentNo);
 	void updateBoardComment(BoardComment comment);
+	void writeBoardReComment(BoardComment boardComment);
 
 }

@@ -11,20 +11,32 @@
 		INSERT INTO boardcomment (boardno, writer, content, groupno, step, depth)
 		VALUES (#{boardNo}, #{writer}, #{content}, 0, 1, 0)
 	</insert>
+	<insert id="insertBoardReComment" parameterType="BoardComment"
+			useGeneratedKeys="true" keyColumn="commentno" keyProperty="commentNo">
+		INSERT INTO boardcomment (boardno, writer, content, groupno, step, depth)
+		VALUES (#{boardNo}, #{writer}, #{content}, #{groupNo}, #{step}, #{depth})
+	</insert>
 
 	<select id="selectByBoardNo" parameterType="int" resultType="BoardComment">
 		SELECT commentno, boardno, writer, content, regdate, deleted, groupno, step, depth
 		FROM boardcomment
-		WHERE boardno = #{boardNo} and deleted = FALSE
-		ORDER BY commentno DESC
+		WHERE boardno = #{boardNo}
+		ORDER BY groupno DESC, step ASC
 	</select>	
 
 	<select id="selectRangeByBoardNo" parameterType="hashmap" resultType="BoardComment">
 		SELECT commentno, boardno, writer, content, regdate, deleted, groupno, step, depth
 		FROM boardcomment
-		WHERE boardno = #{boardNo} and deleted = FALSE
-		ORDER BY boardno DESC
+		WHERE boardno = #{boardNo}
+		ORDER BY groupno DESC, step ASC
 		LIMIT #{from}, #{count}
+	</select>
+	
+	<select id="selectByCommentNo" parameterType="int" resultType="BoardComment">
+		SELECT commentno, boardno, writer, content, regdate, deleted, groupno, step, depth
+		FROM boardcomment
+		WHERE commentno = #{commentNo}
+		ORDER BY commentno DESC
 	</select>
 	
 	<select id="selectCommentCount" resultType="int">
@@ -41,6 +53,20 @@
 		UPDATE boardcomment
 		SET content = #{content}
 		WHERE commentno = #{commentNo}
+	</update>
+	
+	<update id="updateGroupNo" parameterType="BoardComment">
+		UPDATE boardcomment
+		SET groupno = #{groupNo}
+		WHERE commentno = #{commentNo}
+	</update>
+	
+	<update id="updateStep" parameterType="hashmap">
+	<![CDATA[
+		UPDATE boardcomment
+		SET step = step + 1
+		WHERE groupno = #{groupNo} AND step > #{step}
+	]]>
 	</update>
 	
 	

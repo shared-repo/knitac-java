@@ -19,6 +19,10 @@ public interface BoardCommentMapper {
 	int selectCommentCount();
 	void delete(int commentNo);
 	void update(BoardComment boardComment);
+	BoardComment selectByCommentNo(int commentNo);
+	void insertBoardReComment(BoardComment boardComment);
+	void updateGroupNo(BoardComment boardComment);
+	void updateStep(@Param("groupNo") int groupNo, @Param("step") int step);
 	
 	
 

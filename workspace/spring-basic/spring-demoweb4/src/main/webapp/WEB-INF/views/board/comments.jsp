@@ -8,23 +8,31 @@
 				<td style="text-align:left;margin:5px;border-bottom: solid 1px;padding-left:${comment.depth * 20}px">
 	        		
 	        		<div id='commentview${ comment.commentNo }'>
+	        			<br>
 	        			${ comment.writer } &nbsp;&nbsp;
 	        			[${ comment.regDate }]
 	                    <br /><br />
 	                    <span>
 	                    ${ comment.content }
 	                    </span>
-	                    <br /><br />
-	                    <div style='display:${ loginuser.memberId eq comment.writer ? "block" : "none" }'>
+	                    <br><br>
+	                    <span style='display:${ loginuser.memberId eq comment.writer ? "" : "none" }'>
 	                    	<a class="editcomment" data-commentno='${ comment.commentNo }' href="javascript:">편집</a>
 	                    	&nbsp;
 	                    	<a class="deletecomment"
 	                    	   href="javascript:"
 	                    	   data-commentno="${ comment.commentNo }">삭제</a>
-	                    </div>	                    
+	                    	&nbsp;
+	                    </span>
+                    	<a class="recomment"
+                    	   href="javascript:"
+                    	   data-commentno="${ comment.commentNo }">댓글쓰기</a>
+                    	<br><br>
+	                    	                    
 	                </div>
-	                
+
 	                <div id='commentedit${ comment.commentNo }' style="display: none">
+	                	<br>
 	                	${ comment.writer } &nbsp;&nbsp;
 	        			[${ comment.regDate }]
 						<br /><br />

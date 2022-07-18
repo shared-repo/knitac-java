@@ -218,6 +218,16 @@ public class BoardController {
 		
 	}
 	
+	@PostMapping(path = { "/recomment-write" }, produces = { "text/plain;charset=utf-8" })
+	@ResponseBody
+	public String writeReComment(BoardComment boardComment) {
+		
+		boardService.writeBoardReComment(boardComment);
+		
+		return "success";
+		
+	}
+	
 	@GetMapping(path = { "/comment-list" })
 	public String listComment(@RequestParam(name="boardno") int boardNo, Model model) {
 		

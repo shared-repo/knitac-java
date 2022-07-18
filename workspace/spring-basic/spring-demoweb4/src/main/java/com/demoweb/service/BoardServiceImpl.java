@@ -122,6 +122,8 @@ public class BoardServiceImpl implements BoardService {
 	public void writeBoardComment(BoardComment comment) {
 		
 		boardCommentMapper.insertBoardComment(comment);
+		comment.setGroupNo(comment.getCommentNo()); // 생성된 댓글 번호를 그룹 번호로 사용
+		boardCommentMapper.updateGroupNo(comment);
 		
 	}
 
@@ -139,6 +141,18 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void updateBoardComment(BoardComment comment) {
 		boardCommentMapper.update(comment);
+		
+	}
+
+	@Override
+	public void writeBoardReComment(BoardComment boardComment) {
+		// 댓글의 대상글 정보 조회
+		BoardComment parentComment = 
+			boardCommentMapper.selectByCommentNo(boardComment.getCommentNo());
+		boardComment.setGroupNo(parentComment.getGroupNo());
+		boardComment.setDepth(parentComment.getDepth() + 1);
+		boardComment.setStep(parentComment.getStep() + 1);
+		boardCommentMapper.insertBoardReComment(boardComment);
 		
 	}
 

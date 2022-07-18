@@ -12,6 +12,7 @@ public class BoardComment {
 	private Date regDate;
 	private boolean deleted;
 	
+	// 글의 표시 순서(논리적인 순서) 관리를 위한 변수
 	private int groupNo;
 	private int step;
 	private int depth;
