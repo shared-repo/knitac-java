@@ -1,3 +1,4 @@
+<%@page import="DTO.Member"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -10,16 +11,26 @@
     	 
     	 
 <%
-	// 마지막 번호 + 1을 가져와서 custno로 사용
 	Connection conn = ConnectionHelper.getConnection();
 	
-	//String sql = "SELECT member_tbl_02_sequence.nextval FROM dual";
-	String sql = "SELECT NVL(max(custno), 100000) + 1 FROM member_tbl_02";
-	PreparedStatement pstmt = conn.prepareStatement(sql);
+	String sql = "SELECT custno, custname, phone, address, joindate, grade, city " + 
+				 "FROM member_tbl_02 " + 
+				 "WHERE custno = ?";
 	
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	pstmt.setInt(1, Integer.parseInt(request.getParameter("custno")));
 	ResultSet rs = pstmt.executeQuery();
-	rs.next();
-	int nextCustNo = rs.getInt(1);
+	Member member = null;
+	if (rs.next()) {
+		member = new Member();
+		member.setCustNo(rs.getInt(1));
+		member.setCustName(rs.getString(2));
+		member.setPhone(rs.getString(3));
+		member.setAddress(rs.getString(4));
+		member.setJoinDate(rs.getDate(5));
+		member.setGrade(rs.getString(6));
+		member.setCity(rs.getString(7));
+	}
 	
 	rs.close();
 	pstmt.close();
@@ -40,39 +51,39 @@
 	<section style="position:fixed; top:75px; width:100%">
 	
 	<h2 style="text-align: center">홈쇼핑 회원 등록</h2>
-	<form id="register-form" action="register.jsp" method="post">
+	<form id="update-form" action="update.jsp" method="post">
 	<table border="1" align="center">
 		<tr>
-			<th style="width:200px">회원번호(자동발생)</th>
-			<td style="width:450px"><input type="text" readonly id="custno" name="custno" value="<%= nextCustNo %>"></td>
+			<th style="width:200px">회원번호</th>
+			<td style="width:450px"><input type="text" readonly id="custno" name="custno" value="<%= member.getCustNo() %>"></td>
 		</tr>
 		<tr>
 			<th style="width:200px">회원성명</th>
-			<td style="width:450px"><input type="text" id="custname" name="custname"></td>
+			<td style="width:450px"><input type="text" id="custname" name="custname" value="<%= member.getCustName() %>"></td>
 		</tr>
 		<tr>
 			<th style="width:200px">전화번호</th>
-			<td style="width:450px"><input type="text" id="phone" name="phone"></td>
+			<td style="width:450px"><input type="text" id="phone" name="phone" value="<%= member.getPhone() %>"></td>
 		</tr>
 		<tr>
 			<th style="width:200px">주소</th>
-			<td style="width:450px"><input type="text" id="address" name="address"></td>
+			<td style="width:450px"><input type="text" id="address" name="address" value="<%= member.getAddress() %>"></td>
 		</tr>
 		<tr>
 			<th style="width:200px">가입일자</th>
-			<td style="width:450px"><input type="text" id="joindate" name="joindate"></td>
+			<td style="width:450px"><input type="text" id="joindate" name="joindate" value="<%= member.getJoinDate() %>"></td>
 		</tr>
 		<tr>
 			<th style="width:200px">고객등급<br>(A:VIP,B:일반,C:직원)</th>
-			<td style="width:450px"><input type="text" id="grade" name="grade"></td>
+			<td style="width:450px"><input type="text" id="grade" name="grade" value="<%= member.getGrade() %>"></td>
 		</tr>
 		<tr>
 			<th style="width:200px">도시코드</th>
-			<td style="width:450px"><input type="text" id="city" name="city"></td>
+			<td style="width:450px"><input type="text" id="city" name="city" value="<%= member.getCity() %>"></td>
 		</tr>
 		<tr>			
 			<td colspan="2" style="text-align:center">
-				<input type="submit" id="register-btn" value="등록">
+				<input type="submit" id="update-btn" value="수정">
 				<input type="button" value="조회" onclick="location.href='member-list.jsp'">
 			</td>
 		</tr>
@@ -87,23 +98,20 @@
 	
 	window.addEventListener('load', function(event) {
 	
-		var registerBtn = document.querySelector('#register-btn');
-		registerBtn.addEventListener("click", function(event) {
+		var updateBtn = document.querySelector('#update-btn');
+		updateBtn.addEventListener("click", function(event) {
 			event.preventDefault();
 			
 			// 유효성 검사
 			var enNames = ['custname', 'phone', 'address', 'joindate', 'grade', 'city'];
 			var koNames = ['회원성명', '전화번호', '주소', '가입일자', '고객등급', '도시코드'];
 			for (var i = 0; i < enNames.length; i++) {
-				// 여기는 필수
 				var input = document.querySelector('#' + enNames[i]);
 				if (input.value.length == 0) {
 					alert(koNames[i] + '을(를) 입력하세요');
 					input.focus();
 					return;
 				}
-				// 필수
-				// 아래는 선택 사항
 				else if (enNames[i] === 'joindate') {
 					var datePattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
 					if (!datePattern.test(input.value)) {
@@ -119,17 +127,16 @@
 					return;	
 				}
 				else if (enNames[i] ==='city') {
-					var cityPattern = /^[0-9]{2}$/; // 정규 표현식 : /^정규표현식$/
+					var cityPattern = /^[0-9]{2}$/;
 					if (!cityPattern.test(input.value)) {
 						alert(koNames[i] + " 형식 오류");
 						input.focus();
 						return;
 					}
 				}
-				// 여기까지는 생략 가능
 			}			
 			
-			var form = document.querySelector("#register-form");
+			var form = document.querySelector("#update-form");
 			form.submit();
 			
 		});

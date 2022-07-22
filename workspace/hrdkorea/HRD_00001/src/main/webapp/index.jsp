@@ -11,14 +11,12 @@
 <body>
 
 	<jsp:include page="header.jsp" />
-	
 	<section style="position:fixed; top:75px; width:100%">
 	쇼핑몰 회원관리 프로그램
 	...
 	...
 	...
 	</section>
-	
 	<jsp:include page="footer.jsp" />
 
 </body>
